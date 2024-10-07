@@ -1,4 +1,5 @@
 ﻿using DotNet.Testcontainers.Builders;
+using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -23,8 +24,6 @@ public class FirebirdHealthCheckTests : IAsyncLifetime
     [Fact]
     public async Task be_healthy_if_firebird_is_available()
     {
-        //var connectionString = "Server=tcp:localhost,5433;Initial Catalog=master;User Id=sa;Password=Password12!;Encrypt=false";
-
         var connectionString = _firebirdSqlContainer.GetConnectionString();
 
         var webHostBuilder = new WebHostBuilder()
@@ -51,11 +50,16 @@ public class FirebirdHealthCheckTests : IAsyncLifetime
     [Fact]
     public async Task be_unhealthy_if_firebird_is_not_available()
     {
+        var fbConnectionStringBuilder = new FbConnectionStringBuilder(_firebirdSqlContainer.GetConnectionString())
+        {
+            Port = 1833
+        };
+
         var webHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>
             {
                 services.AddHealthChecks()
-                .AddFirebird("Server=tcp:localhost,1833;Initial Catalog=master;User Id=sa;Password=Password12!;Encrypt=false;Connection Timeout=10", tags: ["firebird"]);
+                .AddFirebird(fbConnectionStringBuilder.ConnectionString, tags: ["firebird"]);
             })
             .Configure(app =>
             {
@@ -75,7 +79,7 @@ public class FirebirdHealthCheckTests : IAsyncLifetime
     [Fact]
     public async Task be_unhealthy_if_sqlquery_spec_is_not_valid()
     {
-        var connectionString = "Server=tcp:localhost,5433;Initial Catalog=master;User Id=sa;Password=Password12!;Encrypt=false";
+        var connectionString = _firebirdSqlContainer.GetConnectionString();
 
         var webHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>

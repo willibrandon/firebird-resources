@@ -1,0 +1,8 @@
+<Project>
+
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+		<NuGetAuditMode>direct</NuGetAuditMode>
+	</PropertyGroup>
+
+</Project>

@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Authors>willibrandon</Authors>
+		<Company>willibrandon</Company>
+		<Description>HealthChecks.Firebird is a health check for Firebird Sql.</Description>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<IncludeSymbols>true</IncludeSymbols>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>HealthCheck;HealthChecks;Health;Firebird</PackageTags>
+		<RepositoryType>git</RepositoryType>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<TargetFrameworks>netstandard2.0;net7.0;net8.0</TargetFrameworks>
+		<Version>1.0.0-alpha</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="10.3.1" />
+		<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.8" />
+	</ItemGroup>
+
+</Project>

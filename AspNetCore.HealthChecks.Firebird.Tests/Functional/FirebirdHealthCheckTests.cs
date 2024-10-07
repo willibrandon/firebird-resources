@@ -14,7 +14,7 @@ namespace AspNetCore.HealthChecks.Firebird.Tests.Functional;
 public class FirebirdHealthCheckTests : IAsyncLifetime
 {
     private readonly FirebirdSqlContainer _firebirdSqlContainer = new FirebirdSqlBuilder()
-        .WithWaitStrategy(Wait.ForUnixContainer())
+        .WithWaitStrategy(Wait.ForUnixContainer().UntilContainerIsHealthy())
         .Build();
 
     public Task InitializeAsync() => _firebirdSqlContainer.StartAsync();

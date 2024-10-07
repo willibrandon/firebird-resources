@@ -1,6 +1,6 @@
 ﻿# AspNetCore.HealthChecks.Firebird
 
-AspNetCore.HealthChecks.Firebird is the health check package for Firebird SQL databases.
+AspNetCore.HealthChecks.Firebird is a health check package for Firebird SQL databases.
 
 ```PowerShell
 Install-Package AspNetCore.HealthChecks.Firebird

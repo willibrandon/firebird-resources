@@ -6,7 +6,7 @@ AspNetCore.HealthChecks.Firebird is a health check package for Firebird SQL data
 Install-Package AspNetCore.HealthChecks.Firebird
 ```
 
-Once the package is installed you can add the HealthCheck using the **AddFirebird** `IServiceCollection` extension methods.
+Once the package is installed you can add the HealthCheck using the **AddFirebird** `IHealthChecksBuilder` extension methods.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

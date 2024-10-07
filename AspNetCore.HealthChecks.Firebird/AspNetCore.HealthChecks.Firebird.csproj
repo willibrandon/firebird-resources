@@ -2,13 +2,14 @@
 
 	<PropertyGroup>
 		<Authors>willibrandon</Authors>
-		<Description>AspNetCore.HealthChecks.Firebird is a health check package for Firebird SQL databases.</Description>
+		<Description>HealthChecks.Firebird is a health check package for Firebird SQL databases.</Description>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<IncludeSymbols>true</IncludeSymbols>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
+		<PackageId>HealthChecks.Firebird</PackageId>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/willibrandon/firebird-resources</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>

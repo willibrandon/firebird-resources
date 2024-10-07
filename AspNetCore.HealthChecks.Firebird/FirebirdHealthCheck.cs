@@ -1,7 +1,7 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace HealthChecks.Firebird;
+namespace AspNetCore.HealthChecks.Firebird;
 
 /// <summary>
 ///  A health check for Firebird databases.

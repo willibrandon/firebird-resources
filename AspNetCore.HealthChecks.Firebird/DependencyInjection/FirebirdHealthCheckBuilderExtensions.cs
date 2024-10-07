@@ -1,5 +1,5 @@
-﻿using FirebirdSql.Data.FirebirdClient;
-using HealthChecks.Firebird;
+﻿using AspNetCore.HealthChecks.Firebird;
+using FirebirdSql.Data.FirebirdClient;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class FirebirdHealthCheckBuilderExtensions
 {
     private const string NAME = "firebird";
-    internal const string HEALTH_QUERY = "SELECT 1;";
+    internal const string HEALTH_QUERY = "SELECT 1 FROM RDB$DATABASE;";
 
     /// <summary>
     /// Add a health check for Firebird databases.

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace HealthChecks.Firebird;
+namespace AspNetCore.HealthChecks.Firebird;
 
 /// <summary>
 ///  Options for <see cref="FirebirdHealthCheck"/>.

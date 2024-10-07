@@ -1,21 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-#pragma warning disable IDE0161
-
 #if !NET5_0_OR_GREATER
 
 namespace System.Runtime.CompilerServices
 {
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
-    internal sealed class CallerArgumentExpressionAttribute : Attribute
+    internal sealed class CallerArgumentExpressionAttribute(string parameterName) : Attribute
     {
-        public CallerArgumentExpressionAttribute(string parameterName)
-        {
-            ParameterName = parameterName;
-        }
-
-        public string ParameterName { get; }
+        public string ParameterName { get; } = parameterName;
     }
 }
 
@@ -40,7 +33,7 @@ internal class Guard
     /// <param name="argument">The reference type argument to validate as non-null.</param>
     /// <param name="throwOnEmptyString">Only applicable to strings.</param>
     /// <param name="paramName">The name of the parameter with which <paramref name="argument"/> corresponds.</param>
-    public static T ThrowIfNull<T>([NotNull] T? argument, bool throwOnEmptyString = false, [CallerArgumentExpression("argument")] string? paramName = null)
+    public static T ThrowIfNull<T>([NotNull] T? argument, bool throwOnEmptyString = false, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
         where T : class
     {
 #if NET6_0_OR_GREATER

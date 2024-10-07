@@ -11,9 +11,11 @@
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/willibrandon/firebird-resources</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageTags>HealthCheck;HealthChecks;Health;Firebird</PackageTags>
 		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/willibrandon/firebird-resources</RepositoryUrl>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<TargetFrameworks>netstandard2.0;net7.0;net8.0</TargetFrameworks>
 		<Version>1.0.0-alpha</Version>

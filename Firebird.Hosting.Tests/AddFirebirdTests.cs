@@ -1,10 +1,10 @@
+using Aspire.Hosting;
 using Aspire.Hosting.ApplicationModel;
-using Firebird.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Sockets;
 using Xunit;
 
-namespace Aspire.Hosting.Firebird.Tests;
+namespace Firebird.Hosting.Tests;
 
 public class AddFirebirdTests
 {

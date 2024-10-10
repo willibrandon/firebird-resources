@@ -26,7 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\AspNetCore.HealthChecks.Firebird\AspNetCore.HealthChecks.Firebird.csproj" />
+	  <ProjectReference Include="..\HealthChecks.Firebird\HealthChecks.Firebird.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

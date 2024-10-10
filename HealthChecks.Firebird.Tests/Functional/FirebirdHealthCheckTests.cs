@@ -9,7 +9,7 @@ using Shouldly;
 using System.Net;
 using Testcontainers.FirebirdSql;
 
-namespace AspNetCore.HealthChecks.Firebird.Tests.Functional;
+namespace HealthChecks.Firebird.Tests.Functional;
 
 public class FirebirdHealthCheckTests : IAsyncLifetime
 {

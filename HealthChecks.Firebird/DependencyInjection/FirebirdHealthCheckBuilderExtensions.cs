@@ -1,8 +1,8 @@
-﻿using AspNetCore.HealthChecks.Firebird;
-using FirebirdSql.Data.FirebirdClient;
+﻿using FirebirdSql.Data.FirebirdClient;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace HealthChecks.Firebird;
 
 /// <summary>
 /// Extension methods to configure <see cref="FirebirdHealthCheck"/>.

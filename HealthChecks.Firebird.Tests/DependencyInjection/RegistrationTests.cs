@@ -4,7 +4,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Shouldly;
 
-namespace AspNetCore.HealthChecks.Firebird.Tests.DependencyInjection;
+namespace HealthChecks.Firebird.Tests.DependencyInjection;
 
 public class RegistrationTests
 {

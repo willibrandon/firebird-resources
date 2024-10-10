@@ -10,7 +10,7 @@ namespace Aspire.Hosting.Firebird;
 public class FirebirdServerResource : ContainerResource, IResourceWithConnectionString
 {
     internal const string PrimaryEndpointName = "tcp";
-    private const string DefaultUserName = "postgres";
+    private const string DefaultUserName = "SYSDBA";
 
     private readonly Dictionary<string, string> _databases = new(StringComparer.OrdinalIgnoreCase);
 
@@ -40,17 +40,17 @@ public class FirebirdServerResource : ContainerResource, IResourceWithConnection
     public IReadOnlyDictionary<string, string> Databases => _databases;
 
     /// <summary>
-    /// Gets the primary endpoint for the Firebird SQL server.
+    /// Gets the primary endpoint for the Firebird server.
     /// </summary>
     public EndpointReference PrimaryEndpoint { get; }
 
     /// <summary>
-    /// Gets the parameter that contains the Firebird SQL server password.
+    /// Gets the parameter that contains the Firebird server password.
     /// </summary>
     public ParameterResource PasswordParameter { get; }
 
     /// <summary>
-    /// Gets or sets the parameter that contains the PostgreSQL server user name.
+    /// Gets or sets the parameter that contains the Firebird server user name.
     /// </summary>
     public ParameterResource? UserNameParameter { get; set; }
 
@@ -63,8 +63,8 @@ public class FirebirdServerResource : ContainerResource, IResourceWithConnection
     /// Initializes a new instance of the <see cref="FirebirdServerResource"/> class.
     /// </summary>
     /// <param name="name">The name of the resource.</param>
-    /// <param name="userName">A parameter that contains the Firebird SQL server user name, or <see langword="null"/> to use a default value.</param>
-    /// <param name="password">A parameter that contains the Firebird SQL server password.</param>
+    /// <param name="userName">A parameter that contains the Firebird server user name, or <see langword="null"/> to use a default value.</param>
+    /// <param name="password">A parameter that contains the Firebird server password.</param>
     public FirebirdServerResource(string name, ParameterResource? userName, ParameterResource password) : base(ThrowIfNull(name))
     {
         ArgumentNullException.ThrowIfNull(password);
@@ -77,6 +77,21 @@ public class FirebirdServerResource : ContainerResource, IResourceWithConnection
     internal void AddDatabase(string name, string databaseName)
     {
         _databases.TryAdd(name, databaseName);
+    }
+
+    /// <summary>
+    /// Gets the connection string for the Firebird.
+    /// </summary>
+    /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
+    /// <returns>A connection string for the Firebird in the form "Server=host,port;User ID=sa;Password=password;TrustServerCertificate=true".</returns>
+    internal ValueTask<string?> GetConnectionStringAsync(CancellationToken cancellationToken = default)
+    {
+        if (this.TryGetLastAnnotation<ConnectionStringRedirectAnnotation>(out var connectionStringAnnotation))
+        {
+            return connectionStringAnnotation.Resource.GetConnectionStringAsync(cancellationToken);
+        }
+
+        return ConnectionString.GetValueAsync(cancellationToken);
     }
 
     private static string ThrowIfNull([NotNull] string? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)

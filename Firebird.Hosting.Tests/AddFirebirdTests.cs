@@ -1,4 +1,5 @@
 using Aspire.Hosting.ApplicationModel;
+using Firebird.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Sockets;
 using Xunit;

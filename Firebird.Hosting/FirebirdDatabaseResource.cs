@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace Aspire.Hosting.Firebird;
+namespace Firebird.Hosting;
 
 /// <summary>
 /// A resource that represents a Firebird SQL database. This is a child resource of a <see cref="FirebirdServerResource"/>.

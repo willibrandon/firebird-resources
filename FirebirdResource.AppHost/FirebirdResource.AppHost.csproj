@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aspire.Hosting.Firebird\Aspire.Hosting.Firebird.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\Firebird.Hosting\Firebird.Hosting.csproj" IsAspireProjectResource="false" />
     <ProjectReference Include="..\FirebirdResource.ApiService\FirebirdResource.ApiService.csproj" />
   </ItemGroup>
 

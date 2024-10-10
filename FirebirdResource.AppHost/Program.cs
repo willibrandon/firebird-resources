@@ -1,4 +1,4 @@
-using Aspire.Hosting.Firebird;
+using Firebird.Hosting;
 
 var builder = DistributedApplication.CreateBuilder(args);
 

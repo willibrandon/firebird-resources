@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aspire.Hosting.Firebird\Aspire.Hosting.Firebird.csproj" />
+    <ProjectReference Include="..\Firebird.Hosting\Firebird.Hosting.csproj" />
   </ItemGroup>
 
 </Project>

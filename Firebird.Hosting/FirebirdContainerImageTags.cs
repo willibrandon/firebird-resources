@@ -1,4 +1,4 @@
-﻿namespace Aspire.Hosting.Firebird;
+﻿namespace Firebird.Hosting;
 
 internal static class FirebirdContainerImageTags
 {

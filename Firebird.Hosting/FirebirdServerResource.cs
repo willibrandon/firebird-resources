@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace Aspire.Hosting.Firebird;
+namespace Firebird.Hosting;
 
 /// <summary>
 ///  A resouce that represents a Firebird SQL container.

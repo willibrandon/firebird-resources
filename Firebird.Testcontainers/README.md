@@ -1,8 +1,10 @@
 ﻿# Firebird.Testcontainers
 
-Firebird.Testcontainers is a fluent testcontainer builder for the official Firebird Docker images.
+Firebird.Testcontainers is a fluent testcontainer builder for Firebird Docker images.
 
-Firebird.Testcontainers uses [Testcontainers for .NET](https://dotnet.testcontainers.org/) to spinup a docker container directly from the C# (unit test) code. This options requires docker service running locally.
+Firebird.Testcontainers uses [Testcontainers for .NET](https://dotnet.testcontainers.org/) to spinup a docker container directly from the C# (unit test) code. This requires a docker service running locally.
+
+## Installation
 
 ```PowerShell
 Install-Package Firebird.Testcontainers
@@ -10,18 +12,17 @@ Install-Package Firebird.Testcontainers
 
 ## Build and Start
 
-To build a container and startup a Firebird container:
+To build and startup a Firebird container:
 
 ```csharp
 
-var firebirdSqlContainer = new FirebirdBuilder()
-    .WithWaitStrategy(Wait.ForUnixContainer().UntilContainerIsHealthy())
+var firebirdContainer = new FirebirdBuilder()
     .Build();
 
-await firebirdSqlContainer.StartAsync().ConfigureAwait(false);
+await firebirdContainer.StartAsync().ConfigureAwait(false);
+
+string connectionString = firebirdContainer.GetConnectionString();
 
 ```
 
 ## Methods
-
-Todo.

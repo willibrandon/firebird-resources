@@ -10,8 +10,6 @@ namespace Firebird.Client;
 /// </summary>
 public static class FirebirdExtensions
 {
-    private const string DefaultConfigSectionName = "Aspire:Microsoft:Data:SqlClient";
-
     /// <summary>
     /// Registers 'Scoped' <see cref="FbConnection" /> factory for connecting Firebird database using FirebirdSql.Data.FirebirdClient.
     /// Configures health check, logging and telemetry for the FirebirdClient.

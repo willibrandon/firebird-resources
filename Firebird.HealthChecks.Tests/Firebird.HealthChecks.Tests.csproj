@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\HealthChecks.Firebird\HealthChecks.Firebird.csproj" />
+	  <ProjectReference Include="..\Firebird.HealthChecks\Firebird.HealthChecks.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

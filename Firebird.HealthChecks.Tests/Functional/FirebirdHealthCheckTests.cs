@@ -1,4 +1,5 @@
-﻿using DotNet.Testcontainers.Builders;
+﻿using Firebird.HealthChecks;
+using Firebird.HealthChecks.Tests;
 using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -7,24 +8,17 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using System.Net;
-using Testcontainers.FirebirdSql;
 
 namespace HealthChecks.Firebird.Tests.Functional;
 
-public class FirebirdHealthCheckTests : IAsyncLifetime
+public class FirebirdHealthCheckTests(FirebirdSqlContainerFixture fixture) : IClassFixture<FirebirdSqlContainerFixture>
 {
-    private readonly FirebirdSqlContainer _firebirdSqlContainer = new FirebirdSqlBuilder()
-        .WithWaitStrategy(Wait.ForUnixContainer().UntilContainerIsHealthy())
-        .Build();
-
-    public Task InitializeAsync() => _firebirdSqlContainer.StartAsync();
-
-    public Task DisposeAsync() => _firebirdSqlContainer.DisposeAsync().AsTask();
+    private readonly FirebirdSqlContainerFixture _fixture = fixture;
 
     [Fact]
-    public async Task be_healthy_if_firebird_is_available()
+    public async Task Be_Healthy_If_Firebird_Is_Available()
     {
-        var connectionString = _firebirdSqlContainer.GetConnectionString();
+        var connectionString = _fixture.FirebirdSql.GetConnectionString();
 
         var webHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>
@@ -48,9 +42,9 @@ public class FirebirdHealthCheckTests : IAsyncLifetime
     }
 
     [Fact]
-    public async Task be_unhealthy_if_firebird_is_not_available()
+    public async Task Be_Unhealthy_If_Firebird_Is_Not_Available()
     {
-        var fbConnectionStringBuilder = new FbConnectionStringBuilder(_firebirdSqlContainer.GetConnectionString())
+        var fbConnectionStringBuilder = new FbConnectionStringBuilder(_fixture.FirebirdSql.GetConnectionString())
         {
             Port = 1833
         };
@@ -77,9 +71,9 @@ public class FirebirdHealthCheckTests : IAsyncLifetime
     }
 
     [Fact]
-    public async Task be_unhealthy_if_sqlquery_spec_is_not_valid()
+    public async Task Be_Unhealthy_If_SqlQuery_Spec_Is_Not_Valid()
     {
-        var connectionString = _firebirdSqlContainer.GetConnectionString();
+        var connectionString = _fixture.FirebirdSql.GetConnectionString();
 
         var webHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>

@@ -1,10 +1,10 @@
-﻿using HealthChecks.Firebird;
+﻿using Firebird.HealthChecks;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 #if !NET5_0_OR_GREATER
 
-namespace HealthChecks.Firebird
+namespace Firebird.HealthChecks
 {
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
     internal sealed class CallerArgumentExpressionAttribute(string parameterName) : Attribute
@@ -17,7 +17,7 @@ namespace HealthChecks.Firebird
 
 #if NETSTANDARD2_0
 
-namespace HealthChecks.Firebird
+namespace Firebird.HealthChecks
 {
     /// <summary>Specifies that an output will not be null even if the corresponding type allows it. Specifies that an input argument was not null when the call returns.</summary>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, Inherited = false)]

@@ -1,7 +1,7 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace HealthChecks.Firebird;
+namespace Firebird.HealthChecks;
 
 /// <summary>
 ///  Options for <see cref="FirebirdHealthCheck"/>.

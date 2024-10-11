@@ -15,16 +15,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebird.Hosting.Tests", "F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebird.Client", "Firebird.Client\Firebird.Client.csproj", "{CD632FA3-ACF9-4221-8832-629E209CF5C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthChecks.Firebird", "HealthChecks.Firebird\HealthChecks.Firebird.csproj", "{C74D4610-0C96-4CAE-B6D7-704796E61214}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebird.HealthChecks", "Firebird.HealthChecks\Firebird.HealthChecks.csproj", "{C74D4610-0C96-4CAE-B6D7-704796E61214}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{517CB315-AA91-4B99-88DB-2A9327106470}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthChecks.Firebird.Tests", "HealthChecks.Firebird.Tests\HealthChecks.Firebird.Tests.csproj", "{2A3A1A04-3A47-479C-BD07-083063EDE550}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebird.HealthChecks.Tests", "Firebird.HealthChecks.Tests\Firebird.HealthChecks.Tests.csproj", "{2A3A1A04-3A47-479C-BD07-083063EDE550}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firebird.Testcontainers", "Firebird.Testcontainers\Firebird.Testcontainers.csproj", "{E34ED60C-E05B-45BE-8899-1DDAE766A000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebird.Testcontainers", "Firebird.Testcontainers\Firebird.Testcontainers.csproj", "{E34ED60C-E05B-45BE-8899-1DDAE766A000}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
-﻿using FirebirdSql.Data.FirebirdClient;
+﻿using Firebird.HealthChecks;
+using FirebirdSql.Data.FirebirdClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
@@ -9,7 +10,7 @@ namespace HealthChecks.Firebird.Tests.DependencyInjection;
 public class RegistrationTests
 {
     [Fact]
-    public void add_health_check_when_properly_configured()
+    public void Add_Health_Check_When_Properly_Configured()
     {
         var services = new ServiceCollection()
             .AddHealthChecks()
@@ -27,7 +28,7 @@ public class RegistrationTests
     }
 
     [Fact]
-    public async Task invoke_beforeOpen_when_defined()
+    public async Task Invoke_BeforeOpen_When_Defined()
     {
         var services = new ServiceCollection();
         bool invoked = false;
@@ -51,7 +52,7 @@ public class RegistrationTests
     }
 
     [Fact]
-    public void add_named_health_check_when_properly_configured()
+    public void Add_Named_Health_Check_When_Properly_Configured()
     {
         var services = new ServiceCollection()
             .AddHealthChecks()
@@ -69,7 +70,7 @@ public class RegistrationTests
     }
 
     [Fact]
-    public void add_health_check_with_connection_string_factory_when_properly_configured()
+    public void Add_Health_Check_With_Connection_String_Factory_When_Properly_Configured()
     {
         var services = new ServiceCollection();
         bool factoryCalled = false;

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace HealthChecks.Firebird;
+namespace Firebird.HealthChecks;
 
 /// <summary>
 /// Extension methods to configure <see cref="FirebirdHealthCheck"/>.

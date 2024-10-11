@@ -1,10 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net7.0;net8.0</TargetFrameworks>
+		<Authors>willibrandon</Authors>
+		<Description>A fluent testcontainer builder for the official Firebird Docker images.</Description>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<IncludeSymbols>true</IncludeSymbols>
 		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<PackageId>Firebird.Testcontainers</PackageId>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/willibrandon/firebird-resources</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>docker;testcontainer;testcontainers;firebird</PackageTags>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/willibrandon/firebird-resources</RepositoryUrl>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<TargetFrameworks>netstandard2.0;net7.0;net8.0</TargetFrameworks>
 	</PropertyGroup>
-	
+
+	<ItemGroup>
+		<None Include="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="JetBrains.Annotations" VersionOverride="2023.3.0" PrivateAssets="All" Version="2024.2.0" />
 		<PackageReference Include="Testcontainers" Version="3.10.0" />

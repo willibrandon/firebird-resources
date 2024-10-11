@@ -4,14 +4,36 @@ namespace Firebird.Testcontainers;
 [PublicAPI]
 public sealed class FirebirdConfiguration : ContainerConfiguration
 {
+    private readonly string? _database;
+
+    // /// <summary>
+    // /// Gets the Firebird config.
+    // /// </summary>
+    // public object Config { get; }
+
+    /// <summary>
+    /// Gets the FirebirdSql database.
+    /// </summary>
+    public string? Database => _database;
+
+    /// <summary>
+    /// Gets the FirebirdSql password.
+    /// </summary>
+    public string? Password { get; }
+
+    /// <summary>
+    /// Gets the FirebirdSql username.
+    /// </summary>
+    public string? Username { get; }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="FirebirdConfiguration" /> class.
     /// </summary>
-    /// <param name="config">The Firebird config.</param>
-    public FirebirdConfiguration(object config = null)
+    public FirebirdConfiguration(string? database = null, string? password = null, string? username = null)
     {
-        // // Sets the custom builder methods property values.
-        // Config = config;
+        _database = database;
+        Password = password;
+        Username = username;
     }
 
     /// <summary>
@@ -52,12 +74,8 @@ public sealed class FirebirdConfiguration : ContainerConfiguration
     public FirebirdConfiguration(FirebirdConfiguration oldValue, FirebirdConfiguration newValue)
         : base(oldValue, newValue)
     {
-        // // Create an updated immutable copy of the module configuration.
-        // Config = BuildConfiguration.Combine(oldValue.Config, newValue.Config);
+        _database = BuildConfiguration.Combine(oldValue._database, newValue._database);
+        Password = BuildConfiguration.Combine(oldValue.Password, newValue.Password);
+        Username = BuildConfiguration.Combine(oldValue.Username, newValue.Username);
     }
-
-    // /// <summary>
-    // /// Gets the Firebird config.
-    // /// </summary>
-    // public object Config { get; }
 }

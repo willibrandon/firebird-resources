@@ -1,15 +1,13 @@
-﻿using DotNet.Testcontainers.Builders;
-using Testcontainers.FirebirdSql;
+﻿using Firebird.Testcontainers;
 
 namespace Firebird.HealthChecks.Tests;
 
 public class FirebirdSqlContainerFixture : IAsyncLifetime
 {
-    private readonly FirebirdSqlContainer _firebirdSqlContainer = new FirebirdSqlBuilder()
-        .WithWaitStrategy(Wait.ForUnixContainer().UntilContainerIsHealthy())
+    private readonly FirebirdContainer _firebirdSqlContainer = new FirebirdBuilder()
         .Build();
 
-    public FirebirdSqlContainer FirebirdSql => _firebirdSqlContainer;
+    public FirebirdContainer FirebirdSql => _firebirdSqlContainer;
 
     public Task InitializeAsync() => _firebirdSqlContainer.StartAsync();
 

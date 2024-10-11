@@ -1,0 +1,38 @@
+﻿using FirebirdSql.Data.FirebirdClient;
+
+namespace Firebird.Client;
+
+public sealed class FbConnectionFactory(FirebirdSettings settings) : IDisposable
+{
+    private readonly SemaphoreSlim _semaphore = new(1, 1);
+
+    private FbConnection? _connection;
+
+    public async Task<FbConnection> GetFbConnectionAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await _semaphore.WaitAsync(cancellationToken);
+
+        try
+        {
+            if (_connection is null)
+            {
+                _connection = new FbConnection(settings.ConnectionString);
+                await _connection.OpenAsync(cancellationToken)
+                    .ConfigureAwait(false);
+            }
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
+
+        return _connection;
+    }
+
+    public void Dispose()
+    {
+        _connection?.Dispose();
+        _semaphore.Dispose();
+    }
+}

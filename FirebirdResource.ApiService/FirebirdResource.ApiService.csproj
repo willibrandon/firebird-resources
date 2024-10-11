@@ -8,6 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Firebird.Client\Firebird.Client.csproj" />
+    <ProjectReference Include="..\Firebird.Hosting\Firebird.Hosting.csproj" />
+    <ProjectReference Include="..\FirebirdResource.ServiceDefaults\FirebirdResource.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

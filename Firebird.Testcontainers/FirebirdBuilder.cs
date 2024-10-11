@@ -134,8 +134,8 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
             .WithUsername(SysDbaUsername)
             .WithPassword(DefaultRootPassword)
             .WithRootPassword(DefaultRootPassword)
-            .WithResourceMapping(Encoding.Default.GetBytes(TestQueryString), "/home/firebird_check.sql");
-            //.WithWaitStrategy(Wait.ForUnixContainer().UntilContainerIsHealthy());
+            .WithResourceMapping(Encoding.Default.GetBytes(TestQueryString), "/home/firebird_check.sql")
+            .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(FirebirdSqlPort));
     }
 
     /// <inheritdoc />

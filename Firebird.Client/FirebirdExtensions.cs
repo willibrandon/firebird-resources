@@ -79,14 +79,14 @@ public static class FirebirdExtensions
 
         if (serviceKey is null)
         {
-            builder.Services.AddScoped(CreateFirebirdClientFactory);
+            builder.Services.AddScoped(CreateFbConnectionFactory);
         }
         else
         {
-            builder.Services.AddKeyedScoped(serviceKey, (sp, key) => CreateFirebirdClientFactory(sp));
+            builder.Services.AddKeyedScoped(serviceKey, (sp, key) => CreateFbConnectionFactory(sp));
         }
 
-        FbConnectionFactory CreateFirebirdClientFactory(IServiceProvider _)
+        FbConnectionFactory CreateFbConnectionFactory(IServiceProvider _)
         {
             return new FbConnectionFactory(settings);
         }

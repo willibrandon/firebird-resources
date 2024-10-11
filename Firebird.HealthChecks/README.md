@@ -2,7 +2,7 @@
 
 [![.NET](https://github.com/willibrandon/firebird-resources/actions/workflows/dotnet.yml/badge.svg)](https://github.com/willibrandon/firebird-resources/actions/workflows/dotnet.yml)
 
-HealthChecks.Firebird is an ASP.NET Core health check package for Firebird SQL databases.
+Firebird.HealthChecks is an ASP.NET Core health check package for Firebird SQL databases.
 
 ```PowerShell
 Install-Package Firebird.HealthChecks

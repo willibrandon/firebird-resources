@@ -8,7 +8,7 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
 {
     private const string DefaultDatabase = "employees";
     private const string DefaultRootPassword = "masterkey";
-    private const string TestQueryString = "SELECT 1 FROM RDB$DATABASE;";
+    private const string FirebirdCheckQuery = "SELECT 1 FROM RDB$DATABASE;";
 
     /// <summary>/var/lib/firebird/data/</summary>
     public const string DefaultDatabaseLocation = "/var/lib/firebird/data/";
@@ -72,7 +72,7 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
             .WithUsername(SysDbaUsername)
             .WithPassword(DefaultRootPassword)
             .WithRootPassword(DefaultRootPassword)
-            .WithResourceMapping(Encoding.Default.GetBytes(TestQueryString), "/home/firebird_check.sql")
+            .WithResourceMapping(Encoding.Default.GetBytes(FirebirdCheckQuery), "/home/firebird_check.sql")
             .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(FirebirdSqlPort));
 
     /// <inheritdoc />

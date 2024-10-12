@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 namespace Firebird.Client;
 
 /// <summary>
-/// Extension methods for connecting PostgreSQL database with Npgsql client
+/// Extension methods for connecting Firebird database with FirebirdSql.Data.FirebirdClient.
 /// </summary>
 public static class FirebirdExtensions
 {
@@ -71,7 +71,6 @@ public static class FirebirdExtensions
 
         if (builder.Configuration.GetConnectionString(connectionName) is string connectionString)
         {
-            FbConnectionStringBuilder fbConnectionStringBuilder = new(connectionString);
             settings.ConnectionString = connectionString;
         }
 

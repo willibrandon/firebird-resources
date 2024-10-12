@@ -10,7 +10,7 @@ internal sealed class FirebirdHealthCheck(FbConnectionFactory factory) : IHealth
     {
         try
         {
-            // The factory connects (and authenticates).
+            // The factory connects (and opens).
             _ = await factory.GetFbConnectionAsync(cancellationToken);
 
             return HealthCheckResult.Healthy();

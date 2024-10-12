@@ -8,6 +8,9 @@ namespace Firebird.Hosting;
 /// </summary>
 public static class FirebirdBuilderExtensions
 {
+    private const string DefaultDatabaseName = "employees";
+    private const string DefaultSysDbaPassword = "masterkey";
+
     /// <summary>
     /// Adds a Firebird resource to the application model. A container is used for local development. This version of the package defaults to the <inheritdoc cref="FirebirdContainerImageTags.Tag"/> tag of the <inheritdoc cref="FirebirdContainerImageTags.Image"/> container image.
     /// </summary>
@@ -27,6 +30,7 @@ public static class FirebirdBuilderExtensions
     /// </remarks>
     public static IResourceBuilder<FirebirdServerResource> AddFirebird(this IDistributedApplicationBuilder builder,
         string name,
+        string? databaseName = null,
         IResourceBuilder<ParameterResource>? userName = null,
         IResourceBuilder<ParameterResource>? password = null,
         int? port = null)
@@ -34,7 +38,7 @@ public static class FirebirdBuilderExtensions
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(name);
 
-        var passwordParameter = password?.Resource ?? ParameterResourceBuilderExtensions.CreateDefaultPasswordParameter(builder, $"{name}-password");
+        var passwordParameter = password?.Resource ?? ParameterResourceBuilderExtensions.CreateDefaultPasswordParameter(builder, DefaultSysDbaPassword);
 
         var firebirdServer = new FirebirdServerResource(name, userName?.Resource, passwordParameter);
 
@@ -56,19 +60,21 @@ public static class FirebirdBuilderExtensions
         return builder.AddResource(firebirdServer)
                       .WithEndpoint(port: port, targetPort: 3050, name: FirebirdServerResource.PrimaryEndpointName) // Internal port is always 3050.
                       .WithImage(FirebirdContainerImageTags.Image, FirebirdContainerImageTags.Tag)
-                      .WithImageRegistry(FirebirdContainerImageTags.Registry);
-                      //.WithEnvironment(context =>
-                      //{
-                      //    context.EnvironmentVariables[UserEnvVarName] = firebirdServer.UserNameReference;
-                      //    context.EnvironmentVariables[PasswordEnvVarName] = firebirdServer.PasswordParameter;
-                      //});
-                      //.WithHealthCheck(healthCheckKey);
+                      .WithImageRegistry(FirebirdContainerImageTags.Registry)
+                      .WithEnvironment(context =>
+                      {
+                          context.EnvironmentVariables["FIREBIRD_ROOT_PASSWORD"] = DefaultSysDbaPassword;
+                          context.EnvironmentVariables["FIREBIRD_USER"] = firebirdServer.UserNameReference;
+                          context.EnvironmentVariables["FIREBIRD_PASSWORD"] = firebirdServer.PasswordParameter;
+                          context.EnvironmentVariables["FIREBIRD_DATABASE"] = databaseName ?? DefaultDatabaseName;
+                      });
+        //.WithHealthCheck(healthCheckKey);
     }
 
     /// <summary>
-    /// Adds a PostgreSQL database to the application model.
+    /// Adds a Firebird database to the application model.
     /// </summary>
-    /// <param name="builder">The PostgreSQL server resource builder.</param>
+    /// <param name="builder">The Firebird server resource builder.</param>
     /// <param name="name">The name of the resource. This name will be used as the connection string name when referenced in a dependency.</param>
     /// <param name="databaseName">The name of the database. If not provided, this defaults to the same value as <paramref name="name"/>.</param>
     /// <returns>A reference to the <see cref="IResourceBuilder{T}"/>.</returns>
@@ -76,11 +82,11 @@ public static class FirebirdBuilderExtensions
     /// <para>
     /// This resource includes built-in health checks. When this resource is referenced as a dependency
     /// using the <see cref="ResourceBuilderExtensions.WaitFor{T}(IResourceBuilder{T}, IResourceBuilder{IResource})"/>
-    /// extension method then the dependent resource will wait until the Postgres database is available.
+    /// extension method then the dependent resource will wait until the Firebird database is available.
     /// </para>
     /// <para>
-    /// Note that by default calling <see cref="AddDatabase(IResourceBuilder{PostgresServerResource}, string, string?)"/>
-    /// does not result in the database being created on the Postgres server. It is expected that code within your solution
+    /// Note that by default calling <see cref="AddDatabase(IResourceBuilder{FirebirdServerResource}, string, string?)"/>
+    /// does not result in the database being created on the Firebird server. It is expected that code within your solution
     /// will create the database. As a result if <see cref="ResourceBuilderExtensions.WaitFor{T}(IResourceBuilder{T}, IResourceBuilder{IResource})"/>
     /// is used with this resource it will wait indefinitely until the database exists.
     /// </para>

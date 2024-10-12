@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace Firebird.Hosting;
 
 /// <summary>
-///  A resouce that represents a Firebird SQL container.
+///  A resouce that represents a Firebird container.
 /// </summary>
 public class FirebirdServerResource : ContainerResource, IResourceWithConnectionString
 {
@@ -19,7 +19,7 @@ public class FirebirdServerResource : ContainerResource, IResourceWithConnection
             $"Host={PrimaryEndpoint.Property(EndpointProperty.Host)};Port={PrimaryEndpoint.Property(EndpointProperty.Port)};Username={UserNameReference};Password={PasswordParameter}");
 
     // <summary>
-    /// Gets the connection string expression for the Firebird SQL server.
+    /// Gets the connection string expression for the Firebird server.
     /// </summary>
     public ReferenceExpression ConnectionStringExpression
     {

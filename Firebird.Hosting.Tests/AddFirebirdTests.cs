@@ -89,8 +89,8 @@ public class AddFirebirdTests
         var connectionStringResource = (IResourceWithConnectionString)sqlResource;
         var connectionString = await connectionStringResource.GetConnectionStringAsync();
 
-        Assert.Equal("Host=localhost;Port=3050;Username=SYSDBA;Password=p@ssw0rd1;Database=mydb", connectionString);
-        Assert.Equal("{firebird.connectionString};Database=mydb", connectionStringResource.ConnectionStringExpression.ValueExpression);
+        Assert.Equal("Host=localhost;Port=3050;Username=SYSDBA;Password=p@ssw0rd1;Database=/var/lib/firebird/data/mydb", connectionString);
+        Assert.Equal("{firebird.connectionString};Database=/var/lib/firebird/data/mydb", connectionStringResource.ConnectionStringExpression.ValueExpression);
     }
 
     [Fact]
@@ -129,8 +129,8 @@ public class AddFirebirdTests
         Assert.Equal("customers1", db1.Resource.DatabaseName);
         Assert.Equal("customers2", db2.Resource.DatabaseName);
 
-        Assert.Equal("{firebird1.connectionString};Database=customers1", db1.Resource.ConnectionStringExpression.ValueExpression);
-        Assert.Equal("{firebird1.connectionString};Database=customers2", db2.Resource.ConnectionStringExpression.ValueExpression);
+        Assert.Equal("{firebird1.connectionString};Database=/var/lib/firebird/data/customers1", db1.Resource.ConnectionStringExpression.ValueExpression);
+        Assert.Equal("{firebird1.connectionString};Database=/var/lib/firebird/data/customers2", db2.Resource.ConnectionStringExpression.ValueExpression);
     }
 
     [Fact]
@@ -147,7 +147,7 @@ public class AddFirebirdTests
         Assert.Equal("imports", db1.Resource.DatabaseName);
         Assert.Equal("imports", db2.Resource.DatabaseName);
 
-        Assert.Equal("{firebird1.connectionString};Database=imports", db1.Resource.ConnectionStringExpression.ValueExpression);
-        Assert.Equal("{firebird2.connectionString};Database=imports", db2.Resource.ConnectionStringExpression.ValueExpression);
+        Assert.Equal("{firebird1.connectionString};Database=/var/lib/firebird/data/imports", db1.Resource.ConnectionStringExpression.ValueExpression);
+        Assert.Equal("{firebird2.connectionString};Database=/var/lib/firebird/data/imports", db2.Resource.ConnectionStringExpression.ValueExpression);
     }
 }

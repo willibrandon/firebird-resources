@@ -11,8 +11,8 @@ internal static class VolumeNameGenerator
             throw new ArgumentException($"The suffix '{suffix}' contains invalid characters. Only [a-zA-Z0-9_.-] are allowed.", nameof(suffix));
         }
 
-        // Creates a volume name with the form < c > $"{applicationName}-{sha256 of apphost path}-{resourceName}-{suffix}</c>, e.g. <c>"myapplication-a345f2451-postgres-data"</c>.
-        // Create volume name like "{Sanitize(appname).Lower()}-{sha256.Lower()}-postgres-data"
+        // Creates a volume name with the form < c > $"{applicationName}-{sha256 of apphost path}-{resourceName}-{suffix}</c>, e.g. <c>"myapplication-a345f2451-firebird-data"</c>.
+        // Create volume name like "{Sanitize(appname).Lower()}-{sha256.Lower()}-firebird-data"
 
         // Compute a short hash of the content root path to differentiate between multiple AppHost projects with similar volume names
         var safeApplicationName = Sanitize(builder.ApplicationBuilder.Environment.ApplicationName).ToLowerInvariant();

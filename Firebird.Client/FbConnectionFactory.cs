@@ -8,8 +8,7 @@ public sealed class FbConnectionFactory(FirebirdSettings settings) : IDisposable
 
     private FbConnection? _connection;
 
-    public async Task<FbConnection> GetFbConnectionAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<FbConnection> GetFbConnectionAsync(CancellationToken cancellationToken = default)
     {
         await _semaphore.WaitAsync(cancellationToken);
 
@@ -18,9 +17,12 @@ public sealed class FbConnectionFactory(FirebirdSettings settings) : IDisposable
             if (_connection is null)
             {
                 _connection = new FbConnection(settings.ConnectionString);
-                await _connection.OpenAsync(cancellationToken)
-                    .ConfigureAwait(false);
+                await _connection.OpenAsync(cancellationToken).ConfigureAwait(false);
             }
+        }
+        catch
+        {
+            throw;
         }
         finally
         {

@@ -21,7 +21,7 @@ public class FirebirdDatabaseResource(string name, string databaseName, Firebird
     /// Gets the connection string expression for the Firebird database.
     /// </summary>
     public ReferenceExpression ConnectionStringExpression =>
-       ReferenceExpression.Create($"{Parent};Database={DatabaseName}");
+       ReferenceExpression.Create($"{Parent};Database=/var/lib/firebird/data/{DatabaseName}");
 
     /// <summary>
     /// Gets the database name.

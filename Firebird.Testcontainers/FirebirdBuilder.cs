@@ -6,7 +6,7 @@ namespace Firebird.Testcontainers;
 [PublicAPI]
 public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, FirebirdContainer, FirebirdConfiguration>
 {
-    private const string DefaultDatabase = "myDb";
+    private const string DefaultDatabase = "employees";
     private const string DefaultRootPassword = "masterkey";
     private const string TestQueryString = "SELECT 1 FROM RDB$DATABASE;";
 

@@ -18,27 +18,21 @@ public abstract class FirebirdContainerTests : IAsyncLifetime
     [Fact]
     public void ConnectionStateReturnsOpen()
     {
-        // Given
         using DbConnection connection = new FbConnection(_firebirdContainer.GetConnectionString());
 
-        // When
         connection.Open();
 
-        // Then
         Assert.Equal(ConnectionState.Open, connection.State);
     }
 
     [Fact]
     public async Task ExecScriptReturnsSuccessful()
     {
-        // Given
         const string scriptContent = "SELECT 1 FROM RDB$DATABASE;";
 
-        // When
         var execResult = await _firebirdContainer.ExecScriptAsync(scriptContent)
             .ConfigureAwait(true);
 
-        // Then
         Assert.True(0L.Equals(execResult.ExitCode), execResult.Stderr);
         Assert.Empty(execResult.Stderr);
     }

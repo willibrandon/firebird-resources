@@ -20,6 +20,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
+app.MapHealthChecks("/healthz");
+
 app.MapGet("/health",
     async (FbConnectionFactory factory) =>
     {
@@ -29,9 +31,9 @@ app.MapGet("/health",
         using var reader = command.ExecuteReader();
         while (reader.Read())
         {
-            return reader.GetInt32(0) switch
+            return reader.GetBoolean(0) switch
             {
-                1 => HealthCheckResult.Healthy(),
+                true => HealthCheckResult.Healthy(),
                 _ => HealthCheckResult.Unhealthy()
             };
         }

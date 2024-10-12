@@ -20,9 +20,9 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
-app.MapHealthChecks("/healthz");
+app.MapHealthChecks("/health");
 
-app.MapGet("/health",
+app.MapGet("/fbhealth",
     async (FbConnectionFactory factory) =>
     {
         using FbConnection connection = await factory.GetFbConnectionAsync();

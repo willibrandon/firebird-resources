@@ -9,10 +9,7 @@ public abstract class FirebirdContainerTests : IAsyncLifetime
 {
     private readonly FirebirdContainer _firebirdContainer;
 
-    private FirebirdContainerTests(FirebirdContainer firebirdSqlContainer)
-    {
-        _firebirdContainer = firebirdSqlContainer;
-    }
+    private FirebirdContainerTests(FirebirdContainer firebirdSqlContainer) => _firebirdContainer = firebirdSqlContainer;
 
     public Task InitializeAsync() => _firebirdContainer.StartAsync();
 

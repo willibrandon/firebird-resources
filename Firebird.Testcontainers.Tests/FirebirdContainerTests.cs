@@ -37,6 +37,28 @@ public abstract class FirebirdContainerTests : IAsyncLifetime
         Assert.Empty(execResult.Stderr);
     }
 
+    [Fact]
+    public async Task ExecScriptAsSysDbaReturnsSuccessful()
+    {
+        const string scriptContent = "SELECT 1 FROM RDB$DATABASE;";
+
+        var execResult = await _firebirdContainer.ExecScriptAsSysDbaAsync(scriptContent)
+            .ConfigureAwait(true);
+
+        Assert.True(0L.Equals(execResult.ExitCode), execResult.Stderr);
+        Assert.Empty(execResult.Stderr);
+    }
+
+    [Fact]
+    public void SysDbaConnectionStateReturnsOpen()
+    {
+        using DbConnection connection = new FbConnection(_firebirdContainer.GetSysDbaConnectionString());
+
+        connection.Open();
+
+        Assert.Equal(ConnectionState.Open, connection.State);
+    }
+
     [UsedImplicitly]
     public sealed class Firebird : FirebirdContainerTests
     {
@@ -109,17 +131,6 @@ public abstract class FirebirdContainerTests : IAsyncLifetime
         public FirebirdWithDatabase()
             : base(new FirebirdBuilder()
                   .WithDatabase("foo")
-                  .Build())
-        {
-        }
-    }
-
-    [UsedImplicitly]
-    public sealed class FirebirdWithPassword : FirebirdContainerTests
-    {
-        public FirebirdWithPassword()
-            : base(new FirebirdBuilder()
-                  .WithPassword("foo")
                   .Build())
         {
         }

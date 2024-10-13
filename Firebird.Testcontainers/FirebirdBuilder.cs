@@ -10,11 +10,11 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     /// <summary>/var/lib/firebird/data/</summary>
     public const string DefaultDatabaseLocation = "/var/lib/firebird/data/";
 
-    /// <summary>masterkey</summary>
-    public const string DefaultPassword = "masterkey";
+    /// <summary>firebird</summary>
+    public const string DefaultPassword = "firebird";
 
-    /// <summary>sysdba</summary>
-    public const string DefaultUsername = "sysdba";
+    /// <summary>firebird</summary>
+    public const string DefaultUsername = "firebird";
 
     /// <summary>fdcastel/firebird</summary>
     public const string Image = "fdcastel/firebird";
@@ -22,8 +22,14 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     /// <summary>3050</summary>
     public const ushort Port = 3050;
 
-    /// <summary>docker.io</summary>
+    /// <summary>ghcr.io</summary>
     public const string Registry = "ghcr.io";
+
+    /// <summary>masterkey</summary>
+    public const string SysDbaPassword = "masterkey";
+
+    /// <summary>SYSDBA</summary>
+    public const string SysDbaUsername = "SYSDBA";
 
     /// <summary>latest</summary>
     public const string Tag = "latest";
@@ -58,9 +64,9 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
             .WithImage(Registry + "/" + Image + ":" + Tag)
             .WithPortBinding(Port, true)
             .WithDatabase(DefaultDatabase)
-            .WithPassword(DefaultPassword)
-            .WithRootPassword(DefaultPassword)
+            .WithRootPassword(SysDbaPassword)
             .WithUsername(DefaultUsername)
+            .WithPassword(DefaultPassword)
             .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(Port));
 
     /// <inheritdoc />
@@ -74,6 +80,13 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
             _ = Guard.Argument(DockerResourceConfiguration.Password, nameof(DockerResourceConfiguration.Password))
                 .NotNull()
                 .NotEmpty();
+        }
+
+        if (DockerResourceConfiguration.Password != null)
+        {
+            _ = Guard.Argument(DockerResourceConfiguration.Username, nameof(DockerResourceConfiguration.Username))
+                 .NotNull()
+                 .NotEmpty();
         }
     }
 

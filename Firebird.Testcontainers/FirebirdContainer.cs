@@ -27,25 +27,9 @@ public sealed class FirebirdContainer(FirebirdConfiguration configuration) : Doc
             { "DataSource", Hostname },
             { "Port", GetMappedPublicPort(FirebirdBuilder.Port).ToString() },
             { "Database", database },
+            { "User", _configuration.Username ?? FirebirdBuilder.DefaultUsername },
+            { "Password", _configuration.Password ?? FirebirdBuilder.DefaultPassword }
         };
-
-        if (_configuration.Username != null)
-        {
-            properties.Add("User", _configuration.Username);
-        }
-        else
-        {
-            properties.Add("User", FirebirdBuilder.DefaultUsername);
-        }
-
-        if (_configuration.Password != null)
-        {
-            properties.Add("Password", _configuration.Password);
-        }
-        else
-        {
-            properties.Add("Password", FirebirdBuilder.DefaultPassword);
-        }
 
         return string.Join(";", properties.Select(property => string.Join("=", property.Key, property.Value)));
     }

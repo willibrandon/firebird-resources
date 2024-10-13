@@ -20,13 +20,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{517CB315-AA91-4B99-88DB-2A9327106470}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebird.HealthChecks.Tests", "Firebird.HealthChecks.Tests\Firebird.HealthChecks.Tests.csproj", "{2A3A1A04-3A47-479C-BD07-083063EDE550}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebird.Testcontainers", "Firebird.Testcontainers\Firebird.Testcontainers.csproj", "{E34ED60C-E05B-45BE-8899-1DDAE766A000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firebird.Testcontainers.Tests", "Firebird.Testcontainers.Tests\Firebird.Testcontainers.Tests.csproj", "{3F23F8BF-48E1-473E-A1EC-CE547A7D6457}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebird.Testcontainers.Tests", "Firebird.Testcontainers.Tests\Firebird.Testcontainers.Tests.csproj", "{3F23F8BF-48E1-473E-A1EC-CE547A7D6457}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

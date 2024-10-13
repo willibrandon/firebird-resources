@@ -9,7 +9,7 @@ Firebird.Testcontainers uses [Testcontainers for .NET](https://dotnet.testcontai
 ## Installation
 
 ```PowerShell
-Install-Package Firebird.Testcontainers
+Install-Package Firebird.Testcontainers -IncludePrerelease
 ```
 
 ## Usage

@@ -74,6 +74,10 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     {
         base.Validate();
 
+        _ = Guard.Argument(DockerResourceConfiguration.Database, nameof(DockerResourceConfiguration.Database))
+                .NotNull()
+                .NotEmpty();
+
         // If a Firebird username is set, you must set a password. Otherwise, container initialization will fail.
         if (DockerResourceConfiguration.Username != null)
         {

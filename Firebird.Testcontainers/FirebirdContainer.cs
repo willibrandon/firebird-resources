@@ -73,19 +73,8 @@ public sealed class FirebirdContainer(FirebirdConfiguration configuration) : Doc
     /// <param name="ct">Cancellation token.</param>
     /// <returns>Task that completes when the SQL script has been executed.</returns>
     public async Task<ExecResult> ExecScriptAsync(string scriptContent, CancellationToken ct = default)
-    {
-        var scriptFilePath = string.Join("/", string.Empty, "tmp", Guid.NewGuid().ToString("D"), Path.GetRandomFileName());
-
-        await CopyAsync(Encoding.Default.GetBytes(scriptContent), scriptFilePath, Unix.FileMode644, ct)
+        => await ExecScriptAsync(_configuration.Username!, _configuration.Password!, scriptContent, ct)
             .ConfigureAwait(false);
-
-        return await ExecAsync([
-            "isql", "-i", scriptFilePath,
-            "-user", _configuration.Username,
-            "-pass", _configuration.Password,
-            Path.Combine(FirebirdBuilder.DefaultDatabaseLocation, _configuration.Database!)], ct)
-                .ConfigureAwait(false);
-    }
 
     /// <summary>
     /// Executes the SQL script in the Firebird container using the SYSDBA account.
@@ -94,6 +83,10 @@ public sealed class FirebirdContainer(FirebirdConfiguration configuration) : Doc
     /// <param name="ct">Cancellation token.</param>
     /// <returns>Task that completes when the SQL script has been executed.</returns>
     public async Task<ExecResult> ExecScriptAsSysDbaAsync(string scriptContent, CancellationToken ct = default)
+        => await ExecScriptAsync(FirebirdBuilder.SysDbaUsername, FirebirdBuilder.SysDbaPassword, scriptContent, ct)
+            .ConfigureAwait(false);
+
+    private async Task<ExecResult> ExecScriptAsync(string username, string password, string scriptContent, CancellationToken ct = default)
     {
         var scriptFilePath = string.Join("/", string.Empty, "tmp", Guid.NewGuid().ToString("D"), Path.GetRandomFileName());
 
@@ -102,8 +95,8 @@ public sealed class FirebirdContainer(FirebirdConfiguration configuration) : Doc
 
         return await ExecAsync([
             "isql", "-i", scriptFilePath,
-            "-user", FirebirdBuilder.SysDbaUsername,
-            "-pass", FirebirdBuilder.SysDbaPassword,
+            "-user", username,
+            "-pass", password,
             Path.Combine(FirebirdBuilder.DefaultDatabaseLocation, _configuration.Database!)], ct)
                 .ConfigureAwait(false);
     }

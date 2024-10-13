@@ -23,6 +23,7 @@ var firebirdContainer = new FirebirdBuilder()
 await firebirdContainer.StartAsync().ConfigureAwait(false);
 
 ```
+## Get Connection Strings
 
 To get connection strings:
 
@@ -30,6 +31,8 @@ To get connection strings:
 string connectionString = firebirdContainer.GetConnectionString();
 string sysDbaConnectionString = firebirdContainer.GetSysDbaConnectionString();
 ```
+
+# Execute SQL Scripts
 
 To execute SQL scripts:
 

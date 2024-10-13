@@ -4,7 +4,7 @@
 
 Firebird.Testcontainers is a fluent testcontainer builder for Firebird SQL Docker images.
 
-Firebird.Testcontainers uses [Testcontainers for .NET](https://dotnet.testcontainers.org/) to spinup a docker container directly from the C# (unit test) code. This package requires a docker service running locally.
+Firebird.Testcontainers uses [Testcontainers for .NET](https://dotnet.testcontainers.org/) to spinup a docker container directly from C# (unit test) code. This package requires a docker service running locally.
 
 ## Installation
 

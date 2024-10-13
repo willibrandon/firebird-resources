@@ -22,7 +22,20 @@ var firebirdContainer = new FirebirdBuilder()
 
 await firebirdContainer.StartAsync().ConfigureAwait(false);
 
+```
+
+To get connection strings:
+
+```csharp
 string connectionString = firebirdContainer.GetConnectionString();
+string sysDbaConnectionString = firebirdContainer.GetSysDbaConnectionString();
+```
+
+To execute SQL scripts:
+
+```csharp
+firebirdContainer.ExecScriptAsync("SELECT 1 FROM RDB$DATABASE;");
+firebirdContainer.ExecScriptAsSysDbaAsync("SELECT 1 FROM RDB$DATABASE;");
 
 ```
 

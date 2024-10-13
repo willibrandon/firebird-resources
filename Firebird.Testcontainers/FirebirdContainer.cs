@@ -30,7 +30,7 @@ public sealed class FirebirdContainer(FirebirdConfiguration configuration) : Doc
 
         string database = _configuration.Database != null
             ? Path.Combine(FirebirdBuilder.DefaultDatabaseLocation, _configuration.Database)
-            : FirebirdBuilder.DefaultDatabase; ;
+            : FirebirdBuilder.DefaultDatabase;
 
         var properties = new Dictionary<string, string>
         {
@@ -52,7 +52,7 @@ public sealed class FirebirdContainer(FirebirdConfiguration configuration) : Doc
     {
         string database = _configuration.Database != null
             ? Path.Combine(FirebirdBuilder.DefaultDatabaseLocation, _configuration.Database)
-            : FirebirdBuilder.DefaultDatabase; ;
+            : FirebirdBuilder.DefaultDatabase;
 
         var properties = new Dictionary<string, string>
         {

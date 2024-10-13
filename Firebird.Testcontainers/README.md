@@ -1,5 +1,7 @@
 ﻿# Firebird.Testcontainers
 
+[![.NET](https://github.com/willibrandon/firebird-resources/actions/workflows/dotnet.yml/badge.svg)](https://github.com/willibrandon/firebird-resources/actions/workflows/dotnet.yml)
+
 Firebird.Testcontainers is a fluent testcontainer builder for Firebird Docker images.
 
 Firebird.Testcontainers uses [Testcontainers for .NET](https://dotnet.testcontainers.org/) to spinup a docker container directly from the C# (unit test) code. This package requires a docker service running locally.

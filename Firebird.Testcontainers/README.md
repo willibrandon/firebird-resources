@@ -25,7 +25,7 @@ await firebirdContainer.StartAsync().ConfigureAwait(false);
 ```
 ### Get Connection Strings
 
-To get connection strings:
+To get connection strings from the Firebird container:
 
 ```csharp
 string connectionString = firebirdContainer.GetConnectionString();
@@ -34,7 +34,7 @@ string sysDbaConnectionString = firebirdContainer.GetSysDbaConnectionString();
 
 ### Execute SQL Scripts
 
-To execute SQL scripts:
+To execute SQL scripts on the Firebird container:
 
 ```csharp
 firebirdContainer.ExecScriptAsync("SELECT 1 FROM RDB$DATABASE;");

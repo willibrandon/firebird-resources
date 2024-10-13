@@ -13,7 +13,7 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/willibrandon/firebird-resources</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageTags>HealthCheck;HealthChecks;Health;Firebird</PackageTags>
+		<PackageTags>healthcheck;healthchecks;health;firebird</PackageTags>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/willibrandon/firebird-resources</RepositoryUrl>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>

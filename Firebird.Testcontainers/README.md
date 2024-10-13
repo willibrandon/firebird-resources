@@ -18,12 +18,10 @@ Install-Package Firebird.Testcontainers
 To build and startup a Firebird container:
 
 ```csharp
-
 var firebirdContainer = new FirebirdBuilder()
     .Build();
 
 await firebirdContainer.StartAsync().ConfigureAwait(false);
-
 ```
 ### Get Connection Strings
 
@@ -41,7 +39,6 @@ To execute SQL scripts on the Firebird container:
 ```csharp
 firebirdContainer.ExecScriptAsync("SELECT 1 FROM RDB$DATABASE;");
 firebirdContainer.ExecScriptAsSysDbaAsync("SELECT 1 FROM RDB$DATABASE;");
-
 ```
 
 ### Methods

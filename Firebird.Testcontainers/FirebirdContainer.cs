@@ -3,20 +3,14 @@ using System.Text;
 namespace Firebird.Testcontainers;
 
 /// <inheritdoc cref="DockerContainer" />
+/// <summary>
+/// Initializes a new instance of the <see cref="FirebirdContainer" /> class.
+/// </summary>
+/// <param name="configuration">The container configuration.</param>
 [PublicAPI]
-public sealed class FirebirdContainer : DockerContainer
+public sealed class FirebirdContainer(FirebirdConfiguration configuration) : DockerContainer(configuration)
 {
-    private readonly FirebirdConfiguration _configuration;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="FirebirdContainer" /> class.
-    /// </summary>
-    /// <param name="configuration">The container configuration.</param>
-    public FirebirdContainer(FirebirdConfiguration configuration)
-        : base(configuration)
-    {
-        _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-    }
+    private readonly FirebirdConfiguration _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
     /// <summary>
     /// Gets the FirebirdSql connection string.
@@ -24,32 +18,34 @@ public sealed class FirebirdContainer : DockerContainer
     /// <returns>The FirebirdSql connection string.</returns>
     public string GetConnectionString()
     {
+        string database = _configuration.Database != null
+            ? Path.Combine(FirebirdBuilder.DefaultDatabaseLocation, _configuration.Database)
+            : FirebirdBuilder.DefaultDatabase; ;
+
         var properties = new Dictionary<string, string>
         {
             { "DataSource", Hostname },
-            { "Port", GetMappedPublicPort(FirebirdBuilder.FirebirdSqlPort).ToString() },
-            { "Database", Path.Combine(FirebirdBuilder.DefaultDatabaseLocation, _configuration.Database!) },
-            { "User", _configuration.Username! },
-            { "Password", _configuration.Password! }
+            { "Port", GetMappedPublicPort(FirebirdBuilder.Port).ToString() },
+            { "Database", database },
         };
 
-        return string.Join(";", properties.Select(property => string.Join("=", property.Key, property.Value)));
-    }
-
-    /// <summary>
-    /// Gets the FirebirdSql SYSDBA connection string.
-    /// </summary>
-    /// <returns>The FirebirdSql connection string.</returns>
-    public string GetSysDbaConnectionString()
-    {
-        var properties = new Dictionary<string, string>
+        if (_configuration.Username != null)
         {
-            { "DataSource", Hostname },
-            { "Port", GetMappedPublicPort(FirebirdBuilder.FirebirdSqlPort).ToString() },
-            { "Database", _configuration.Database! },
-            { "User", FirebirdBuilder.SysDbaUsername },
-            { "Password", _configuration.Password! }
-        };
+            properties.Add("User", _configuration.Username);
+        }
+        else
+        {
+            properties.Add("User", FirebirdBuilder.DefaultUsername);
+        }
+
+        if (_configuration.Password != null)
+        {
+            properties.Add("Password", _configuration.Password);
+        }
+        else
+        {
+            properties.Add("Password", FirebirdBuilder.DefaultPassword);
+        }
 
         return string.Join(";", properties.Select(property => string.Join("=", property.Key, property.Value)));
     }

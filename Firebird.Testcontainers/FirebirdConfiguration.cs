@@ -4,17 +4,10 @@ namespace Firebird.Testcontainers;
 [PublicAPI]
 public sealed class FirebirdConfiguration : ContainerConfiguration
 {
-    private readonly string? _database;
-
-    // /// <summary>
-    // /// Gets the Firebird config.
-    // /// </summary>
-    // public object Config { get; }
-
     /// <summary>
     /// Gets the FirebirdSql database.
     /// </summary>
-    public string? Database => _database;
+    public string? Database { get; }
 
     /// <summary>
     /// Gets the FirebirdSql password.
@@ -31,9 +24,9 @@ public sealed class FirebirdConfiguration : ContainerConfiguration
     /// </summary>
     public FirebirdConfiguration(string? database = null, string? password = null, string? username = null)
     {
-        _database = database;
-        Password = password;
+        Database = database;
         Username = username;
+        Password = password;
     }
 
     /// <summary>
@@ -74,8 +67,8 @@ public sealed class FirebirdConfiguration : ContainerConfiguration
     public FirebirdConfiguration(FirebirdConfiguration oldValue, FirebirdConfiguration newValue)
         : base(oldValue, newValue)
     {
-        _database = BuildConfiguration.Combine(oldValue._database, newValue._database);
-        Password = BuildConfiguration.Combine(oldValue.Password, newValue.Password);
+        Database = BuildConfiguration.Combine(oldValue.Database, newValue.Database);
         Username = BuildConfiguration.Combine(oldValue.Username, newValue.Username);
+        Password = BuildConfiguration.Combine(oldValue.Password, newValue.Password);
     }
 }

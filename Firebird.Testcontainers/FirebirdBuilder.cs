@@ -1,29 +1,29 @@
-using System.Text;
-
 namespace Firebird.Testcontainers;
 
 /// <inheritdoc cref="ContainerBuilder{TBuilderEntity, TContainerEntity, TConfigurationEntity}" />
 [PublicAPI]
 public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, FirebirdContainer, FirebirdConfiguration>
 {
-    private const string DefaultDatabase = "employees";
-    private const string DefaultRootPassword = "masterkey";
-    private const string FirebirdCheckQuery = "SELECT 1 FROM RDB$DATABASE;";
+    /// <summary>firebird</summary>
+    public const string DefaultDatabase = "firebird";
 
     /// <summary>/var/lib/firebird/data/</summary>
     public const string DefaultDatabaseLocation = "/var/lib/firebird/data/";
 
-    /// <summary>3050</summary>
-    public const ushort FirebirdSqlPort = 3050;
+    /// <summary>masterkey</summary>
+    public const string DefaultPassword = "masterkey";
+
+    /// <summary>sysdba</summary>
+    public const string DefaultUsername = "sysdba";
 
     /// <summary>fdcastel/firebird</summary>
     public const string Image = "fdcastel/firebird";
 
+    /// <summary>3050</summary>
+    public const ushort Port = 3050;
+
     /// <summary>docker.io</summary>
     public const string Registry = "ghcr.io";
-
-    /// <summary>SYSDBA</summary>
-    public const string SysDbaUsername = "SYSDBA";
 
     /// <summary>latest</summary>
     public const string Tag = "latest";
@@ -32,24 +32,13 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     protected override FirebirdConfiguration DockerResourceConfiguration { get; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FirebirdBuilder" /> class.
+    ///  Initializes a new instance of the <see cref="FirebirdBuilder" /> class.
     /// </summary>
     public FirebirdBuilder() : this(new FirebirdConfiguration())
-    {
-        // 1) To change the ContainerBuilder default configuration override the DockerResourceConfiguration property and the "FirebirdBuilder Init()" method.
-        //    Append the module configuration to base.Init() e.g. base.Init().WithImage("alpine:3.17") to set the modules' default image.
-
-        // 2) To customize the ContainerBuilder validation override the "void Validate()" method.
-        //    Use Testcontainers' Guard.Argument<TType>(TType, string) or your own guard implementation to validate the module configuration.
-
-        // 3) Add custom builder methods to extend the ContainerBuilder capabilities such as "FirebirdBuilder WithFirebirdConfig(object)".
-        //    Merge the current module configuration with a new instance of the immutable FirebirdConfiguration type to update the module configuration.
-
-        DockerResourceConfiguration = Init().DockerResourceConfiguration;
-    }
+        => DockerResourceConfiguration = Init().DockerResourceConfiguration;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FirebirdBuilder" /> class.
+    ///  Initializes a new instance of the <see cref="FirebirdBuilder" /> class.
     /// </summary>
     /// <param name="resourceConfiguration">The Docker resource configuration.</param>
     private FirebirdBuilder(FirebirdConfiguration resourceConfiguration) : base(resourceConfiguration)
@@ -67,26 +56,30 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     protected override FirebirdBuilder Init()
         => base.Init()
             .WithImage(Registry + "/" + Image + ":" + Tag)
-            .WithPortBinding(FirebirdSqlPort, true)
+            .WithPortBinding(Port, true)
             .WithDatabase(DefaultDatabase)
-            .WithUsername(SysDbaUsername)
-            .WithPassword(DefaultRootPassword)
-            .WithRootPassword(DefaultRootPassword)
-            .WithResourceMapping(Encoding.Default.GetBytes(FirebirdCheckQuery), "/home/firebird_check.sql")
-            .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(FirebirdSqlPort));
+            .WithPassword(DefaultPassword)
+            .WithRootPassword(DefaultPassword)
+            .WithUsername(DefaultUsername)
+            .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(Port));
 
     /// <inheritdoc />
     protected override void Validate()
     {
         base.Validate();
-        _ = Guard.Argument(DockerResourceConfiguration.Password, nameof(DockerResourceConfiguration.Password))
-            .NotNull()
-            .NotEmpty();
+
+        // If a Firebird username is set, you must set a password. Otherwise, container initialization will fail.
+        if (DockerResourceConfiguration.Username != null)
+        {
+            _ = Guard.Argument(DockerResourceConfiguration.Password, nameof(DockerResourceConfiguration.Password))
+                .NotNull()
+                .NotEmpty();
+        }
     }
 
     /// <inheritdoc />
     protected override FirebirdBuilder Merge(FirebirdConfiguration oldValue, FirebirdConfiguration newValue)
-        => new FirebirdBuilder(new FirebirdConfiguration(oldValue, newValue));
+        => new(new FirebirdConfiguration(oldValue, newValue));
 
     /// <inheritdoc />
     public override FirebirdContainer Build()
@@ -96,52 +89,69 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     }
 
     /// <summary>
-    /// Sets the Firebird config.
+    ///  Sets values in the Firebird configuration file (firebird.conf).
     /// </summary>
-    /// <param name="config">The Firebird config.</param>
+    /// <param name="entry">The name of the configuration entry.</param>
+    /// <param name="value">The value of configuration entry.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
-    public FirebirdBuilder WithFirebirdConfig(object config)
-    {
-        // Extends the ContainerBuilder capabilities and holds a custom configuration in FirebirdConfiguration.
-        // In case of a module requires other properties to represent itself, extend ContainerConfiguration.
-        return Merge(
-            DockerResourceConfiguration,
-            new FirebirdConfiguration(database: DefaultDatabase, username: null, password: null));
-    }
+    public FirebirdBuilder WithConfiguration(string entry, string value)
+        => Merge(DockerResourceConfiguration, new FirebirdConfiguration())
+            .WithEnvironment("FIREBIRD_CONF_" + entry, value);
 
     /// <summary>
-    /// Sets the FirebirdSql database.
+    ///  Sets the Firebird database.
     /// </summary>
-    /// <param name="database">The FirebirdSql database.</param>
+    /// <param name="database">The Firebird database.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
     public FirebirdBuilder WithDatabase(string database)
         => Merge(DockerResourceConfiguration, new FirebirdConfiguration(database: database))
             .WithEnvironment("FIREBIRD_DATABASE", database);
 
     /// <summary>
-    /// Sets the FirebirdSql password.
+    ///  Sets the Firebird password.
     /// </summary>
-    /// <param name="password">The FirebirdSql password.</param>
+    /// <param name="password">The Firebird password.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
     public FirebirdBuilder WithPassword(string password)
         => Merge(DockerResourceConfiguration, new FirebirdConfiguration(password: password))
             .WithEnvironment("FIREBIRD_PASSWORD", password);
 
     /// <summary>
-    /// Sets the Firebird root password.
+    ///  Sets the Firebird SYSDBA password.
     /// </summary>
-    /// <param name="password">The FirebirdSql password.</param>
+    /// <param name="rootPassword">The Firebird password.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
-    public FirebirdBuilder WithRootPassword(string password)
-        => Merge(DockerResourceConfiguration, new FirebirdConfiguration(password: password))
-            .WithEnvironment("FIREBIRD_ROOT_PASSWORD", password);
+    public FirebirdBuilder WithRootPassword(string rootPassword)
+        => Merge(DockerResourceConfiguration, new FirebirdConfiguration())
+            .WithEnvironment("FIREBIRD_ROOT_PASSWORD", rootPassword);
 
     /// <summary>
-    /// Sets the FirebirdSql username.
+    ///  Sets the Firebird container time zone. e.g. "America/Los_Angeles".
     /// </summary>
-    /// <param name="username">The FirebirdSql username.</param>
+    /// <remarks>
+    /// <para>
+    ///  The container runs in UTC time zone by default.
+    /// </para>
+    /// </remarks>
+    /// <param name="value">The Firebird password.</param>
+    /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
+    public FirebirdBuilder WithTimeZone(string value)
+        => Merge(DockerResourceConfiguration, new FirebirdConfiguration())
+            .WithEnvironment("TZ", value);
+
+    /// <summary>
+    ///  Enables legacy Firebird authentication (not recommended).
+    /// </summary>
+    /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
+    public FirebirdBuilder WithUseLegacyAuth()
+        => WithConfiguration("FIREBIRD_USE_LEGACY_AUTH", true.ToString());
+
+    /// <summary>
+    ///  Sets the FirebirdSql username.
+    /// </summary>
+    /// <param name="username">The Firebird username.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
     public FirebirdBuilder WithUsername(string username)
         => Merge(DockerResourceConfiguration, new FirebirdConfiguration(username: username))
-            .WithEnvironment("FIREBIRD_USER", SysDbaUsername.Equals(username, StringComparison.OrdinalIgnoreCase) ? string.Empty : username);
+            .WithEnvironment("FIREBIRD_USER", username);
 }

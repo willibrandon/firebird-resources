@@ -38,46 +38,113 @@ public abstract class FirebirdContainerTests : IAsyncLifetime
     }
 
     [UsedImplicitly]
-    public sealed class FirebirdSql3 : FirebirdContainerTests
+    public sealed class Firebird3 : FirebirdContainerTests
     {
-        public FirebirdSql3()
-            : base(new FirebirdBuilder().WithImage("ghcr.io/fdcastel/firebird:3").Build())
+        public Firebird3()
+            : base(new FirebirdBuilder()
+                  .WithImage("ghcr.io/fdcastel/firebird:3")
+                  .Build())
         {
         }
     }
 
     [UsedImplicitly]
-    public sealed class FirebirdSql4: FirebirdContainerTests
+    public sealed class Firebird4 : FirebirdContainerTests
     {
-        public FirebirdSql4()
-            : base(new FirebirdBuilder().WithImage("ghcr.io/fdcastel/firebird:4").Build())
+        public Firebird4()
+            : base(new FirebirdBuilder()
+                  .WithImage("ghcr.io/fdcastel/firebird:4")
+                  .Build())
         {
         }
     }
 
     [UsedImplicitly]
-    public sealed class FirebirdSql5 : FirebirdContainerTests
+    public sealed class Firebird5 : FirebirdContainerTests
     {
-        public FirebirdSql5()
-            : base(new FirebirdBuilder().WithImage("ghcr.io/fdcastel/firebird:5").Build())
+        public Firebird5()
+            : base(new FirebirdBuilder()
+                  .WithImage("ghcr.io/fdcastel/firebird:5")
+                  .Build())
         {
         }
     }
 
     [UsedImplicitly]
-    public sealed class FirebirdSqlLatest : FirebirdContainerTests
+    public sealed class FirebirdLatest : FirebirdContainerTests
     {
-        public FirebirdSqlLatest()
-            : base(new FirebirdBuilder().WithImage("ghcr.io/fdcastel/firebird:latest").Build())
+        public FirebirdLatest()
+            : base(new FirebirdBuilder()
+                  .WithImage("ghcr.io/fdcastel/firebird:latest")
+                  .Build())
         {
         }
     }
 
     [UsedImplicitly]
-    public sealed class FirebirdSqlSysdba : FirebirdContainerTests
+    public sealed class FirebirdWithConfig : FirebirdContainerTests
     {
-        public FirebirdSqlSysdba()
-            : base(new FirebirdBuilder().WithUsername("SYSDBA").WithRootPassword("some-password").Build())
+        public FirebirdWithConfig()
+            : base(new FirebirdBuilder()
+                  .WithConfiguration("ConnectionTimeout", 90.ToString())
+                  .WithConfiguration("DeadlockTimeout", 5.ToString())
+                  .Build())
+        {
+        }
+    }
+
+    [UsedImplicitly]
+    public sealed class FirebirdWithDatabase : FirebirdContainerTests
+    {
+        public FirebirdWithDatabase()
+            : base(new FirebirdBuilder()
+                  .WithDatabase("foo")
+                  .Build())
+        {
+        }
+    }
+
+    [UsedImplicitly]
+    public sealed class FirebirdWithPassword : FirebirdContainerTests
+    {
+        public FirebirdWithPassword()
+            : base(new FirebirdBuilder()
+                  .WithPassword("foo")
+                  .Build())
+        {
+        }
+    }
+
+    [UsedImplicitly]
+    public sealed class FirebirdWithTimeZone : FirebirdContainerTests
+    {
+        public FirebirdWithTimeZone()
+            : base(new FirebirdBuilder()
+                  .WithTimeZone("America/Los_Angeles")
+                  .Build())
+        {
+        }
+    }
+
+    [UsedImplicitly]
+    public sealed class FirebirdWithUseLegacyAuth : FirebirdContainerTests
+    {
+        public FirebirdWithUseLegacyAuth()
+            : base(new FirebirdBuilder()
+                  .WithUseLegacyAuth()
+                  .Build())
+        {
+        }
+    }
+
+    [UsedImplicitly]
+    public sealed class FirebirdWithUsernameWithPassword : FirebirdContainerTests
+    {
+        public FirebirdWithUsernameWithPassword()
+            : base(new FirebirdBuilder()
+                  .WithUsername("foo")
+                  .WithPassword("bar")
+                  .Build())
         {
         }
     }

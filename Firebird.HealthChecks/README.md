@@ -18,7 +18,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Firebird HealthCheck registration also supports name, tags, failure status and other optional parameters.
+Firebird HealthCheck registration also supports healthQuery, name, tags, failure status, and other optional parameters.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

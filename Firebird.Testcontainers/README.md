@@ -25,7 +25,7 @@ await firebirdContainer.StartAsync().ConfigureAwait(false);
 ```
 ### Get Connection Strings
 
-To get connection strings from the Firebird container:
+To get connection strings from a Firebird container:
 
 ```csharp
 string connectionString = firebirdContainer.GetConnectionString();
@@ -34,7 +34,7 @@ string sysDbaConnectionString = firebirdContainer.GetSysDbaConnectionString();
 
 ### Execute SQL Scripts
 
-To execute SQL scripts on the Firebird container:
+To execute SQL scripts on a Firebird container:
 
 ```csharp
 firebirdContainer.ExecScriptAsync("SELECT 1 FROM RDB$DATABASE;");
@@ -42,7 +42,7 @@ firebirdContainer.ExecScriptAsSysDbaAsync("SELECT 1 FROM RDB$DATABASE;");
 ```
 
 ### Methods
-The following builder methods are available for the `FirebirdBuilder`:
+The following builder methods are available for a `FirebirdBuilder`:
 
 | Method |  Example | What |
 | -      | -        | -    |
@@ -54,7 +54,7 @@ The following builder methods are available for the `FirebirdBuilder`:
 | `WithUseLegacyAuth` | `.WithUseLegacyAuth()` | Enables legacy Firebird authentication (not recommended).
 | `WithUsername` | `.WithUsername("user")` | Sets the Firebird user name.
 
-The following container methods are available for the `FirebirdContainer`:
+The following container methods are available for a `FirebirdContainer`:
 
 | Method |  Example | What |
 | -      | -        | -    |

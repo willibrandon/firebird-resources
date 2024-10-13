@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<Authors>willibrandon</Authors>
-		<Description>Firebird.HealthChecks is an ASP.NET Core health check package for Firebird SQL databases.</Description>
+		<Description>An ASP.NET Core health check package for Firebird SQL databases.</Description>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<ImplicitUsings>enable</ImplicitUsings>

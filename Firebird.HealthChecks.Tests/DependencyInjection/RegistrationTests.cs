@@ -1,11 +1,10 @@
-﻿using Firebird.HealthChecks;
-using FirebirdSql.Data.FirebirdClient;
+﻿using FirebirdSql.Data.FirebirdClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Shouldly;
 
-namespace HealthChecks.Firebird.Tests.DependencyInjection;
+namespace Firebird.HealthChecks.Tests.DependencyInjection;
 
 public class RegistrationTests
 {

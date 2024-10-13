@@ -1,6 +1,4 @@
-﻿using Firebird.HealthChecks;
-using Firebird.HealthChecks.Tests;
-using FirebirdSql.Data.FirebirdClient;
+﻿using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using System.Net;
 
-namespace HealthChecks.Firebird.Tests.Functional;
+namespace Firebird.HealthChecks.Tests.Functional;
 
 public class FirebirdHealthCheckTests(FirebirdSqlContainerFixture fixture) : IClassFixture<FirebirdSqlContainerFixture>
 {

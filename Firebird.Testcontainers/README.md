@@ -1,6 +1,6 @@
 ﻿# Firebird.Testcontainers
 
-[![.NET](https://github.com/willibrandon/firebird-resources/actions/workflows/dotnet.yml/badge.svg)](https://github.com/willibrandon/firebird-resources/actions/workflows/dotnet.yml)
+[![.NET](https://github.com/willibrandon/firebird-resources/actions/workflows/ci.yml/badge.svg)](https://github.com/willibrandon/firebird-resources/actions/workflows/ci.yml)
 
 Firebird.Testcontainers is a fluent testcontainer builder for Firebird SQL Docker images.
 

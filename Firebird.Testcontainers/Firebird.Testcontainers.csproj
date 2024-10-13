@@ -2,7 +2,7 @@
 	
 	<PropertyGroup>
 		<Authors>willibrandon</Authors>
-		<Description>A fluent testcontainer builder for Firebird Docker images.</Description>
+		<Description>A fluent testcontainer builder for Firebird SQL Docker images.</Description>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<ImplicitUsings>enable</ImplicitUsings>

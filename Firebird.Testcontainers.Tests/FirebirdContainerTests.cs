@@ -86,8 +86,8 @@ public abstract class FirebirdContainerTests : IAsyncLifetime
     {
         public FirebirdWithConfig()
             : base(new FirebirdBuilder()
-                  .WithConfiguration("ConnectionTimeout", 90.ToString())
-                  .WithConfiguration("DeadlockTimeout", 5.ToString())
+                  .WithConfig("ConnectionTimeout", 90.ToString())
+                  .WithConfig("DeadlockTimeout", 5.ToString())
                   .Build())
         {
         }

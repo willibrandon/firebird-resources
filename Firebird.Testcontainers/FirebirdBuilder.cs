@@ -94,7 +94,7 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     /// <param name="entry">The name of the configuration entry.</param>
     /// <param name="value">The value of configuration entry.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
-    public FirebirdBuilder WithConfiguration(string entry, string value)
+    public FirebirdBuilder WithConfig(string entry, string value)
         => Merge(DockerResourceConfiguration, new FirebirdConfiguration())
             .WithEnvironment("FIREBIRD_CONF_" + entry, value);
 
@@ -144,7 +144,7 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     /// </summary>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
     public FirebirdBuilder WithUseLegacyAuth()
-        => WithConfiguration("FIREBIRD_USE_LEGACY_AUTH", true.ToString());
+        => WithConfig("FIREBIRD_USE_LEGACY_AUTH", true.ToString());
 
     /// <summary>
     ///  Sets the Firebird user name.

@@ -31,7 +31,7 @@ The following builder methods are available for the `FirebirdBuilder`:
 
 | Method |  Example | What |
 | -      | -        | -    |
-| `WithConfiguration` | `.WithConfiguration("ConnectionTimeout", "90")` | Sets values in the Firebird configuration file (firebird.conf).
+| `WithConfig` | `.WithConfig("ConnectionTimeout", "90")` | Sets values in the Firebird configuration file (firebird.conf).
 | `WithDatabase` | `.WithDatabase("employess")` | Sets the Firebird database name.
 | `WithPassword` | `.WithPassword("yourStrong(!)Password")` | Sets the Firebird user password.
 | `WithRootPassword` | `.WithRootPassword("masterkey")` | Sets the Firebird SYSDBA password.

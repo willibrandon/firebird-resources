@@ -4,6 +4,7 @@
 		<NoWarn>$(NoWarn);1591</NoWarn>
 		<NuGetAuditMode>direct</NuGetAuditMode>
 		<Version>1.0.0-alpha</Version>
+		<WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
 	</PropertyGroup>
 
 </Project>

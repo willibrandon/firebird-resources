@@ -10,6 +10,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Firebird.Testcontainers" Version="1.0.1-alpha" />
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.21" Condition="'$(TargetFramework)' == 'net6.0'" />
 		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="7.0.10" Condition="'$(TargetFramework)' == 'net7.0'" />
@@ -32,7 +33,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Firebird.HealthChecks\Firebird.HealthChecks.csproj" />
-	  <ProjectReference Include="..\Firebird.Testcontainers\Firebird.Testcontainers.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

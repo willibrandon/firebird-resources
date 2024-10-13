@@ -14,7 +14,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Firebird.Testcontainers" Version="1.0.1-alpha" />
     <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="10.3.1" />
     <PackageReference Include="JetBrains.Annotations" Version="2024.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
@@ -23,6 +22,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Firebird.Testcontainers\Firebird.Testcontainers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

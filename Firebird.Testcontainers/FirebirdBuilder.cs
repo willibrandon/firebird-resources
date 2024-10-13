@@ -99,7 +99,7 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
             .WithEnvironment("FIREBIRD_CONF_" + entry, value);
 
     /// <summary>
-    ///  Sets the Firebird database.
+    ///  Sets the Firebird database name.
     /// </summary>
     /// <param name="database">The Firebird database.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
@@ -108,7 +108,7 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
             .WithEnvironment("FIREBIRD_DATABASE", database);
 
     /// <summary>
-    ///  Sets the Firebird password.
+    ///  Sets the Firebird user password.
     /// </summary>
     /// <param name="password">The Firebird password.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
@@ -147,7 +147,7 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
         => WithConfiguration("FIREBIRD_USE_LEGACY_AUTH", true.ToString());
 
     /// <summary>
-    ///  Sets the FirebirdSql username.
+    ///  Sets the Firebird user name.
     /// </summary>
     /// <param name="username">The Firebird username.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>

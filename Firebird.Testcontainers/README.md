@@ -10,7 +10,8 @@ Firebird.Testcontainers uses [Testcontainers for .NET](https://dotnet.testcontai
 Install-Package Firebird.Testcontainers
 ```
 
-## Build and Start
+## Usage
+### Build and Start
 
 To build and startup a Firebird container:
 
@@ -25,4 +26,15 @@ string connectionString = firebirdContainer.GetConnectionString();
 
 ```
 
-## Methods
+### Methods
+The following builder methods are available for the `FirebirdBuilder`:
+
+| Method |  Example | What |
+| -      | -        | -    |
+| `WithConfiguration` | `.WithConfiguration("ConnectionTimeout", 90.ToString())` | Sets values in the Firebird configuration file (firebird.conf).
+| `WithDatabase` | `.WithDatabase("employess")` | Sets the Firebird database name.
+| `WithPassword` | `.WithPassword("yourStrong(!)Password")` | Sets the Firebird user password.
+| `WithRootPassword` | `.WithRootPassword("masterkey")` | Sets the Firebird SYSDBA password.
+| `WithTimeZone` | `.WithTimeZone("America/Los_Angeles")` | Sets the Firebird container time zone. e.g. "America/Los_Angeles".
+| `WithUseLegacyAuth` | `.WithUseLegacyAuth()` | Enables legacy Firebird authentication (not recommended).
+| `WithUsername` | `.WithUsername("user")` | Sets the Firebird user name.

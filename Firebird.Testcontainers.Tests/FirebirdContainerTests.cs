@@ -38,6 +38,16 @@ public abstract class FirebirdContainerTests : IAsyncLifetime
     }
 
     [UsedImplicitly]
+    public sealed class Firebird : FirebirdContainerTests
+    {
+        public Firebird()
+            : base(new FirebirdBuilder()
+                  .Build())
+        {
+        }
+    }
+
+    [UsedImplicitly]
     public sealed class Firebird3 : FirebirdContainerTests
     {
         public Firebird3()
@@ -86,8 +96,8 @@ public abstract class FirebirdContainerTests : IAsyncLifetime
     {
         public FirebirdWithConfig()
             : base(new FirebirdBuilder()
-                  .WithConfig("ConnectionTimeout", 90.ToString())
-                  .WithConfig("DeadlockTimeout", 5.ToString())
+                  .WithConfig("ConnectionTimeout", "90")
+                  .WithConfig("DeadlockTimeout", "5")
                   .Build())
         {
         }

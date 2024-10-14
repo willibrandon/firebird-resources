@@ -11,11 +11,13 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.1" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="8.2.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Firebird.Aspire.Hosting\Firebird.Aspire.Hosting.csproj" IsAspireProjectResource="false" />
     <ProjectReference Include="..\FirebirdResource.ApiService\FirebirdResource.ApiService.csproj" />
+    <ProjectReference Include="..\FirebirdResource.Web\FirebirdResource.Web.csproj" />
   </ItemGroup>
 
 </Project>

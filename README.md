@@ -2,7 +2,7 @@
 
 [![.NET](https://github.com/willibrandon/firebird-resources/actions/workflows/ci.yml/badge.svg)](https://github.com/willibrandon/firebird-resources/actions/workflows/ci.yml)
 
-A collection of tools and libraries for working with Firebird SQL databases using Docker, ASP.NET Core, and .NET Aspire.
+A collection of libraries for working with Firebird SQL databases using Docker, ASP.NET Core, and .NET Aspire.
 
 ## Firebird.HealthChecks
 

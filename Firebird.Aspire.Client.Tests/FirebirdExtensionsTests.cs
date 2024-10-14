@@ -31,7 +31,7 @@ public class FirebirdExtensionsTests
         var factory = useKeyed ?
             host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnection") :
             host.Services.GetRequiredService<FbConnectionFactory>();
-        var connectionString = factory.ConnectionString;
+        var connectionString = factory.Settings.ConnectionString;
 
         Assert.Equal(ConnectionString, connectionString);
     }
@@ -60,7 +60,7 @@ public class FirebirdExtensionsTests
         var factory = useKeyed ?
             host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnection") :
             host.Services.GetRequiredService<FbConnectionFactory>();
-        var connectionString = factory.ConnectionString;
+        var connectionString = factory.Settings.ConnectionString;
 
         Assert.Equal(ConnectionString, connectionString);
         // the connection string from config should not be used since code set it explicitly
@@ -94,9 +94,9 @@ public class FirebirdExtensionsTests
             host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnection") :
             host.Services.GetRequiredService<FbConnectionFactory>();
 
-        Assert.Equal(ConnectionString, factory.ConnectionString);
+        Assert.Equal(ConnectionString, factory.Settings.ConnectionString);
         // the connection string from config should not be used since it was found in ConnectionStrings
-        Assert.DoesNotContain("unused", factory.ConnectionString);
+        Assert.DoesNotContain("unused", factory.Settings.ConnectionString);
     }
 
     [Fact]
@@ -123,9 +123,9 @@ public class FirebirdExtensionsTests
         Assert.NotSame(factory1, factory3);
         Assert.NotSame(factory2, factory3);
 
-        Assert.Contains("fake1", factory1.ConnectionString);
-        Assert.Contains("fake2", factory2.ConnectionString);
-        Assert.Contains("fake3", factory3.ConnectionString);
+        Assert.Contains("fake1", factory1.Settings.ConnectionString);
+        Assert.Contains("fake2", factory2.Settings.ConnectionString);
+        Assert.Contains("fake3", factory3.Settings.ConnectionString);
     }
 
     private static string CreateConfigKey(string prefix, string? key, string suffix)

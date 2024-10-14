@@ -8,7 +8,7 @@ public sealed class FbConnectionFactory(FirebirdSettings settings) : IDisposable
 
     private FbConnection? _connection;
 
-    public string? ConnectionString => settings.ConnectionString;
+    public FirebirdSettings Settings => settings;
 
     public async Task<FbConnection> GetFbConnectionAsync(CancellationToken cancellationToken = default)
     {

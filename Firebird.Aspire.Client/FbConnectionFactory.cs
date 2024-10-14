@@ -8,6 +8,8 @@ public sealed class FbConnectionFactory(FirebirdSettings settings) : IDisposable
 
     private FbConnection? _connection;
 
+    public string? ConnectionString => settings.ConnectionString;
+
     public async Task<FbConnection> GetFbConnectionAsync(CancellationToken cancellationToken = default)
     {
         await _semaphore.WaitAsync(cancellationToken);

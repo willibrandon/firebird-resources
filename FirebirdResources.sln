@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebird.Testcontainers", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebird.Testcontainers.Tests", "Firebird.Testcontainers.Tests\Firebird.Testcontainers.Tests.csproj", "{3F23F8BF-48E1-473E-A1EC-CE547A7D6457}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firebird.Aspire.Client.Tests", "Firebird.Aspire.Client.Tests\Firebird.Aspire.Client.Tests.csproj", "{972446C6-F432-480E-9BBE-BF3DF298EEA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{3F23F8BF-48E1-473E-A1EC-CE547A7D6457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F23F8BF-48E1-473E-A1EC-CE547A7D6457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F23F8BF-48E1-473E-A1EC-CE547A7D6457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{972446C6-F432-480E-9BBE-BF3DF298EEA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{972446C6-F432-480E-9BBE-BF3DF298EEA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{972446C6-F432-480E-9BBE-BF3DF298EEA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{972446C6-F432-480E-9BBE-BF3DF298EEA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@
 /// </summary>
 public sealed class FirebirdSettings
 {
-    internal const string DefaultConfigSectionName = "Firebird:Client";
+    public const string DefaultConfigSectionName = "Firebird:Aspire:Client";
 
     /// <summary>
     /// Gets or sets the connection string of the Firebird database to connect to.

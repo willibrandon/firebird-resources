@@ -15,21 +15,21 @@ public class FirebirdExtensionsTests
     {
         var builder = Host.CreateEmptyApplicationBuilder(null);
         builder.Configuration.AddInMemoryCollection([
-            new KeyValuePair<string, string?>("ConnectionStrings:fbconnection", ConnectionString)
+            new KeyValuePair<string, string?>("ConnectionStrings:fbconnectionFactory", ConnectionString)
         ]);
 
         if (useKeyed)
         {
-            builder.AddKeyedFirebirdClient("fbconnection");
+            builder.AddKeyedFirebirdClient("fbconnectionFactory");
         }
         else
         {
-            builder.AddFirebirdClient("fbconnection");
+            builder.AddFirebirdClient("fbconnectionFactory");
         }
 
         using var host = builder.Build();
         var factory = useKeyed ?
-            host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnection") :
+            host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnectionFactory") :
             host.Services.GetRequiredService<FbConnectionFactory>();
         var connectionString = factory.Settings.ConnectionString;
 
@@ -43,22 +43,22 @@ public class FirebirdExtensionsTests
     {
         var builder = Host.CreateEmptyApplicationBuilder(null);
         builder.Configuration.AddInMemoryCollection([
-            new KeyValuePair<string, string?>("ConnectionStrings:fbconnection", "unused")
+            new KeyValuePair<string, string?>("ConnectionStrings:fbconnectionFactory", "unused")
         ]);
 
         static void SetConnectionString(FirebirdSettings settings) => settings.ConnectionString = ConnectionString;
         if (useKeyed)
         {
-            builder.AddKeyedFirebirdClient("fbconnection", SetConnectionString);
+            builder.AddKeyedFirebirdClient("fbconnectionFactory", SetConnectionString);
         }
         else
         {
-            builder.AddFirebirdClient("fbconnection", SetConnectionString);
+            builder.AddFirebirdClient("fbconnectionFactory", SetConnectionString);
         }
 
         using var host = builder.Build();
         var factory = useKeyed ?
-            host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnection") :
+            host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnectionFactory") :
             host.Services.GetRequiredService<FbConnectionFactory>();
         var connectionString = factory.Settings.ConnectionString;
 
@@ -74,24 +74,24 @@ public class FirebirdExtensionsTests
     {
         var builder = Host.CreateEmptyApplicationBuilder(null);
 
-        var key = useKeyed ? "fbconnection" : null;
+        var key = useKeyed ? "fbconnectionFactory" : null;
         builder.Configuration.AddInMemoryCollection([
             new KeyValuePair<string, string?>(CreateConfigKey(FirebirdSettings.DefaultConfigSectionName, key, "ConnectionString"), "unused"),
-            new KeyValuePair<string, string?>("ConnectionStrings:fbconnection", ConnectionString)
+            new KeyValuePair<string, string?>("ConnectionStrings:fbconnectionFactory", ConnectionString)
         ]);
 
         if (useKeyed)
         {
-            builder.AddKeyedFirebirdClient("fbconnection");
+            builder.AddKeyedFirebirdClient("fbconnectionFactory");
         }
         else
         {
-            builder.AddFirebirdClient("fbconnection");
+            builder.AddFirebirdClient("fbconnectionFactory");
         }
 
         using var host = builder.Build();
         var factory = useKeyed ?
-            host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnection") :
+            host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnectionFactory") :
             host.Services.GetRequiredService<FbConnectionFactory>();
 
         Assert.Equal(ConnectionString, factory.Settings.ConnectionString);
@@ -104,20 +104,20 @@ public class FirebirdExtensionsTests
     {
         var builder = Host.CreateEmptyApplicationBuilder(null);
         builder.Configuration.AddInMemoryCollection([
-            new KeyValuePair<string, string?>("ConnectionStrings:fbconnection1", "Host=fake1;Database=/var/lib/firebird/data/employees"),
-            new KeyValuePair<string, string?>("ConnectionStrings:fbconnection2", "Host=fake2;Database=/var/lib/firebird/data/employees"),
-            new KeyValuePair<string, string?>("ConnectionStrings:fbconnection3", "Host=fake3;Database=/var/lib/firebird/data/employees"),
+            new KeyValuePair<string, string?>("ConnectionStrings:fbconnectionFactory1", "Host=fake1;Database=/var/lib/firebird/data/employees"),
+            new KeyValuePair<string, string?>("ConnectionStrings:fbconnectionFactory2", "Host=fake2;Database=/var/lib/firebird/data/employees"),
+            new KeyValuePair<string, string?>("ConnectionStrings:fbconnectionFactory3", "Host=fake3;Database=/var/lib/firebird/data/employees"),
         ]);
 
-        builder.AddFirebirdClient("fbconnection1");
-        builder.AddKeyedFirebirdClient("fbconnection2");
-        builder.AddKeyedFirebirdClient("fbconnection3");
+        builder.AddFirebirdClient("fbconnectionFactory1");
+        builder.AddKeyedFirebirdClient("fbconnectionFactory2");
+        builder.AddKeyedFirebirdClient("fbconnectionFactory3");
 
         using var host = builder.Build();
 
         var factory1 = host.Services.GetRequiredService<FbConnectionFactory>();
-        var factory2 = host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnection2");
-        var factory3 = host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnection3");
+        var factory2 = host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnectionFactory2");
+        var factory3 = host.Services.GetRequiredKeyedService<FbConnectionFactory>("fbconnectionFactory3");
 
         Assert.NotSame(factory1, factory2);
         Assert.NotSame(factory1, factory3);

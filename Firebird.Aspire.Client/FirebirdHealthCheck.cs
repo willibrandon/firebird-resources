@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Firebird.Client;
+namespace Firebird.Aspire.Client;
 
 internal sealed class FirebirdHealthCheck(FbConnectionFactory factory) : IHealthCheck
 {

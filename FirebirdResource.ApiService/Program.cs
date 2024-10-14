@@ -1,4 +1,4 @@
-using Firebird.Client;
+using Firebird.Aspire.Client;
 using FirebirdSql.Data.FirebirdClient;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Firebird.Client;
+namespace Firebird.Aspire.Client;
 
 /// <summary>
 /// Extension methods for connecting Firebird database with FirebirdSql.Data.FirebirdClient.

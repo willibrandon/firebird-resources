@@ -1,7 +1,7 @@
 ﻿using Aspire.Hosting;
 using Aspire.Hosting.ApplicationModel;
 
-namespace Firebird.Hosting;
+namespace Firebird.Aspire.Hosting;
 
 /// <summary>
 /// Provides extension methods for adding Firebird resources to an <see cref="IDistributedApplicationBuilder"/>.

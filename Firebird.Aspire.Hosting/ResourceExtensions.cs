@@ -1,7 +1,7 @@
 ﻿using Aspire.Hosting.ApplicationModel;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Firebird.Hosting;
+namespace Firebird.Aspire.Hosting;
 
 public static class ResourceExtensions
 {

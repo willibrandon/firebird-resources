@@ -1,6 +1,6 @@
 ﻿using Aspire.Hosting.ApplicationModel;
 
-namespace Firebird.Hosting;
+namespace Firebird.Aspire.Hosting;
 
 internal static class VolumeNameGenerator
 {

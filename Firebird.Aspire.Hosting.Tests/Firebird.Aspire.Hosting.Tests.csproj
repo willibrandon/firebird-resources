@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Firebird.Hosting\Firebird.Hosting.csproj" />
+    <ProjectReference Include="..\Firebird.Aspire.Hosting\Firebird.Aspire.Hosting.csproj" />
   </ItemGroup>
 
 </Project>

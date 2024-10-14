@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace Firebird.Hosting;
+namespace Firebird.Aspire.Hosting;
 
 /// <summary>
 ///  A resouce that represents a Firebird container.

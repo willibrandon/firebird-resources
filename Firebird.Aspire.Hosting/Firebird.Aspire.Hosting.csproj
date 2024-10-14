@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="Firebird.Hosting.Tests" />
+		<InternalsVisibleTo Include="Firebird.Aspire.Hosting.Tests" />
 	</ItemGroup>
 
 </Project>

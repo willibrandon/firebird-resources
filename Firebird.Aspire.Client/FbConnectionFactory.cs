@@ -1,6 +1,6 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
 
-namespace Firebird.Client;
+namespace Firebird.Aspire.Client;
 
 public sealed class FbConnectionFactory(FirebirdSettings settings) : IDisposable
 {

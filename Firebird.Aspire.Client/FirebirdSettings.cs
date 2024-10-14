@@ -1,4 +1,4 @@
-﻿namespace Firebird.Client;
+﻿namespace Firebird.Aspire.Client;
 
 /// <summary>
 /// Provides the client configuration settings for connecting to a Firebird database using the Firebird .NET Data Provider.

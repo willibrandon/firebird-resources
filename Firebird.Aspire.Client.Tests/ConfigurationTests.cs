@@ -4,7 +4,7 @@ public class ConfigurationTests
 {
     [Fact]
     public void ConnectionStringIsNullByDefault()
-    => Assert.Null(new FirebirdSettings().ConnectionString);
+        => Assert.Null(new FirebirdSettings().ConnectionString);
 
     [Fact]
     public void HealthCheckIsEnabledByDefault()

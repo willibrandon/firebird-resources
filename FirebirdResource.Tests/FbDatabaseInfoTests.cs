@@ -1,24 +1,17 @@
 ﻿namespace FirebirdResource.Tests;
 
-public partial class ApiServiceTests
+public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClassFixture<DistributedApplicationFixture>
 {
+    private readonly DistributedApplicationFixture _fixture = fixture;
+
     [Fact]
     public async Task GetHealthReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/health");
 
         // Assert
@@ -29,19 +22,10 @@ public partial class ApiServiceTests
     public async Task GetIscVersionReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getiscversion");
 
         // Assert
@@ -52,19 +36,10 @@ public partial class ApiServiceTests
     public async Task GetServerVersionReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getserverversion");
 
         // Assert
@@ -75,19 +50,10 @@ public partial class ApiServiceTests
     public async Task GetServerClassReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getserverclass");
 
         // Assert
@@ -98,19 +64,10 @@ public partial class ApiServiceTests
     public async Task GetPageSizeReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getpagesize");
 
         // Assert
@@ -121,19 +78,10 @@ public partial class ApiServiceTests
     public async Task GetAllocationPagesReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getallocationpages");
 
         // Assert
@@ -144,19 +92,10 @@ public partial class ApiServiceTests
     public async Task GetBaseLevelReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getbaselevel");
 
         // Assert
@@ -167,19 +106,10 @@ public partial class ApiServiceTests
     public async Task GetDbIdReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getdbid");
 
         // Assert
@@ -190,19 +120,10 @@ public partial class ApiServiceTests
     public async Task GetImplementationReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getimplementation");
 
         // Assert
@@ -213,19 +134,10 @@ public partial class ApiServiceTests
     public async Task GetNoReserveReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getnoreserve");
 
         // Assert
@@ -236,19 +148,10 @@ public partial class ApiServiceTests
     public async Task GetOdsVersionReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getodsversion");
 
         // Assert
@@ -259,19 +162,10 @@ public partial class ApiServiceTests
     public async Task GetOdsMinorVersionReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getodsminorversion");
 
         // Assert
@@ -282,19 +176,10 @@ public partial class ApiServiceTests
     public async Task GetMaxMemoryReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getmaxmemory");
 
         // Assert
@@ -305,19 +190,10 @@ public partial class ApiServiceTests
     public async Task GetCurrentMemoryReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getcurrentmemory");
 
         // Assert
@@ -328,19 +204,10 @@ public partial class ApiServiceTests
     public async Task GetForcedWritesReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getforcedwrites");
 
         // Assert
@@ -351,19 +218,10 @@ public partial class ApiServiceTests
     public async Task GetNumBuffersReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getnumbuffers");
 
         // Assert
@@ -374,19 +232,10 @@ public partial class ApiServiceTests
     public async Task GetSweepIntervalReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getsweepinterval");
 
         // Assert
@@ -397,19 +246,10 @@ public partial class ApiServiceTests
     public async Task GetReadOnlyReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getreadonly");
 
         // Assert
@@ -420,19 +260,10 @@ public partial class ApiServiceTests
     public async Task GetFetchesReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getfetches");
 
         // Assert
@@ -443,19 +274,10 @@ public partial class ApiServiceTests
     public async Task GetMarksReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getmarks");
 
         // Assert
@@ -466,19 +288,10 @@ public partial class ApiServiceTests
     public async Task GetReadsReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getreads");
 
         // Assert
@@ -489,19 +302,10 @@ public partial class ApiServiceTests
     public async Task GetWritesReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getwrites");
 
         // Assert
@@ -512,19 +316,10 @@ public partial class ApiServiceTests
     public async Task GetBackoutCountReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getbackoutcount");
 
         // Assert
@@ -535,19 +330,10 @@ public partial class ApiServiceTests
     public async Task GetDeleteCountReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getdeletecount");
 
         // Assert
@@ -558,19 +344,10 @@ public partial class ApiServiceTests
     public async Task GetExpungeCountReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getexpungecount");
 
         // Assert
@@ -581,19 +358,10 @@ public partial class ApiServiceTests
     public async Task GetInsertCountReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getinsertcount");
 
         // Assert
@@ -604,19 +372,10 @@ public partial class ApiServiceTests
     public async Task GetPurgeCountReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getpurgecount");
 
         // Assert
@@ -627,19 +386,10 @@ public partial class ApiServiceTests
     public async Task GetReadIxCountReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getreadixcount");
 
         // Assert
@@ -650,19 +400,10 @@ public partial class ApiServiceTests
     public async Task GetReadSeqCountReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getreadseqcount");
 
         // Assert
@@ -673,19 +414,10 @@ public partial class ApiServiceTests
     public async Task GetUpdateCountReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getupdatecount");
 
         // Assert
@@ -696,19 +428,10 @@ public partial class ApiServiceTests
     public async Task GetDatabaseSizeInPagesReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getdatabasesizeinpages");
 
         // Assert
@@ -719,19 +442,10 @@ public partial class ApiServiceTests
     public async Task GetOldestTransactionReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getoldesttransaction");
 
         // Assert
@@ -742,19 +456,10 @@ public partial class ApiServiceTests
     public async Task GetOldestActiveTransactionReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getoldestactivetransaction");
 
         // Assert
@@ -765,19 +470,10 @@ public partial class ApiServiceTests
     public async Task GetOldestActiveSnapshotReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getoldestactivesnapshot");
 
         // Assert
@@ -788,19 +484,10 @@ public partial class ApiServiceTests
     public async Task GetNextTransactionReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getnexttransaction");
 
         // Assert
@@ -811,19 +498,10 @@ public partial class ApiServiceTests
     public async Task GetActiveTransactionReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getactivetransactions");
 
         // Assert
@@ -834,19 +512,10 @@ public partial class ApiServiceTests
     public async Task GetActiveTransactionsCountReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getactivetransactionscount");
 
         // Assert
@@ -857,19 +526,10 @@ public partial class ApiServiceTests
     public async Task GetActiveUsersReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getactiveusers");
 
         // Assert
@@ -880,19 +540,10 @@ public partial class ApiServiceTests
     public async Task GetWireCryptReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getwirecrypt");
 
         // Assert
@@ -903,19 +554,10 @@ public partial class ApiServiceTests
     public async Task GetCryptPluginReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getcryptplugin");
 
         // Assert
@@ -926,19 +568,10 @@ public partial class ApiServiceTests
     public async Task GetCreationDateReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getcreationdate");
 
         // Assert
@@ -949,19 +582,10 @@ public partial class ApiServiceTests
     public async Task GetNextAttachmentReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getnextattachment");
 
         // Assert
@@ -972,19 +596,10 @@ public partial class ApiServiceTests
     public async Task GetNextStatementReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getnextstatement");
 
         // Assert
@@ -995,19 +610,10 @@ public partial class ApiServiceTests
     public async Task GetReplicaModeReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getreplicamode");
 
         // Assert
@@ -1018,19 +624,10 @@ public partial class ApiServiceTests
     public async Task GetDbFileIdReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getdbfileid");
 
         // Assert
@@ -1041,19 +638,10 @@ public partial class ApiServiceTests
     public async Task GetDbGuidtReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getdbguid");
 
         // Assert
@@ -1064,19 +652,10 @@ public partial class ApiServiceTests
     public async Task GetCreationTimestampReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getcreationtimestamp");
 
         // Assert
@@ -1087,19 +666,10 @@ public partial class ApiServiceTests
     public async Task GetProtocolVersionReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getprotocolversion");
 
         // Assert
@@ -1110,19 +680,10 @@ public partial class ApiServiceTests
     public async Task GetStatementTimeoutDatabaseReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getstatementtimeoutdatabase");
 
         // Assert
@@ -1133,19 +694,10 @@ public partial class ApiServiceTests
     public async Task GetStatementTimeoutAttachmentReturnsOkStatusCode()
     {
         // Arrange
-        var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.FirebirdResource_AppHost>();
-        appHost.Services.ConfigureHttpClientDefaults(clientBuilder =>
-        {
-            clientBuilder.AddStandardResilienceHandler();
-        });
-
-        await using var app = await appHost.BuildAsync();
-        var resourceNotificationService = app.Services.GetRequiredService<ResourceNotificationService>();
-        await app.StartAsync();
+        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = app.CreateHttpClient("apiService");
-        await resourceNotificationService.WaitForResourceAsync("apiService", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
+        var httpClient = _fixture.App.CreateHttpClient("apiService");
         var response = await httpClient.GetAsync("/getstatementtimeoutattachment");
 
         // Assert

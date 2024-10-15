@@ -1,18 +1,23 @@
 ﻿namespace FirebirdResource.Tests;
 
-public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClassFixture<DistributedApplicationFixture>
+public class FbDatabaseInfoTests: IClassFixture<DistributedApplicationFixture>
 {
-    private readonly DistributedApplicationFixture _fixture = fixture;
+    private readonly DistributedApplicationFixture _fixture;
+    private readonly HttpClient _httpClient;
+
+    public FbDatabaseInfoTests(DistributedApplicationFixture fixture)
+    {
+        _fixture = fixture;
+        _httpClient = _fixture.App.CreateHttpClient("apiService");
+    }
 
     [Fact]
     public async Task GetHealthReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/health");
+        var response = await _httpClient.GetAsync("/health");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -22,11 +27,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetIscVersionReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getiscversion");
+        var response = await _httpClient.GetAsync("/getiscversion");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -36,11 +39,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetServerVersionReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getserverversion");
+        var response = await _httpClient.GetAsync("/getserverversion");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -50,11 +51,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetServerClassReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getserverclass");
+        var response = await _httpClient.GetAsync("/getserverclass");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -64,11 +63,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetPageSizeReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getpagesize");
+        var response = await _httpClient.GetAsync("/getpagesize");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -78,11 +75,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetAllocationPagesReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getallocationpages");
+        var response = await _httpClient.GetAsync("/getallocationpages");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -92,11 +87,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetBaseLevelReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getbaselevel");
+        var response = await _httpClient.GetAsync("/getbaselevel");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -106,11 +99,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetDbIdReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getdbid");
+        var response = await _httpClient.GetAsync("/getdbid");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -120,11 +111,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetImplementationReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getimplementation");
+        var response = await _httpClient.GetAsync("/getimplementation");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -134,11 +123,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetNoReserveReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getnoreserve");
+        var response = await _httpClient.GetAsync("/getnoreserve");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -148,11 +135,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetOdsVersionReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getodsversion");
+        var response = await _httpClient.GetAsync("/getodsversion");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -162,11 +147,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetOdsMinorVersionReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getodsminorversion");
+        var response = await _httpClient.GetAsync("/getodsminorversion");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -176,11 +159,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetMaxMemoryReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getmaxmemory");
+        var response = await _httpClient.GetAsync("/getmaxmemory");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -190,11 +171,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetCurrentMemoryReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getcurrentmemory");
+        var response = await _httpClient.GetAsync("/getcurrentmemory");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -204,11 +183,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetForcedWritesReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getforcedwrites");
+        var response = await _httpClient.GetAsync("/getforcedwrites");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -218,11 +195,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetNumBuffersReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getnumbuffers");
+        var response = await _httpClient.GetAsync("/getnumbuffers");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -232,11 +207,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetSweepIntervalReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getsweepinterval");
+        var response = await _httpClient.GetAsync("/getsweepinterval");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -246,11 +219,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetReadOnlyReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getreadonly");
+        var response = await _httpClient.GetAsync("/getreadonly");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -260,11 +231,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetFetchesReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getfetches");
+        var response = await _httpClient.GetAsync("/getfetches");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -274,11 +243,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetMarksReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getmarks");
+        var response = await _httpClient.GetAsync("/getmarks");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -288,11 +255,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetReadsReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getreads");
+        var response = await _httpClient.GetAsync("/getreads");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -302,11 +267,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetWritesReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getwrites");
+        var response = await _httpClient.GetAsync("/getwrites");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -316,11 +279,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetBackoutCountReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getbackoutcount");
+        var response = await _httpClient.GetAsync("/getbackoutcount");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -330,11 +291,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetDeleteCountReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getdeletecount");
+        var response = await _httpClient.GetAsync("/getdeletecount");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -344,11 +303,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetExpungeCountReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getexpungecount");
+        var response = await _httpClient.GetAsync("/getexpungecount");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -358,11 +315,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetInsertCountReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getinsertcount");
+        var response = await _httpClient.GetAsync("/getinsertcount");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -372,11 +327,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetPurgeCountReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getpurgecount");
+        var response = await _httpClient.GetAsync("/getpurgecount");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -386,11 +339,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetReadIxCountReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getreadixcount");
+        var response = await _httpClient.GetAsync("/getreadixcount");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -400,11 +351,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetReadSeqCountReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getreadseqcount");
+        var response = await _httpClient.GetAsync("/getreadseqcount");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -414,11 +363,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetUpdateCountReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getupdatecount");
+        var response = await _httpClient.GetAsync("/getupdatecount");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -428,11 +375,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetDatabaseSizeInPagesReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getdatabasesizeinpages");
+        var response = await _httpClient.GetAsync("/getdatabasesizeinpages");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -442,11 +387,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetOldestTransactionReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getoldesttransaction");
+        var response = await _httpClient.GetAsync("/getoldesttransaction");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -456,11 +399,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetOldestActiveTransactionReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getoldestactivetransaction");
+        var response = await _httpClient.GetAsync("/getoldestactivetransaction");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -470,11 +411,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetOldestActiveSnapshotReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getoldestactivesnapshot");
+        var response = await _httpClient.GetAsync("/getoldestactivesnapshot");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -484,11 +423,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetNextTransactionReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getnexttransaction");
+        var response = await _httpClient.GetAsync("/getnexttransaction");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -498,11 +435,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetActiveTransactionReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getactivetransactions");
+        var response = await _httpClient.GetAsync("/getactivetransactions");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -512,11 +447,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetActiveTransactionsCountReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getactivetransactionscount");
+        var response = await _httpClient.GetAsync("/getactivetransactionscount");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -526,11 +459,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetActiveUsersReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getactiveusers");
+        var response = await _httpClient.GetAsync("/getactiveusers");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -540,11 +471,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetWireCryptReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getwirecrypt");
+        var response = await _httpClient.GetAsync("/getwirecrypt");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -554,11 +483,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetCryptPluginReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getcryptplugin");
+        var response = await _httpClient.GetAsync("/getcryptplugin");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -568,11 +495,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetCreationDateReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getcreationdate");
+        var response = await _httpClient.GetAsync("/getcreationdate");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -582,11 +507,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetNextAttachmentReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getnextattachment");
+        var response = await _httpClient.GetAsync("/getnextattachment");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -596,11 +519,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetNextStatementReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getnextstatement");
+        var response = await _httpClient.GetAsync("/getnextstatement");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -610,11 +531,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetReplicaModeReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getreplicamode");
+        var response = await _httpClient.GetAsync("/getreplicamode");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -624,11 +543,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetDbFileIdReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getdbfileid");
+        var response = await _httpClient.GetAsync("/getdbfileid");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -638,11 +555,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetDbGuidtReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getdbguid");
+        var response = await _httpClient.GetAsync("/getdbguid");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -652,11 +567,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetCreationTimestampReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getcreationtimestamp");
+        var response = await _httpClient.GetAsync("/getcreationtimestamp");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -666,11 +579,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetProtocolVersionReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getprotocolversion");
+        var response = await _httpClient.GetAsync("/getprotocolversion");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -680,11 +591,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetStatementTimeoutDatabaseReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getstatementtimeoutdatabase");
+        var response = await _httpClient.GetAsync("/getstatementtimeoutdatabase");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -694,11 +603,9 @@ public class FbDatabaseInfoTests(DistributedApplicationFixture fixture) : IClass
     public async Task GetStatementTimeoutAttachmentReturnsOkStatusCode()
     {
         // Arrange
-        Assert.NotNull(_fixture.App);
 
         // Act
-        var httpClient = _fixture.App.CreateHttpClient("apiService");
-        var response = await httpClient.GetAsync("/getstatementtimeoutattachment");
+        var response = await _httpClient.GetAsync("/getstatementtimeoutattachment");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);

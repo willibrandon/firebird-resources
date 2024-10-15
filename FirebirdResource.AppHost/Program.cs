@@ -3,7 +3,7 @@ using Firebird.Aspire.Hosting;
 var builder = DistributedApplication.CreateBuilder(args);
 
 var firebird = builder.AddFirebird("firebird")
-    .AddDatabase("employees");
+    .AddDatabase("firebirdDb", "employees");
 
 var cache = builder.AddRedis("cache");
 

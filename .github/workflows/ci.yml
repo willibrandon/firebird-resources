@@ -26,6 +26,9 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
+    - name: Trust developer certificate
+      run: dotnet dev-certs https --verbose --trust
+
     - name: Install .NET Aspire workload
       run: dotnet workload install aspire
 

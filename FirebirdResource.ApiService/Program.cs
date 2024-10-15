@@ -444,7 +444,7 @@ app.MapGet("/getprotocolversion",
     }
 );
 
-app.MapGet("/getstatementimeoutdatabase",
+app.MapGet("/getstatementtimeoutdatabase",
     async (FbConnectionFactory factory) =>
     {
         using FbConnection connection = await factory.GetFbConnectionAsync();

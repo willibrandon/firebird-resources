@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+﻿using FirebirdSql.Data.FirebirdClient;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Firebird.Aspire.Client;
 
@@ -10,10 +11,20 @@ internal sealed class FirebirdHealthCheck(FbConnectionFactory factory) : IHealth
     {
         try
         {
-            // The factory connects (and opens).
-            _ = await factory.GetFbConnectionAsync(cancellationToken);
+            using FbConnection connection = await factory.GetFbConnectionAsync(cancellationToken);
+            using var transaction = connection.BeginTransaction();
+            using var command = new FbCommand("SELECT 1 FROM RDB$DATABASE;", connection, transaction);
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                return reader.GetBoolean(0) switch
+                {
+                    true => HealthCheckResult.Healthy(),
+                    _ => HealthCheckResult.Unhealthy()
+                };
+            }
 
-            return HealthCheckResult.Healthy();
+            return HealthCheckResult.Unhealthy();
         }
         catch (Exception ex)
         {

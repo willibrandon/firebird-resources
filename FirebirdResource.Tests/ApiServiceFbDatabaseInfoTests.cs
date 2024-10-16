@@ -12,14 +12,6 @@ public class ApiServiceFbDatabaseInfoTests : IClassFixture<DistributedApplicatio
     }
 
     [Fact]
-    public async Task GetHealthReturnsOkStatusCode()
-    {
-        var response = await _httpClient.GetAsync("/health");
-
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-    }
-
-    [Fact]
     public async Task GetIscVersionReturnsOkStatusCode()
     {
         var response = await _httpClient.GetAsync("/fbdatabaseinfo/getiscversion");

@@ -9,6 +9,7 @@ public static class WebApplicationExtensions
     {
         app.MapHealthChecks();
         app.MapFbDatabaseInfo();
+        app.MapFbTransactionInfo();
     }
 
     public static void MapFbDatabaseInfo(this WebApplication app)
@@ -451,6 +452,19 @@ public static class WebApplicationExtensions
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
                 return await dbInfo.GetStatementTimeoutAttachmentAsync();
+            }
+        );
+    }
+
+    public static void MapFbTransactionInfo(this WebApplication app)
+    {
+        app.MapGet("/fbtransactioninfo/gettransactionsnapshotnumber",
+            async (FbConnectionFactory factory) =>
+            {
+                using FbConnection connection = await factory.GetFbConnectionAsync();
+                using var transaction = connection.BeginTransaction();
+                var txInfo = new FbTransactionInfo(transaction);
+                return await txInfo.GetTransactionSnapshotNumberAsync();
             }
         );
     }

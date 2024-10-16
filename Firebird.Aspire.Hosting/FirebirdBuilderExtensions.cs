@@ -8,7 +8,7 @@ namespace Firebird.Aspire.Hosting;
 /// </summary>
 public static class FirebirdBuilderExtensions
 {
-    private const string DefaultDatabaseName = "employees";
+    private const string DefaultDatabaseName = "firebird";
     private const string DefaultSysDbaPassword = "masterkey";
 
     /// <summary>
@@ -42,6 +42,8 @@ public static class FirebirdBuilderExtensions
 
         var firebirdServer = new FirebirdServerResource(name, userName?.Resource, passwordParameter);
 
+        databaseName = databaseName ?? DefaultDatabaseName;
+
         //#pragma warning disable ASPIREEVENTING001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
         //        builder.Eventing.Subscribe<ConnectionStringAvailableEvent>(firebirdServer, async (@event, ct) =>
         //        {
@@ -66,7 +68,6 @@ public static class FirebirdBuilderExtensions
                           context.EnvironmentVariables["FIREBIRD_ROOT_PASSWORD"] = DefaultSysDbaPassword;
                           context.EnvironmentVariables["FIREBIRD_USER"] = firebirdServer.UserNameReference;
                           context.EnvironmentVariables["FIREBIRD_PASSWORD"] = firebirdServer.PasswordParameter;
-                          context.EnvironmentVariables["FIREBIRD_DATABASE"] = databaseName ?? DefaultDatabaseName;
                       });
         //.WithHealthCheck(healthCheckKey);
     }
@@ -100,6 +101,7 @@ public static class FirebirdBuilderExtensions
         databaseName ??= name;
 
         builder.Resource.AddDatabase(name, databaseName);
+        builder.WithEnvironment("FIREBIRD_DATABASE", databaseName);
         var firebirdDatabase = new FirebirdDatabaseResource(name, databaseName, builder.Resource);
         return builder.ApplicationBuilder.AddResource(firebirdDatabase);
     }

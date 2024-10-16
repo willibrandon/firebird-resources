@@ -1,11 +1,11 @@
 ﻿namespace FirebirdResource.Tests;
 
-public class FbDatabaseInfoTests: IClassFixture<DistributedApplicationFixture>
+public class ApiServiceFbDatabaseInfoTests : IClassFixture<DistributedApplicationFixture>
 {
     private readonly DistributedApplicationFixture _fixture;
     private readonly HttpClient _httpClient;
 
-    public FbDatabaseInfoTests(DistributedApplicationFixture fixture)
+    public ApiServiceFbDatabaseInfoTests(DistributedApplicationFixture fixture)
     {
         _fixture = fixture;
         _httpClient = _fixture.App.CreateHttpClient("apiService");
@@ -14,600 +14,400 @@ public class FbDatabaseInfoTests: IClassFixture<DistributedApplicationFixture>
     [Fact]
     public async Task GetHealthReturnsOkStatusCode()
     {
-        // Arrange
-
-        // Act
         var response = await _httpClient.GetAsync("/health");
 
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetIscVersionReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getiscversion");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getiscversion");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetServerVersionReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getserverversion");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getserverversion");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetServerClassReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getserverclass");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getserverclass");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetPageSizeReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getpagesize");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getpagesize");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetAllocationPagesReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getallocationpages");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getallocationpages");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetBaseLevelReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getbaselevel");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getbaselevel");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetDbIdReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getdbid");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getdbid");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetImplementationReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getimplementation");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getimplementation");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetNoReserveReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getnoreserve");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getnoreserve");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetOdsVersionReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getodsversion");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getodsversion");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetOdsMinorVersionReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getodsminorversion");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getodsminorversion");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetMaxMemoryReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getmaxmemory");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getmaxmemory");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetCurrentMemoryReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getcurrentmemory");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getcurrentmemory");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetForcedWritesReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getforcedwrites");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getforcedwrites");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetNumBuffersReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getnumbuffers");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getnumbuffers");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetSweepIntervalReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getsweepinterval");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getsweepinterval");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetReadOnlyReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getreadonly");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getreadonly");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetFetchesReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getfetches");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getfetches");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetMarksReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getmarks");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getmarks");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetReadsReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getreads");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getreads");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetWritesReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getwrites");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getwrites");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetBackoutCountReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getbackoutcount");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getbackoutcount");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetDeleteCountReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getdeletecount");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getdeletecount");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetExpungeCountReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getexpungecount");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getexpungecount");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetInsertCountReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getinsertcount");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getinsertcount");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetPurgeCountReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getpurgecount");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getpurgecount");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetReadIxCountReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getreadixcount");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getreadixcount");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetReadSeqCountReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getreadseqcount");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getreadseqcount");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetUpdateCountReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getupdatecount");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getupdatecount");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetDatabaseSizeInPagesReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getdatabasesizeinpages");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getdatabasesizeinpages");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetOldestTransactionReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getoldesttransaction");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getoldesttransaction");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetOldestActiveTransactionReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getoldestactivetransaction");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getoldestactivetransaction");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetOldestActiveSnapshotReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getoldestactivesnapshot");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getoldestactivesnapshot");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetNextTransactionReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getnexttransaction");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getnexttransaction");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetActiveTransactionReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getactivetransactions");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getactivetransactions");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetActiveTransactionsCountReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getactivetransactionscount");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getactivetransactionscount");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetActiveUsersReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getactiveusers");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getactiveusers");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetWireCryptReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getwirecrypt");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getwirecrypt");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetCryptPluginReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getcryptplugin");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getcryptplugin");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetCreationDateReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getcreationdate");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getcreationdate");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetNextAttachmentReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getnextattachment");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getnextattachment");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetNextStatementReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getnextstatement");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getnextstatement");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetReplicaModeReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getreplicamode");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getreplicamode");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetDbFileIdReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getdbfileid");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getdbfileid");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetDbGuidtReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getdbguid");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getdbguid");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetCreationTimestampReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getcreationtimestamp");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getcreationtimestamp");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetProtocolVersionReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getprotocolversion");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getprotocolversion");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetStatementTimeoutDatabaseReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getstatementtimeoutdatabase");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getstatementtimeoutdatabase");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task GetStatementTimeoutAttachmentReturnsOkStatusCode()
     {
-        // Arrange
+        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getstatementtimeoutattachment");
 
-        // Act
-        var response = await _httpClient.GetAsync("/getstatementtimeoutattachment");
-
-        // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 }

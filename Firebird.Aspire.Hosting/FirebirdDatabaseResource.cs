@@ -10,7 +10,8 @@ namespace Firebird.Aspire.Hosting;
 /// <param name="name">The name of the resource.</param>
 /// <param name="databaseName">The database name.</param>
 /// <param name="firebirdParentResource">The Firebird SQL parent resource associated with this database.</param>
-public class FirebirdDatabaseResource(string name, string databaseName, FirebirdServerResource firebirdParentResource) : Resource(ThrowIfNull(name)), IResourceWithParent<FirebirdServerResource>, IResourceWithConnectionString
+public class FirebirdDatabaseResource(string name, string databaseName, FirebirdServerResource firebirdParentResource)
+    : Resource(ThrowIfNull(name)), IResourceWithParent<FirebirdServerResource>, IResourceWithConnectionString
 {
     /// <summary>
     /// Gets the parent Firebird SQL container resource.

@@ -30,7 +30,6 @@ public static class FirebirdBuilderExtensions
     /// </remarks>
     public static IResourceBuilder<FirebirdServerResource> AddFirebird(this IDistributedApplicationBuilder builder,
         string name,
-        string? databaseName = null,
         IResourceBuilder<ParameterResource>? userName = null,
         IResourceBuilder<ParameterResource>? password = null,
         int? port = null)
@@ -41,8 +40,6 @@ public static class FirebirdBuilderExtensions
         var passwordParameter = password?.Resource ?? ParameterResourceBuilderExtensions.CreateDefaultPasswordParameter(builder, DefaultSysDbaPassword);
 
         var firebirdServer = new FirebirdServerResource(name, userName?.Resource, passwordParameter);
-
-        databaseName = databaseName ?? DefaultDatabaseName;
 
         //#pragma warning disable ASPIREEVENTING001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
         //        builder.Eventing.Subscribe<ConnectionStringAvailableEvent>(firebirdServer, async (@event, ct) =>
@@ -65,7 +62,6 @@ public static class FirebirdBuilderExtensions
                       .WithImageRegistry(FirebirdContainerImageTags.Registry)
                       .WithEnvironment(context =>
                       {
-                          context.EnvironmentVariables["FIREBIRD_DATABASE"] = databaseName;
                           context.EnvironmentVariables["FIREBIRD_ROOT_PASSWORD"] = DefaultSysDbaPassword;
                           context.EnvironmentVariables["FIREBIRD_USER"] = firebirdServer.UserNameReference;
                           context.EnvironmentVariables["FIREBIRD_PASSWORD"] = firebirdServer.PasswordParameter;

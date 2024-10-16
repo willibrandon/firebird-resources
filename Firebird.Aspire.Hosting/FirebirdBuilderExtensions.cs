@@ -65,6 +65,7 @@ public static class FirebirdBuilderExtensions
                       .WithImageRegistry(FirebirdContainerImageTags.Registry)
                       .WithEnvironment(context =>
                       {
+                          context.EnvironmentVariables["FIREBIRD_DATABASE"] = databaseName;
                           context.EnvironmentVariables["FIREBIRD_ROOT_PASSWORD"] = DefaultSysDbaPassword;
                           context.EnvironmentVariables["FIREBIRD_USER"] = firebirdServer.UserNameReference;
                           context.EnvironmentVariables["FIREBIRD_PASSWORD"] = firebirdServer.PasswordParameter;

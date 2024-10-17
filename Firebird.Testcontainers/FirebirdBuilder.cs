@@ -118,7 +118,7 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     /// <summary>
     ///  Sets the Firebird database name.
     /// </summary>
-    /// <param name="database">The Firebird database.</param>
+    /// <param name="database">The Firebird database name.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
     public FirebirdBuilder WithDatabase(string database)
         => Merge(DockerResourceConfiguration, new FirebirdConfiguration(database: database))
@@ -127,7 +127,7 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     /// <summary>
     ///  Sets the Firebird user password.
     /// </summary>
-    /// <param name="password">The Firebird password.</param>
+    /// <param name="password">The Firebird user password.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
     public FirebirdBuilder WithPassword(string password)
         => Merge(DockerResourceConfiguration, new FirebirdConfiguration(password: password))
@@ -136,7 +136,7 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     /// <summary>
     ///  Sets the Firebird SYSDBA password.
     /// </summary>
-    /// <param name="rootPassword">The Firebird password.</param>
+    /// <param name="rootPassword">The Firebird SYSDBA password.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
     public FirebirdBuilder WithRootPassword(string rootPassword)
         => Merge(DockerResourceConfiguration, new FirebirdConfiguration())
@@ -150,11 +150,11 @@ public sealed class FirebirdBuilder : ContainerBuilder<FirebirdBuilder, Firebird
     ///  The container runs in UTC time zone by default.
     /// </para>
     /// </remarks>
-    /// <param name="value">The Firebird password.</param>
+    /// <param name="timezone">The Firebird container time zone.</param>
     /// <returns>A configured instance of <see cref="FirebirdBuilder" />.</returns>
-    public FirebirdBuilder WithTimeZone(string value)
+    public FirebirdBuilder WithTimeZone(string timezone)
         => Merge(DockerResourceConfiguration, new FirebirdConfiguration())
-            .WithEnvironment("TZ", value);
+            .WithEnvironment("TZ", timezone);
 
     /// <summary>
     ///  Enables legacy Firebird authentication (not recommended).

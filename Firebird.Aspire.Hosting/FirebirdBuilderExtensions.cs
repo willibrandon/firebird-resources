@@ -62,6 +62,7 @@ public static class FirebirdBuilderExtensions
                       .WithImageRegistry(FirebirdContainerImageTags.Registry)
                       .WithEnvironment(context =>
                       {
+                          context.EnvironmentVariables["FIREBIRD_DATABASE"] = DefaultDatabaseName;
                           context.EnvironmentVariables["FIREBIRD_ROOT_PASSWORD"] = DefaultSysDbaPassword;
                           context.EnvironmentVariables["FIREBIRD_USER"] = firebirdServer.UserNameReference;
                           context.EnvironmentVariables["FIREBIRD_PASSWORD"] = firebirdServer.PasswordParameter;
@@ -70,7 +71,7 @@ public static class FirebirdBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a Firebird database to the application model.
+    ///  Adds a Firebird database to the application model.
     /// </summary>
     /// <param name="builder">The Firebird server resource builder.</param>
     /// <param name="name">The name of the resource. This name will be used as the connection string name when referenced in a dependency.</param>
@@ -101,6 +102,22 @@ public static class FirebirdBuilderExtensions
         builder.WithEnvironment("FIREBIRD_DATABASE", databaseName);
         var firebirdDatabase = new FirebirdDatabaseResource(name, databaseName, builder.Resource);
         return builder.ApplicationBuilder.AddResource(firebirdDatabase);
+    }
+
+    /// <summary>
+    ///  Sets values in the Firebird configuration file (firebird.conf).
+    /// </summary>
+    /// <param name="builder">The resource builder.</param>
+    /// <param name="entry">The name of the configuration entry.</param>
+    /// <param name="value">The value of configuration entry.</param>
+    /// <returns>The <see cref="IResourceBuilder{T}"/>.</returns>
+    public static IResourceBuilder<FirebirdServerResource> WithConfig(this IResourceBuilder<FirebirdServerResource> builder, string entry, string value)
+    {
+        ArgumentNullException.ThrowIfNull(builder);
+        ArgumentNullException.ThrowIfNull(entry);
+        ArgumentNullException.ThrowIfNull(value);
+
+        return builder.WithEnvironment("FIREBIRD_CONF" + entry, value);
     }
 
     /// <summary>
@@ -146,5 +163,73 @@ public static class FirebirdBuilderExtensions
         ArgumentNullException.ThrowIfNull(source);
 
         return builder.WithBindMount(source, "/docker-entrypoint-initdb.d", isReadOnly);
+    }
+
+    /// <summary>
+    /// Sets the Firebird user password.
+    /// </summary>
+    /// <param name="builder">The resource builder.</param>
+    /// <param name="password">The Firebird user password.</param>
+    /// <returns>The <see cref="IResourceBuilder{T}"/>.</returns>
+    public static IResourceBuilder<FirebirdServerResource> WithPassword(this IResourceBuilder<FirebirdServerResource> builder, string password)
+    {
+        ArgumentNullException.ThrowIfNull(builder);
+        ArgumentNullException.ThrowIfNull(password);
+
+        return builder.WithEnvironment("FIREBIRD_PASSWORD", password);
+    }
+
+    /// <summary>
+    /// Sets the Firebird SYSDBA password.
+    /// </summary>
+    /// <param name="builder">The resource builder.</param>
+    /// <param name="password">The Firebird SYSDBA password.</param>
+    /// <returns>The <see cref="IResourceBuilder{T}"/>.</returns>
+    public static IResourceBuilder<FirebirdServerResource> WithRootPassword(this IResourceBuilder<FirebirdServerResource> builder, string password)
+    {
+        ArgumentNullException.ThrowIfNull(builder);
+        ArgumentNullException.ThrowIfNull(password);
+
+        return builder.WithEnvironment("FIREBIRD_ROOT_PASSWORD", password);
+    }
+
+    /// <summary>
+    ///  Sets the Firebird container time zone. e.g. "America/Los_Angeles".
+    /// </summary>
+    /// <param name="builder">The resource builder.</param>
+    /// <param name="timezone">The Firebird container time zone.</param>
+    /// <returns>The <see cref="IResourceBuilder{T}"/>.</returns>
+    public static IResourceBuilder<FirebirdServerResource> WithTimeZone(this IResourceBuilder<FirebirdServerResource> builder, string timezone)
+    {
+        ArgumentNullException.ThrowIfNull(builder);
+        ArgumentNullException.ThrowIfNull(timezone);
+
+        return builder.WithEnvironment("TZ", timezone);
+    }
+
+    /// <summary>
+    ///  Enables legacy Firebird authentication (not recommended).
+    /// </summary>
+    /// <param name="builder">The resource builder.</param>
+    /// <returns>The <see cref="IResourceBuilder{T}"/>.</returns>
+    public static IResourceBuilder<FirebirdServerResource> WithUseLegacyAuth(this IResourceBuilder<FirebirdServerResource> builder)
+    {
+        ArgumentNullException.ThrowIfNull(builder);
+
+        return builder.WithEnvironment("FIREBIRD_USE_LEGACY_AUTH", true.ToString());
+    }
+
+    /// <summary>
+    /// Creates a user in the Firebird security database.
+    /// </summary>
+    /// <param name="builder">The resource builder.</param>
+    /// <param name="username">The Firebird username.</param>
+    /// <returns>The <see cref="IResourceBuilder{T}"/>.</returns>
+    public static IResourceBuilder<FirebirdServerResource> WithUsername(this IResourceBuilder<FirebirdServerResource> builder, string username)
+    {
+        ArgumentNullException.ThrowIfNull(builder);
+        ArgumentNullException.ThrowIfNull(username);
+
+        return builder.WithEnvironment("FIREBIRD_USER", username);
     }
 }

@@ -127,12 +127,12 @@ public static class FirebirdBuilderExtensions
     /// <param name="name">The name of the volume. Defaults to an auto-generated name based on the application and resource names.</param>
     /// <param name="isReadOnly">A flag that indicates if this is a read-only volume.</param>
     /// <returns>The <see cref="IResourceBuilder{T}"/>.</returns>
-    public static IResourceBuilder<FirebirdServerResource> WithDataVolume(this IResourceBuilder<FirebirdServerResource> builder, string? name = null, bool isReadOnly = false)
+    public static IResourceBuilder<FirebirdServerResource> WithDataVolume(this IResourceBuilder<FirebirdServerResource> builder, string name, bool isReadOnly = false)
     {
         ArgumentNullException.ThrowIfNull(builder);
+        ArgumentNullException.ThrowIfNull(name);
 
-        return builder.WithVolume(name ?? VolumeNameGenerator.CreateVolumeName(builder, "data"),
-            "/var/lib/firebird/data", isReadOnly);
+        return builder.WithVolume(name, "/var/lib/firebird/data", isReadOnly);
     }
 
     /// <summary>

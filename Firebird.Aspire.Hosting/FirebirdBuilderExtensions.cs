@@ -12,7 +12,8 @@ public static class FirebirdBuilderExtensions
     private const string DefaultSysDbaPassword = "masterkey";
 
     /// <summary>
-    /// Adds a Firebird resource to the application model. A container is used for local development. This version of the package defaults to the <inheritdoc cref="FirebirdContainerImageTags.Tag"/> tag of the <inheritdoc cref="FirebirdContainerImageTags.Image"/> container image.
+    ///  Adds a Firebird resource to the application model. A container is used for local development. This version of the package defaults to the
+    /// <inheritdoc cref="FirebirdContainerImageTags.Tag"/> tag of the <inheritdoc cref="FirebirdContainerImageTags.Image"/> container image.
     /// </summary>
     /// <param name="builder">The <see cref="IDistributedApplicationBuilder"/>.</param>
     /// <param name="name">The name of the resource. This name will be used as the connection string name when referenced in a dependency.</param>
@@ -90,7 +91,10 @@ public static class FirebirdBuilderExtensions
     /// is used with this resource it will wait indefinitely until the database exists.
     /// </para>
     /// </remarks>
-    public static IResourceBuilder<FirebirdDatabaseResource> AddDatabase(this IResourceBuilder<FirebirdServerResource> builder, string name, string? databaseName = null)
+    public static IResourceBuilder<FirebirdDatabaseResource> AddDatabase(
+        this IResourceBuilder<FirebirdServerResource> builder,
+        string name,
+        string? databaseName = null)
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(name);
@@ -111,7 +115,10 @@ public static class FirebirdBuilderExtensions
     /// <param name="entry">The name of the configuration entry.</param>
     /// <param name="value">The value of configuration entry.</param>
     /// <returns>The <see cref="IResourceBuilder{T}"/>.</returns>
-    public static IResourceBuilder<FirebirdServerResource> WithConfig(this IResourceBuilder<FirebirdServerResource> builder, string entry, string value)
+    public static IResourceBuilder<FirebirdServerResource> WithConfig(
+        this IResourceBuilder<FirebirdServerResource> builder,
+        string entry,
+        string value)
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(entry);
@@ -121,13 +128,16 @@ public static class FirebirdBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a named volume for the data folder to a Firebird container resource.
+    ///  Adds a named volume for the data folder to a Firebird container resource.
     /// </summary>
     /// <param name="builder">The resource builder.</param>
     /// <param name="name">The name of the volume. Defaults to an auto-generated name based on the application and resource names.</param>
     /// <param name="isReadOnly">A flag that indicates if this is a read-only volume.</param>
     /// <returns>The <see cref="IResourceBuilder{T}"/>.</returns>
-    public static IResourceBuilder<FirebirdServerResource> WithDataVolume(this IResourceBuilder<FirebirdServerResource> builder, string name, bool isReadOnly = false)
+    public static IResourceBuilder<FirebirdServerResource> WithDataVolume(
+        this IResourceBuilder<FirebirdServerResource> builder,
+        string name,
+        bool isReadOnly = false)
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(name);
@@ -142,7 +152,10 @@ public static class FirebirdBuilderExtensions
     /// <param name="source">The source directory on the host to mount into the container.</param>
     /// <param name="isReadOnly">A flag that indicates if this is a read-only mount.</param>
     /// <returns>The <see cref="IResourceBuilder{T}"/>.</returns>
-    public static IResourceBuilder<FirebirdServerResource> WithDataBindMount(this IResourceBuilder<FirebirdServerResource> builder, string source, bool isReadOnly = false)
+    public static IResourceBuilder<FirebirdServerResource> WithDataBindMount(
+        this IResourceBuilder<FirebirdServerResource> builder,
+        string source,
+        bool isReadOnly = false)
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(source);
@@ -151,13 +164,22 @@ public static class FirebirdBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a bind mount for the init folder to a Firebird container resource.
+    ///  Adds a bind mount for the init folder to a Firebird container resource.
     /// </summary>
+    /// <remarks>
+    ///  When creating a new database with the <see cref="AddDatabase(IResourceBuilder{FirebirdServerResource}, string, string?)"/> method, you
+    ///  can initialize it running one or more shell or SQL scripts. Any file with extensions .sh, .sql, .sql.gz, .sql.xz, and .sql.zst found
+    ///  in <paramref name="source"/> will be executed in alphabetical order. .sh files without file execute permission (+x) will be sourced
+    ///  rather than executed.
+    /// </remarks>
     /// <param name="builder">The resource builder.</param>
     /// <param name="source">The source directory on the host to mount into the container.</param>
     /// <param name="isReadOnly">A flag that indicates if this is a read-only mount.</param>
     /// <returns>The <see cref="IResourceBuilder{T}"/>.</returns>
-    public static IResourceBuilder<FirebirdServerResource> WithInitBindMount(this IResourceBuilder<FirebirdServerResource> builder, string source, bool isReadOnly = true)
+    public static IResourceBuilder<FirebirdServerResource> WithInitBindMount(
+        this IResourceBuilder<FirebirdServerResource> builder,
+        string source,
+        bool isReadOnly = true)
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(source);
@@ -166,7 +188,7 @@ public static class FirebirdBuilderExtensions
     }
 
     /// <summary>
-    /// Sets the Firebird user password.
+    ///  Sets the Firebird user password.
     /// </summary>
     /// <param name="builder">The resource builder.</param>
     /// <param name="password">The Firebird user password.</param>
@@ -180,7 +202,7 @@ public static class FirebirdBuilderExtensions
     }
 
     /// <summary>
-    /// Sets the Firebird SYSDBA password.
+    ///  Sets the Firebird SYSDBA password.
     /// </summary>
     /// <param name="builder">The resource builder.</param>
     /// <param name="password">The Firebird SYSDBA password.</param>
@@ -220,7 +242,7 @@ public static class FirebirdBuilderExtensions
     }
 
     /// <summary>
-    /// Creates a user in the Firebird security database.
+    ///  Creates a user in the Firebird security database.
     /// </summary>
     /// <param name="builder">The resource builder.</param>
     /// <param name="username">The Firebird username.</param>

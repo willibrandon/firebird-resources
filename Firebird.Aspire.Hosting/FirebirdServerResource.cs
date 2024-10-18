@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace Firebird.Aspire.Hosting;
 
 /// <summary>
-///  A resouce that represents a Firebird container.
+///  A resouce that represents a Firebird server container.
 /// </summary>
 public class FirebirdServerResource : ContainerResource, IResourceWithConnectionString
 {
@@ -80,7 +80,7 @@ public class FirebirdServerResource : ContainerResource, IResourceWithConnection
     }
 
     /// <summary>
-    /// Gets the connection string for the Firebird.
+    /// Gets the connection string for the Firebird server.
     /// </summary>
     /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
     /// <returns>A connection string for the Firebird in the form "Server=host,port;User ID=sa;Password=password;TrustServerCertificate=true".</returns>

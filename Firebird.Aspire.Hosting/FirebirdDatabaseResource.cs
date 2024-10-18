@@ -19,13 +19,13 @@ public class FirebirdDatabaseResource(string name, string databaseName, Firebird
     public FirebirdServerResource Parent { get; } = ThrowIfNull(firebirdParentResource);
 
     /// <summary>
-    /// Gets the connection string expression for the Firebird database.
+    /// Gets the connection string expression for the Firebird SQL database.
     /// </summary>
     public ReferenceExpression ConnectionStringExpression =>
        ReferenceExpression.Create($"{Parent};Database=/var/lib/firebird/data/{DatabaseName}");
 
     /// <summary>
-    /// Gets the database name.
+    /// Gets the Firebird SQL database name.
     /// </summary>
     public string DatabaseName { get; } = ThrowIfNull(databaseName);
 

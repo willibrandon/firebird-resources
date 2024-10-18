@@ -56,7 +56,8 @@ public class AddFirebirdTests
         var pass = appBuilder.AddParameter("pass");
         appBuilder
             .AddFirebird("firebird", password: pass)
-            .WithEndpoint("tcp", e => e.AllocatedEndpoint = new AllocatedEndpoint(e, "localhost", 3050));
+            .WithEndpoint("tcp", e => e.AllocatedEndpoint = new AllocatedEndpoint(e, "localhost", 3050))
+            .AddDatabase("firebirdDb");
 
         using var app = appBuilder.Build();
 
@@ -79,18 +80,18 @@ public class AddFirebirdTests
         appBuilder
             .AddFirebird("firebird", password: pass)
             .WithEndpoint("tcp", e => e.AllocatedEndpoint = new AllocatedEndpoint(e, "localhost", 3050))
-            .AddDatabase("mydb");
+            .AddDatabase("firebirdDb");
 
         using var app = appBuilder.Build();
 
         var appModel = app.Services.GetRequiredService<DistributedApplicationModel>();
 
         var sqlResource = Assert.Single(appModel.Resources.OfType<FirebirdDatabaseResource>());
-        var connectionStringResource = (IResourceWithConnectionString)sqlResource;
+        var connectionStringResource = sqlResource;
         var connectionString = await connectionStringResource.GetConnectionStringAsync();
 
-        Assert.Equal("Host=localhost;Port=3050;Username=SYSDBA;Password=p@ssw0rd1;Database=/var/lib/firebird/data/mydb", connectionString);
-        Assert.Equal("{firebird.connectionString};Database=/var/lib/firebird/data/mydb", connectionStringResource.ConnectionStringExpression.ValueExpression);
+        Assert.Equal("Host=localhost;Port=3050;Username=SYSDBA;Password=p@ssw0rd1;Database=/var/lib/firebird/data/firebirdDb", connectionString);
+        Assert.Equal("{firebird.connectionString};Database=/var/lib/firebird/data/firebirdDb", connectionStringResource.ConnectionStringExpression.ValueExpression);
     }
 
     [Fact]
@@ -98,10 +99,10 @@ public class AddFirebirdTests
     {
         var appBuilder = DistributedApplication.CreateBuilder();
 
-        var db = appBuilder.AddFirebird("firebird1");
-        db.AddDatabase("db");
+        var firebird = appBuilder.AddFirebird("firebird");
+        firebird.AddDatabase("db");
 
-        Assert.Throws<DistributedApplicationException>(() => db.AddDatabase("db"));
+        Assert.Throws<DistributedApplicationException>(() => firebird.AddDatabase("db"));
     }
 
     [Fact]
@@ -121,16 +122,16 @@ public class AddFirebirdTests
     {
         var appBuilder = DistributedApplication.CreateBuilder();
 
-        var firebird1 = appBuilder.AddFirebird("firebird1");
+        var firebird = appBuilder.AddFirebird("firebird");
 
-        var db1 = firebird1.AddDatabase("db1", "customers1");
-        var db2 = firebird1.AddDatabase("db2", "customers2");
+        var db1 = firebird.AddDatabase("db1", "customers1");
+        var db2 = firebird.AddDatabase("db2", "customers2");
 
         Assert.Equal("customers1", db1.Resource.DatabaseName);
         Assert.Equal("customers2", db2.Resource.DatabaseName);
 
-        Assert.Equal("{firebird1.connectionString};Database=/var/lib/firebird/data/customers1", db1.Resource.ConnectionStringExpression.ValueExpression);
-        Assert.Equal("{firebird1.connectionString};Database=/var/lib/firebird/data/customers2", db2.Resource.ConnectionStringExpression.ValueExpression);
+        Assert.Equal("{firebird.connectionString};Database=/var/lib/firebird/data/customers1", db1.Resource.ConnectionStringExpression.ValueExpression);
+        Assert.Equal("{firebird.connectionString};Database=/var/lib/firebird/data/customers2", db2.Resource.ConnectionStringExpression.ValueExpression);
     }
 
     [Fact]
@@ -149,5 +150,100 @@ public class AddFirebirdTests
 
         Assert.Equal("{firebird1.connectionString};Database=/var/lib/firebird/data/imports", db1.Resource.ConnectionStringExpression.ValueExpression);
         Assert.Equal("{firebird2.connectionString};Database=/var/lib/firebird/data/imports", db2.Resource.ConnectionStringExpression.ValueExpression);
+    }
+
+    [Fact]
+    public async Task WithPasswordAddsEnvironmentVariable()
+    {
+        var appBuilder = DistributedApplication.CreateBuilder();
+
+        appBuilder
+            .AddFirebird("firebird")
+            .WithPassword("p@ssw0rd1");
+
+        using var app = appBuilder.Build();
+        var appModel = app.Services.GetRequiredService<DistributedApplicationModel>();
+
+        var firebirdResource = Assert.Single(appModel.Resources.OfType<FirebirdServerResource>());
+        var envVars = await firebirdResource.GetEnvironmentVariableValuesAsync();
+
+        Assert.True(envVars.ContainsKey("FIREBIRD_PASSWORD"));
+        Assert.Equal("p@ssw0rd1", envVars["FIREBIRD_PASSWORD"]);
+    }
+
+    [Fact]
+    public async Task WithRootPasswordAddsEnvironmentVariable()
+    {
+        var appBuilder = DistributedApplication.CreateBuilder();
+
+        appBuilder
+            .AddFirebird("firebird")
+            .WithRootPassword("p@ssw0rd1");
+
+        using var app = appBuilder.Build();
+        var appModel = app.Services.GetRequiredService<DistributedApplicationModel>();
+
+        var firebirdResource = Assert.Single(appModel.Resources.OfType<FirebirdServerResource>());
+        var envVars = await firebirdResource.GetEnvironmentVariableValuesAsync();
+
+        Assert.True(envVars.ContainsKey("FIREBIRD_ROOT_PASSWORD"));
+        Assert.Equal("p@ssw0rd1", envVars["FIREBIRD_ROOT_PASSWORD"]);
+    }
+
+    [Fact]
+    public async Task WithTimeZoneAddsEnvironmentVariable()
+    {
+        var appBuilder = DistributedApplication.CreateBuilder();
+
+        appBuilder
+            .AddFirebird("firebird")
+            .WithTimeZone("America/Los_Angeles");
+
+        using var app = appBuilder.Build();
+        var appModel = app.Services.GetRequiredService<DistributedApplicationModel>();
+
+        var firebirdResource = Assert.Single(appModel.Resources.OfType<FirebirdServerResource>());
+        var envVars = await firebirdResource.GetEnvironmentVariableValuesAsync();
+
+        Assert.True(envVars.ContainsKey("TZ"));
+        Assert.Equal("America/Los_Angeles", envVars["TZ"]);
+    }
+
+    [Fact]
+    public async Task WithUseLegacyAuthAddsEnvironmentVariable()
+    {
+        var appBuilder = DistributedApplication.CreateBuilder();
+
+        appBuilder
+            .AddFirebird("firebird")
+            .WithUseLegacyAuth();
+
+        using var app = appBuilder.Build();
+        var appModel = app.Services.GetRequiredService<DistributedApplicationModel>();
+
+        var firebirdResource = Assert.Single(appModel.Resources.OfType<FirebirdServerResource>());
+        var envVars = await firebirdResource.GetEnvironmentVariableValuesAsync();
+
+        Assert.True(envVars.ContainsKey("FIREBIRD_USE_LEGACY_AUTH"));
+        Assert.Equal(true.ToString(), envVars["FIREBIRD_USE_LEGACY_AUTH"]);
+    }
+
+    [Fact]
+    public async Task WithUsernameAddsEnvironmentVariable()
+    {
+        var appBuilder = DistributedApplication.CreateBuilder();
+
+        appBuilder
+            .AddFirebird("firebird")
+            .WithUsername("sally");
+
+        using var app = appBuilder.Build();
+        var appModel = app.Services.GetRequiredService<DistributedApplicationModel>();
+
+        var firebirdResource = Assert.Single(appModel.Resources.OfType<FirebirdServerResource>());
+        var envVars = await firebirdResource.GetEnvironmentVariableValuesAsync();
+
+        Assert.True(envVars.ContainsKey("FIREBIRD_USER"));
+        Assert.Equal("sally", envVars["FIREBIRD_USER"]);
     }
 }

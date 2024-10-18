@@ -29,6 +29,22 @@ public class FirebirdDatabaseResource(string name, string databaseName, Firebird
     /// </summary>
     public string DatabaseName { get; } = ThrowIfNull(databaseName);
 
+    /// <summary>
+    /// Gets the connection string for the Firebird SQL database.
+    /// </summary>
+    /// <param name="cancellationToken"> A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
+    /// <returns>A connection string for the Firebird SQL database in the form
+    /// "Host=host;Port=port;Username=SYSDBA;Password=password;Database=database".</returns>
+    internal ValueTask<string?> GetConnectionStringAsync(CancellationToken cancellationToken = default)
+    {
+        if (this.TryGetLastAnnotation<ConnectionStringRedirectAnnotation>(out var connectionStringAnnotation))
+        {
+            return connectionStringAnnotation.Resource.GetConnectionStringAsync(cancellationToken);
+        }
+
+        return ConnectionStringExpression.GetValueAsync(cancellationToken);
+    }
+
     private static T ThrowIfNull<T>([NotNull] T? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
         => argument ?? throw new ArgumentNullException(paramName);
 }

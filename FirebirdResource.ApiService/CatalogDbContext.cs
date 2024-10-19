@@ -2,12 +2,7 @@
 
 namespace FirebirdResource.ApiService;
 
-public interface ICatalogDbContext
-{
-    public DbSet<CatalogBrand> CatalogBrands { get; }
-}
-
-public class CatalogDbContext(DbContextOptions<CatalogDbContext> options) : DbContext(options), ICatalogDbContext
+public class CatalogDbContext(DbContextOptions<CatalogDbContext> options) : DbContext(options)
 {
     public DbContextOptions<CatalogDbContext> Options { get; } = options;
 

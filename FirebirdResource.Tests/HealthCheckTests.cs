@@ -1,11 +1,11 @@
 ﻿namespace FirebirdResource.Tests;
 
-public class ApiServiceHealthTests : IClassFixture<DistributedApplicationFixture>
+public class HealthCheckTests : IClassFixture<DistributedApplicationFixture>
 {
     private readonly DistributedApplicationFixture _fixture;
     private readonly HttpClient _httpClient;
 
-    public ApiServiceHealthTests(DistributedApplicationFixture fixture)
+    public HealthCheckTests(DistributedApplicationFixture fixture)
     {
         _fixture = fixture;
         _httpClient = _fixture.App.CreateHttpClient("apiService");

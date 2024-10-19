@@ -25,7 +25,6 @@ if (app.Environment.IsDevelopment())
 
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
-
 app.UseHttpsRedirection();
 app.UseSwagger();
 
@@ -34,7 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapCatalogBrandsApi();
+app.MapCatalogApi();
 app.MapFbDatabaseInfoApi();
 app.MapFbTransactionInfoApi();
 app.MapHealthChecks();

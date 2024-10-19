@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Aspire.Hosting" Version="8.2.1" />
+		<PackageReference Include="Firebird.HealthChecks" Version="1.0.1-alpha" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="FirebirdResources.Aspire.Hosting.Tests" />
+	</ItemGroup>
+
+</Project>

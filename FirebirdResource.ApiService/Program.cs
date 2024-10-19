@@ -1,5 +1,5 @@
-using Firebird.Aspire.Client;
-using Firebird.Aspire.EntityFrameworkCore.Client;
+using FirebirdResources.Aspire.Client;
+using FirebirdResources.Aspire.EntityFrameworkCore.Client;
 using FirebirdResource.ApiService;
 
 var builder = WebApplication.CreateBuilder(args);

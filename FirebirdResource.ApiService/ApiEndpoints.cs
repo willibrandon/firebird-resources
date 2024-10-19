@@ -1,4 +1,4 @@
-﻿using Firebird.Aspire.Client;
+﻿using FirebirdResources.Aspire.Client;
 using FirebirdSql.Data.FirebirdClient;
 using Microsoft.EntityFrameworkCore;
 
@@ -55,7 +55,7 @@ public static class ApiEndpoints
         var group = app.MapGroup("/fbdatabaseinfo");
 
         group.MapGet("getiscversion",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -64,7 +64,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getserverversion",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -73,7 +73,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getserverclass",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -82,7 +82,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getpagesize",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -91,7 +91,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getallocationpages",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -100,7 +100,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getbaselevel",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -109,7 +109,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getdbid",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -118,7 +118,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getimplementation",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -127,7 +127,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getnoreserve",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -136,7 +136,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getodsversion",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -145,7 +145,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getodsminorversion",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -154,7 +154,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getmaxmemory",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -163,7 +163,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getcurrentmemory",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -172,7 +172,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getforcedwrites",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -181,7 +181,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getnumbuffers",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -190,7 +190,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getsweepinterval",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -199,7 +199,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getreadonly",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -208,7 +208,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getfetches",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -217,7 +217,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getmarks",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -226,7 +226,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getreads",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -235,7 +235,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getwrites",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -244,7 +244,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getbackoutcount",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -253,7 +253,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getdeletecount",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -262,7 +262,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getexpungecount",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -271,7 +271,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getinsertcount",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -280,7 +280,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getpurgecount",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -289,7 +289,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getreadixcount",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -298,7 +298,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getreadseqcount",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -307,7 +307,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getupdatecount",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -316,7 +316,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getdatabasesizeinpages",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -325,7 +325,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getoldesttransaction",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -334,7 +334,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getoldestactivetransaction",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -343,7 +343,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getoldestactivesnapshot",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -352,7 +352,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getnexttransaction",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -361,7 +361,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getactivetransactions",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -370,7 +370,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getactivetransactionscount",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -379,7 +379,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getactiveusers",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -388,7 +388,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getwirecrypt",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -397,7 +397,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getcryptplugin",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -406,7 +406,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getcreationdate",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -415,7 +415,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getnextattachment",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -424,7 +424,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getnextstatement",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -433,7 +433,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getreplicamode",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -442,7 +442,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getdbfileid",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -451,7 +451,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getdbguid",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -460,7 +460,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getcreationtimestamp",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -469,7 +469,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getprotocolversion",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -478,7 +478,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getstatementtimeoutdatabase",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -487,7 +487,7 @@ public static class ApiEndpoints
         );
 
         group.MapGet("getstatementtimeoutattachment",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 var dbInfo = new FbDatabaseInfo(connection);
@@ -503,7 +503,7 @@ public static class ApiEndpoints
         var group = app.MapGroup("fbtransactioninfo");
 
         group.MapGet("gettransactionsnapshotnumber",
-            async (FbConnectionFactory factory) =>
+            async (FirebirdConnectionFactory factory) =>
             {
                 using FbConnection connection = await factory.GetFbConnectionAsync();
                 using var transaction = connection.BeginTransaction();

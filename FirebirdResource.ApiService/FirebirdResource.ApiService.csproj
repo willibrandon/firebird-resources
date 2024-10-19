@@ -12,10 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Firebird.Aspire.Client\Firebird.Aspire.Client.csproj" />
-    <ProjectReference Include="..\Firebird.Aspire.EntityFrameworkCore.Client\Firebird.Aspire.EntityFrameworkCore.Client.csproj" />
-    <ProjectReference Include="..\Firebird.Aspire.Hosting\Firebird.Aspire.Hosting.csproj" />
     <ProjectReference Include="..\FirebirdResource.ServiceDefaults\FirebirdResource.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\FirebirdResources.Aspire.Client\FirebirdResources.Aspire.Client.csproj" />
+    <ProjectReference Include="..\FirebirdResources.Aspire.EntityFrameworkCore.Client\FirebirdResources.Aspire.EntityFrameworkCore.Client.csproj" />
   </ItemGroup>
 
 </Project>

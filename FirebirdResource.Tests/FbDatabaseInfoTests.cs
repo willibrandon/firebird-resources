@@ -1,11 +1,11 @@
 ﻿namespace FirebirdResource.Tests;
 
-public class ApiServiceFbDatabaseInfoTests : IClassFixture<DistributedApplicationFixture>
+public class FbDatabaseInfoTests : IClassFixture<DistributedApplicationFixture>
 {
     private readonly DistributedApplicationFixture _fixture;
     private readonly HttpClient _httpClient;
 
-    public ApiServiceFbDatabaseInfoTests(DistributedApplicationFixture fixture)
+    public FbDatabaseInfoTests(DistributedApplicationFixture fixture)
     {
         _fixture = fixture;
         _httpClient = _fixture.App.CreateHttpClient("apiService");

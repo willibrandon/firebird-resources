@@ -5,21 +5,22 @@ using System.Text.Json;
 
 namespace FirebirdResource.Tests;
 
-public class CatalogBrandTests : IClassFixture<DistributedApplicationFixture>
+public class CatalogTests : IClassFixture<DistributedApplicationFixture>
 {
     private readonly DistributedApplicationFixture _fixture;
     private readonly HttpClient _httpClient;
 
-    public CatalogBrandTests(DistributedApplicationFixture fixture)
+    public CatalogTests(DistributedApplicationFixture fixture)
     {
         _fixture = fixture;
         _httpClient = _fixture.App.CreateHttpClient("apiService");
+        _httpClient.BaseAddress = new Uri(_httpClient.BaseAddress!, "/api/v1/catalog/");
     }
 
     [Fact]
     public async Task GetCatalogBrandsReturnsOkStatusCode()
     {
-        using HttpResponseMessage response = await _httpClient.GetAsync("/catalogbrands");
+        using HttpResponseMessage response = await _httpClient.GetAsync("brands");
         response.EnsureSuccessStatusCode()
             .WriteRequestToConsole();
 
@@ -40,14 +41,14 @@ public class CatalogBrandTests : IClassFixture<DistributedApplicationFixture>
             Encoding.UTF8,
             "application/json");
 
-        using HttpResponseMessage postResponse = await _httpClient.PostAsync("/catalogbrands", jsonContent);
+        using HttpResponseMessage postResponse = await _httpClient.PostAsync("brands", jsonContent);
         postResponse.EnsureSuccessStatusCode()
             .WriteRequestToConsole();
 
         var postBrand = await postResponse.Content.ReadFromJsonAsync<CatalogBrand>();
         Console.WriteLine($"{postBrand}\n");
 
-        using HttpResponseMessage getResponse = await _httpClient.GetAsync("/catalogbrands/" + postBrand?.Id);
+        using HttpResponseMessage getResponse = await _httpClient.GetAsync($"brands/{postBrand?.Id}");
         getResponse.EnsureSuccessStatusCode()
             .WriteRequestToConsole();
 
@@ -73,7 +74,7 @@ public class CatalogBrandTests : IClassFixture<DistributedApplicationFixture>
             Encoding.UTF8,
             "application/json");
 
-        using HttpResponseMessage response = await _httpClient.PostAsync("/catalogbrands", jsonContent);
+        using HttpResponseMessage response = await _httpClient.PostAsync("brands", jsonContent);
         response.EnsureSuccessStatusCode()
             .WriteRequestToConsole();
 
@@ -94,7 +95,7 @@ public class CatalogBrandTests : IClassFixture<DistributedApplicationFixture>
             Encoding.UTF8,
             "application/json");
 
-        using HttpResponseMessage postResponse = await _httpClient.PostAsync("/catalogbrands", jsonContentPost);
+        using HttpResponseMessage postResponse = await _httpClient.PostAsync("brands", jsonContentPost);
         postResponse.EnsureSuccessStatusCode()
             .WriteRequestToConsole();
 
@@ -109,7 +110,7 @@ public class CatalogBrandTests : IClassFixture<DistributedApplicationFixture>
             Encoding.UTF8,
             "application/json");
 
-        using HttpResponseMessage putResponse = await _httpClient.PutAsync($"/catalogbrands/{brand?.Id}", jsonContentPut);
+        using HttpResponseMessage putResponse = await _httpClient.PutAsync($"brands/{brand?.Id}", jsonContentPut);
         putResponse.EnsureSuccessStatusCode()
             .WriteRequestToConsole();
 
@@ -132,14 +133,14 @@ public class CatalogBrandTests : IClassFixture<DistributedApplicationFixture>
             Encoding.UTF8,
             "application/json");
 
-        using HttpResponseMessage postResponse = await _httpClient.PostAsync("/catalogbrands", jsonContentPost);
+        using HttpResponseMessage postResponse = await _httpClient.PostAsync("brands", jsonContentPost);
         postResponse.EnsureSuccessStatusCode()
             .WriteRequestToConsole();
 
         var brand = await postResponse.Content.ReadFromJsonAsync<CatalogBrand>();
         Console.WriteLine($"{brand}\n");
 
-        using HttpResponseMessage deleteResponse = await _httpClient.DeleteAsync($"/catalogbrands/{brand?.Id}");
+        using HttpResponseMessage deleteResponse = await _httpClient.DeleteAsync($"brands/{brand?.Id}");
         deleteResponse.EnsureSuccessStatusCode()
             .WriteRequestToConsole();
 

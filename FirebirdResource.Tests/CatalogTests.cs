@@ -14,7 +14,7 @@ public class CatalogTests : IClassFixture<DistributedApplicationFixture>
     {
         _fixture = fixture;
         _httpClient = _fixture.App.CreateHttpClient("apiService");
-        _httpClient.BaseAddress = new Uri(_httpClient.BaseAddress!, "/api/v1/catalog/");
+        _httpClient.BaseAddress = new Uri(_httpClient.BaseAddress!, "/catalog/");
     }
 
     [Fact]

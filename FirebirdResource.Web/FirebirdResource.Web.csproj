@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\FirebirdResource.ApiService\CatalogBrand.cs" Link="CatalogBrand.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="8.2.1" />
   </ItemGroup>
 

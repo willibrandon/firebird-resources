@@ -11,8 +11,8 @@ var apiService = builder.AddProject<Projects.FirebirdResource_ApiService>("apise
     .WithReference(firebird);
 
 builder.AddProject<Projects.FirebirdResource_Web>("webfrontend")
-    .WithExternalHttpEndpoints()
     .WithReference(cache)
-    .WithReference(apiService);
+    .WithReference(apiService)
+    .WithExternalHttpEndpoints();
 
 builder.Build().Run();

@@ -6,24 +6,26 @@ namespace FirebirdResource.ApiService;
 
 public static class ApiEndpoints
 {
-    public static WebApplication MapCatalogBrandsApi(this WebApplication app)
+    public static WebApplication MapCatalogApi(this WebApplication app)
     {
-        app.MapGet("/catalogbrands", async (CatalogDbContext dbContext) =>
+        var group = app.MapGroup("/api/v1/catalog");
+
+        group.MapGet("brands", async (CatalogDbContext dbContext) =>
             await dbContext.CatalogBrands.ToListAsync());
 
-        app.MapGet("/catalogbrands/{id}", async (int id, CatalogDbContext dbContext) =>
+        group.MapGet("brands/{id}", async (int id, CatalogDbContext dbContext) =>
             await dbContext.CatalogBrands.FindAsync(id) is CatalogBrand catalogBrand
                 ? Results.Ok(catalogBrand)
                 : Results.NotFound());
 
-        app.MapPost("/catalogbrands", async (CatalogBrand catalogBrand, CatalogDbContext dbContext) =>
+        group.MapPost("brands", async (CatalogBrand catalogBrand, CatalogDbContext dbContext) =>
         {
             dbContext.CatalogBrands.Add(catalogBrand);
             await dbContext.SaveChangesAsync();
             return Results.Created($"/catalogbrands/{catalogBrand.Id}", catalogBrand);
         });
 
-        app.MapPut("/catalogbrands/{id}", async (int id, CatalogBrand catalogBrand, CatalogDbContext dbContext) =>
+        group.MapPut("brands/{id}", async (int id, CatalogBrand catalogBrand, CatalogDbContext dbContext) =>
         {
             var brand = await dbContext.CatalogBrands.FindAsync(id);
             if (brand is null) return Results.NotFound();
@@ -33,7 +35,7 @@ public static class ApiEndpoints
             return Results.Ok(brand);
         });
 
-        app.MapDelete("/catalogbrands/{id}", async (int id, CatalogDbContext dbContext) =>
+        group.MapDelete("brands/{id}", async (int id, CatalogDbContext dbContext) =>
         {
             if (await dbContext.CatalogBrands.FindAsync(id) is CatalogBrand catalogBrand)
             {

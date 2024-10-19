@@ -4,32 +4,39 @@ using FirebirdResource.ApiService;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add service defaults & Aspire components.
 builder.AddServiceDefaults();
+builder.AddFirebirdClient("firebirdDb");
+builder.AddFirebirdDbContext<CatalogDbContext>("firebirdDb");
 
+// Add services to the container.
 builder.Services.AddProblemDetails();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add services to the container.
-
-builder.AddFirebirdClient("firebirdDb");
-builder.AddFirebirdDbContext<FirebirdtDbContext>("firebirdDb");
-
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-
-app.MapApiService();
 
 if (app.Environment.IsDevelopment())
 {
     using var scope = app.Services.CreateScope();
-    var dbContext = scope.ServiceProvider.GetRequiredService<FirebirdtDbContext>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<CatalogDbContext>();
     dbContext.Database.EnsureCreated();
 }
 
-app.UseSwagger();
-app.UseSwaggerUI();
+// Configure the HTTP request pipeline.
+app.UseExceptionHandler();
+
 app.UseHttpsRedirection();
+app.UseSwagger();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwaggerUI();
+}
+
+app.MapCatalogBrandsApi();
+app.MapFbDatabaseInfoApi();
+app.MapFbTransactionInfoApi();
+app.MapHealthChecks();
 
 app.Run();

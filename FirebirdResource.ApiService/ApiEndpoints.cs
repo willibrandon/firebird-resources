@@ -4,34 +4,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FirebirdResource.ApiService;
 
-public static class WebApplicationExtensions
+public static class ApiEndpoints
 {
-    public static void MapApiService(this WebApplication app)
+    public static WebApplication MapCatalogBrandsApi(this WebApplication app)
     {
-        app.MapCatalogBrands();
-        app.MapFbDatabaseInfo();
-        app.MapFbTransactionInfo();
-        app.MapHealthChecks();
-    }
-
-    public static void MapCatalogBrands(this WebApplication app)
-    {
-        app.MapGet("/catalogbrands", async (FirebirdtDbContext dbContext) =>
+        app.MapGet("/catalogbrands", async (CatalogDbContext dbContext) =>
             await dbContext.CatalogBrands.ToListAsync());
 
-        app.MapGet("/catalogbrands/{id}", async (int id, FirebirdtDbContext dbContext) =>
+        app.MapGet("/catalogbrands/{id}", async (int id, CatalogDbContext dbContext) =>
             await dbContext.CatalogBrands.FindAsync(id) is CatalogBrand catalogBrand
                 ? Results.Ok(catalogBrand)
                 : Results.NotFound());
 
-        app.MapPost("/catalogbrands", async (CatalogBrand catalogBrand, FirebirdtDbContext dbContext) =>
+        app.MapPost("/catalogbrands", async (CatalogBrand catalogBrand, CatalogDbContext dbContext) =>
         {
             dbContext.CatalogBrands.Add(catalogBrand);
             await dbContext.SaveChangesAsync();
             return Results.Created($"/catalogbrands/{catalogBrand.Id}", catalogBrand);
         });
 
-        app.MapPut("/catalogbrands/{id}", async (int id, CatalogBrand catalogBrand, FirebirdtDbContext dbContext) =>
+        app.MapPut("/catalogbrands/{id}", async (int id, CatalogBrand catalogBrand, CatalogDbContext dbContext) =>
         {
             var brand = await dbContext.CatalogBrands.FindAsync(id);
             if (brand is null) return Results.NotFound();
@@ -41,7 +33,7 @@ public static class WebApplicationExtensions
             return Results.Ok(brand);
         });
 
-        app.MapDelete("/catalogbrands/{id}", async (int id, FirebirdtDbContext dbContext) =>
+        app.MapDelete("/catalogbrands/{id}", async (int id, CatalogDbContext dbContext) =>
         {
             if (await dbContext.CatalogBrands.FindAsync(id) is CatalogBrand catalogBrand)
             {
@@ -52,9 +44,11 @@ public static class WebApplicationExtensions
 
             return Results.NotFound();
         });
+
+        return app;
     }
 
-    public static void MapFbDatabaseInfo(this WebApplication app)
+    public static WebApplication MapFbDatabaseInfoApi(this WebApplication app)
     {
         app.MapGet("/fbdatabaseinfo/getiscversion",
             async (FbConnectionFactory factory) =>
@@ -496,9 +490,11 @@ public static class WebApplicationExtensions
                 return await dbInfo.GetStatementTimeoutAttachmentAsync();
             }
         );
+
+        return app;
     }
 
-    public static void MapFbTransactionInfo(this WebApplication app)
+    public static WebApplication MapFbTransactionInfoApi(this WebApplication app)
     {
         app.MapGet("/fbtransactioninfo/gettransactionsnapshotnumber",
             async (FbConnectionFactory factory) =>
@@ -509,5 +505,7 @@ public static class WebApplicationExtensions
                 return await txInfo.GetTransactionSnapshotNumberAsync();
             }
         );
+
+        return app;
     }
 }

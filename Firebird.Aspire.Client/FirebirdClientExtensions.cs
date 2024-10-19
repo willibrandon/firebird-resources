@@ -8,7 +8,7 @@ namespace Firebird.Aspire.Client;
 /// <summary>
 /// Extension methods for connecting Firebird database with FirebirdSql.Data.FirebirdClient.
 /// </summary>
-public static class FirebirdExtensions
+public static class FirebirdClientExtensions
 {
     /// <summary>
     /// Registers 'Scoped' <see cref="FbConnection" /> factory for connecting Firebird database using FirebirdSql.Data.FirebirdClient.

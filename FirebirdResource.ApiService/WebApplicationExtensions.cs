@@ -1,5 +1,6 @@
 ﻿using Firebird.Aspire.Client;
 using FirebirdSql.Data.FirebirdClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace FirebirdResource.ApiService;
 
@@ -7,9 +8,50 @@ public static class WebApplicationExtensions
 {
     public static void MapApiService(this WebApplication app)
     {
-        app.MapHealthChecks();
+        app.MapCatalogBrands();
         app.MapFbDatabaseInfo();
         app.MapFbTransactionInfo();
+        app.MapHealthChecks();
+    }
+
+    public static void MapCatalogBrands(this WebApplication app)
+    {
+        app.MapGet("/catalogbrands", async (FirebirdtDbContext dbContext) =>
+            await dbContext.CatalogBrands.ToListAsync());
+
+        app.MapGet("/catalogbrands/{id}", async (int id, FirebirdtDbContext dbContext) =>
+            await dbContext.CatalogBrands.FindAsync(id) is CatalogBrand catalogBrand
+                ? Results.Ok(catalogBrand)
+                : Results.NotFound());
+
+        app.MapPost("/catalogbrands", async (CatalogBrand catalogBrand, FirebirdtDbContext dbContext) =>
+        {
+            dbContext.CatalogBrands.Add(catalogBrand);
+            await dbContext.SaveChangesAsync();
+            return Results.Created($"/catalogbrands/{catalogBrand.Id}", catalogBrand);
+        });
+
+        app.MapPut("/catalogbrands/{id}", async (int id, CatalogBrand catalogBrand, FirebirdtDbContext dbContext) =>
+        {
+            var brand = await dbContext.CatalogBrands.FindAsync(id);
+            if (brand is null) return Results.NotFound();
+
+            brand.Brand = catalogBrand.Brand;
+            await dbContext.SaveChangesAsync();
+            return Results.Ok(brand);
+        });
+
+        app.MapDelete("/catalogbrands/{id}", async (int id, FirebirdtDbContext dbContext) =>
+        {
+            if (await dbContext.CatalogBrands.FindAsync(id) is CatalogBrand catalogBrand)
+            {
+                dbContext.CatalogBrands.Remove(catalogBrand);
+                await dbContext.SaveChangesAsync();
+                return Results.Ok($"{id} deleted");
+            }
+
+            return Results.NotFound();
+        });
     }
 
     public static void MapFbDatabaseInfo(this WebApplication app)
@@ -467,10 +509,5 @@ public static class WebApplicationExtensions
                 return await txInfo.GetTransactionSnapshotNumberAsync();
             }
         );
-    }
-
-    public static void MapHealthChecks(this WebApplication app)
-    {
-        app.MapHealthChecks("/health");
     }
 }

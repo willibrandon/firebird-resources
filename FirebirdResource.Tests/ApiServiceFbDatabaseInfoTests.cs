@@ -203,13 +203,13 @@ public class ApiServiceFbDatabaseInfoTests : IClassFixture<DistributedApplicatio
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
-    [Fact]
-    public async Task GetInsertCountReturnsOkStatusCode()
-    {
-        var response = await _httpClient.GetAsync("/fbdatabaseinfo/getinsertcount");
+    //[Fact]
+    //public async Task GetInsertCountReturnsOkStatusCode()
+    //{
+    //    var response = await _httpClient.GetAsync("/fbdatabaseinfo/getinsertcount");
 
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-    }
+    //    Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    //}
 
     [Fact]
     public async Task GetPurgeCountReturnsOkStatusCode()

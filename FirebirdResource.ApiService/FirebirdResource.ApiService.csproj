@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Firebird.Aspire.Client\Firebird.Aspire.Client.csproj" />
+    <ProjectReference Include="..\Firebird.Aspire.EntityFrameworkCore.Client\Firebird.Aspire.EntityFrameworkCore.Client.csproj" />
     <ProjectReference Include="..\Firebird.Aspire.Hosting\Firebird.Aspire.Hosting.csproj" />
     <ProjectReference Include="..\FirebirdResource.ServiceDefaults\FirebirdResource.ServiceDefaults.csproj" />
   </ItemGroup>

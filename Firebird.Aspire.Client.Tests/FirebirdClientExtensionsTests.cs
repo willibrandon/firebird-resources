@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Firebird.Aspire.Client.Tests;
 
-public class FirebirdExtensionsTests
+public class FirebirdClientExtensionsTests
 {
     private const string ConnectionString = "Host=fake;Database=/var/lib/firebird/data/employees";
 

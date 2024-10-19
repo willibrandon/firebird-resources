@@ -2,7 +2,7 @@
 
 internal static class FirebirdContainerImageTags
 {
-    /// <summary>docker.io</summary>
+    /// <summary>ghcr.io</summary>
     public const string Registry = "ghcr.io";
 
     /// <summary>fdcastel/firebird</summary>

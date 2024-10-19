@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.0.0
 MinimumVisualStudioVersion = 17.8.0.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResource.AppHost", "FirebirdResource.AppHost\FirebirdResource.AppHost.csproj", "{1196E705-3FF4-4F5F-BF5B-6B220DA9CF40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResource.AppHost", "src\FirebirdResource.AppHost\FirebirdResource.AppHost.csproj", "{1196E705-3FF4-4F5F-BF5B-6B220DA9CF40}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResource.ServiceDefaults", "FirebirdResource.ServiceDefaults\FirebirdResource.ServiceDefaults.csproj", "{4A079D86-C1CC-459C-810F-173CBC095DF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResource.ServiceDefaults", "src\FirebirdResource.ServiceDefaults\FirebirdResource.ServiceDefaults.csproj", "{4A079D86-C1CC-459C-810F-173CBC095DF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.Hosting", "FirebirdResources.Aspire.Hosting\FirebirdResources.Aspire.Hosting.csproj", "{E672BA94-08CE-4B95-BCAB-356291C598EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.Hosting", "src\FirebirdResources.Aspire.Hosting\FirebirdResources.Aspire.Hosting.csproj", "{E672BA94-08CE-4B95-BCAB-356291C598EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResource.ApiService", "FirebirdResource.ApiService\FirebirdResource.ApiService.csproj", "{5BB90911-1089-492D-BDB2-E3FF99BE7C3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResource.ApiService", "src\FirebirdResource.ApiService\FirebirdResource.ApiService.csproj", "{5BB90911-1089-492D-BDB2-E3FF99BE7C3A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.Hosting.Tests", "FirebirdResources.Aspire.Hosting.Tests\FirebirdResources.Aspire.Hosting.Tests.csproj", "{4B9E6E04-1C84-436B-AEF1-2C3BCB7AA8C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.Hosting.Tests", "src\FirebirdResources.Aspire.Hosting.Tests\FirebirdResources.Aspire.Hosting.Tests.csproj", "{4B9E6E04-1C84-436B-AEF1-2C3BCB7AA8C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.Client", "FirebirdResources.Aspire.Client\FirebirdResources.Aspire.Client.csproj", "{CD632FA3-ACF9-4221-8832-629E209CF5C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.Client", "src\FirebirdResources.Aspire.Client\FirebirdResources.Aspire.Client.csproj", "{CD632FA3-ACF9-4221-8832-629E209CF5C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.HealthChecks", "FirebirdResources.HealthChecks\FirebirdResources.HealthChecks.csproj", "{C74D4610-0C96-4CAE-B6D7-704796E61214}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.HealthChecks", "src\FirebirdResources.HealthChecks\FirebirdResources.HealthChecks.csproj", "{C74D4610-0C96-4CAE-B6D7-704796E61214}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{517CB315-AA91-4B99-88DB-2A9327106470}"
 	ProjectSection(SolutionItems) = preProject
@@ -23,21 +23,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.HealthChecks.Tests", "FirebirdResources.HealthChecks.Tests\FirebirdResources.HealthChecks.Tests.csproj", "{2A3A1A04-3A47-479C-BD07-083063EDE550}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.HealthChecks.Tests", "src\FirebirdResources.HealthChecks.Tests\FirebirdResources.HealthChecks.Tests.csproj", "{2A3A1A04-3A47-479C-BD07-083063EDE550}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Testcontainers", "FirebirdResources.Testcontainers\FirebirdResources.Testcontainers.csproj", "{E34ED60C-E05B-45BE-8899-1DDAE766A000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Testcontainers", "src\FirebirdResources.Testcontainers\FirebirdResources.Testcontainers.csproj", "{E34ED60C-E05B-45BE-8899-1DDAE766A000}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Testcontainers.Tests", "FirebirdResources.Testcontainers.Tests\FirebirdResources.Testcontainers.Tests.csproj", "{3F23F8BF-48E1-473E-A1EC-CE547A7D6457}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Testcontainers.Tests", "src\FirebirdResources.Testcontainers.Tests\FirebirdResources.Testcontainers.Tests.csproj", "{3F23F8BF-48E1-473E-A1EC-CE547A7D6457}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.Client.Tests", "FirebirdResources.Aspire.Client.Tests\FirebirdResources.Aspire.Client.Tests.csproj", "{972446C6-F432-480E-9BBE-BF3DF298EEA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.Client.Tests", "src\FirebirdResources.Aspire.Client.Tests\FirebirdResources.Aspire.Client.Tests.csproj", "{972446C6-F432-480E-9BBE-BF3DF298EEA0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResource.Tests", "FirebirdResource.Tests\FirebirdResource.Tests.csproj", "{121CE9F7-D9CD-445E-9D04-FE37AB69F3C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResource.Tests", "src\FirebirdResource.Tests\FirebirdResource.Tests.csproj", "{121CE9F7-D9CD-445E-9D04-FE37AB69F3C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResource.Web", "FirebirdResource.Web\FirebirdResource.Web.csproj", "{55E68E71-9648-45E3-8162-FF624FDBA157}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResource.Web", "src\FirebirdResource.Web\FirebirdResource.Web.csproj", "{55E68E71-9648-45E3-8162-FF624FDBA157}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.EntityFrameworkCore.Client", "FirebirdResources.Aspire.EntityFrameworkCore.Client\FirebirdResources.Aspire.EntityFrameworkCore.Client.csproj", "{D0D77E6E-1DC1-4555-A583-DFE44619313D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.EntityFrameworkCore.Client", "src\FirebirdResources.Aspire.EntityFrameworkCore.Client\FirebirdResources.Aspire.EntityFrameworkCore.Client.csproj", "{D0D77E6E-1DC1-4555-A583-DFE44619313D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.EntityFrameworkCore.Client.Tests", "FirebirdResources.Aspire.EntityFrameworkCore.Client.Tests\FirebirdResources.Aspire.EntityFrameworkCore.Client.Tests.csproj", "{6012FD1E-CA52-49C8-84ED-56E84A20D21F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebirdResources.Aspire.EntityFrameworkCore.Client.Tests", "src\FirebirdResources.Aspire.EntityFrameworkCore.Client.Tests\FirebirdResources.Aspire.EntityFrameworkCore.Client.Tests.csproj", "{6012FD1E-CA52-49C8-84ED-56E84A20D21F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

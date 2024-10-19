@@ -1,5 +1,4 @@
-﻿using FirebirdSql.Data.FirebirdClient;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -11,13 +10,13 @@ namespace Firebird.Aspire.Client;
 public static class FirebirdClientExtensions
 {
     /// <summary>
-    /// Registers 'Scoped' <see cref="FbConnection" /> factory for connecting Firebird database using FirebirdSql.Data.FirebirdClient.
+    /// Registers 'Scoped' <see cref="FbConnectionFactory" /> for connecting Firebird database using FirebirdSql.Data.FirebirdClient.
     /// Configures health check, logging and telemetry for the FirebirdClient.
     /// </summary>
     /// <param name="builder">The <see cref="IHostApplicationBuilder" /> to read config from and add services to.</param>
     /// <param name="connectionName">A name used to retrieve the connection string from the ConnectionStrings configuration section.</param>
     /// <param name="configureSettings">An optional delegate that can be used for customizing options. It's invoked after the settings are read from the configuration.</param>
-    /// <remarks>Reads the configuration from "Aspire:Microsoft:Data:SqlClient" section.</remarks>
+    /// <remarks>Reads the configuration from "Firebird:Aspire:Client" section.</remarks>
     /// <exception cref="InvalidOperationException">If required <see cref="FirebirdSettings.ConnectionString"/>  is not provided in configuration section.</exception>
     public static void AddFirebirdClient(
         this IHostApplicationBuilder builder,
@@ -31,13 +30,13 @@ public static class FirebirdClientExtensions
             serviceKey: null);
 
     /// <summary>
-    /// Registers 'Scoped' <see cref="SqlConnection" /> factory for given <paramref name="name"/> for connecting Azure SQL, MsSQL database using Microsoft.Data.SqlClient.
-    /// Configures health check, logging and telemetry for the SqlClient.
+    /// Registers 'Scoped' <see cref="FbConnectionFactory" /> for given <paramref name="name"/> for connecting Firebird database using FirebirdSql.Data.FirebirdClient.
+    /// Configures health check, logging and telemetry for the FirebirdClient.
     /// </summary>
     /// <param name="builder">The <see cref="IHostApplicationBuilder" /> to read config from and add services to.</param>
     /// <param name="name">The name of the component, which is used as the <see cref="ServiceDescriptor.ServiceKey"/> of the service and also to retrieve the connection string from the ConnectionStrings configuration section.</param>
     /// <param name="configureSettings">An optional method that can be used for customizing options. It's invoked after the settings are read from the configuration.</param>
-    /// <remarks>Reads the configuration from "Aspire:Microsoft:Data:SqlClient:{name}" section.</remarks>
+    /// <remarks>Reads the configuration from "Firebird:Aspire:Client:{name}" section.</remarks>
     /// <exception cref="InvalidOperationException">If required <see cref="FirebirdSettings.ConnectionString"/> is not provided in configuration section.</exception>
     public static void AddKeyedFirebirdClient(
         this IHostApplicationBuilder builder,

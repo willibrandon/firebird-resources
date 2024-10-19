@@ -171,9 +171,6 @@ public static class FirebirdClientEFCoreExtensions
 
         if (!settings.DisableHealthChecks)
         {
-            //builder.Services.AddHealthChecks()
-            //    .AddDbContextCheck<TContext>();
-
             builder.TryAddHealthCheck(
                 name: typeof(TContext).Name,
                 static hcBuilder => hcBuilder.AddDbContextCheck<TContext>());

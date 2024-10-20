@@ -2,10 +2,9 @@
 
 namespace FirebirdResources.Aspire.Client;
 
-public sealed class FirebirdConnectionFactory(FirebirdClientSettings settings) : IDisposable
+public class FirebirdConnectionFactory(FirebirdClientSettings settings) : IDisposable
 {
     private readonly SemaphoreSlim _semaphore = new(1, 1);
-
     private FbConnection? _connection;
 
     public FirebirdClientSettings Settings => settings;
@@ -36,7 +35,9 @@ public sealed class FirebirdConnectionFactory(FirebirdClientSettings settings) :
 
     public void Dispose()
     {
+        _connection?.Close();
         _connection?.Dispose();
-        _semaphore.Dispose();
+        _semaphore?.Dispose();
+        GC.SuppressFinalize(this);
     }
 }

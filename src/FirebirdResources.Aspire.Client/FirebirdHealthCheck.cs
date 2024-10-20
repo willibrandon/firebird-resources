@@ -3,17 +3,21 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace FirebirdResources.Aspire.Client;
 
-internal sealed class FirebirdHealthCheck(FirebirdConnectionFactory factory) : IHealthCheck
+internal sealed class FirebirdHealthCheck(FirebirdConnectionFactory factory) : IHealthCheck, IDisposable
 {
+    private const string HealthQuery = "SELECT 1 FROM RDB$DATABASE;";
+    private readonly SemaphoreSlim _semaphore = new(1, 1);
+
     public async Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context,
         CancellationToken cancellationToken = default)
     {
+        await _semaphore.WaitAsync(cancellationToken);
+
         try
         {
-            using FbConnection connection = await factory.GetFbConnectionAsync(cancellationToken);
-            using var transaction = connection.BeginTransaction();
-            using var command = new FbCommand("SELECT 1 FROM RDB$DATABASE;", connection, transaction);
+            var connection = await factory.GetFbConnectionAsync(cancellationToken);
+            using var command = new FbCommand(HealthQuery, connection);
             using var reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -30,5 +34,15 @@ internal sealed class FirebirdHealthCheck(FirebirdConnectionFactory factory) : I
         {
             return HealthCheckResult.Unhealthy(exception: ex);
         }
+        finally
+        {
+            _semaphore.Release();
+        }
+    }
+
+    public void Dispose()
+    {
+        _semaphore?.Dispose();
+        GC.SuppressFinalize(this);
     }
 }

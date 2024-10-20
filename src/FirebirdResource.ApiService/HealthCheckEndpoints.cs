@@ -9,9 +9,17 @@ public static class HealthCheckEndpoints
 {
     public static void MapHealthChecks(this WebApplication app)
     {
-        app.MapHealthChecks("/health", new HealthCheckOptions
+        var healthChecks = app.MapGroup(string.Empty).CacheOutput();
+
+        healthChecks.MapHealthChecks("/health", new HealthCheckOptions
         {
+            AllowCachingResponses = true,
             ResponseWriter = WriteResponse
+        });
+
+        healthChecks.MapHealthChecks("/alive", new()
+        {
+            Predicate = static r => r.Tags.Contains("live")
         });
     }
 

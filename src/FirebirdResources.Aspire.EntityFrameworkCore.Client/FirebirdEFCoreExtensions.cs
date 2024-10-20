@@ -161,23 +161,19 @@ public static class FirebirdEFCoreExtensions
         IHostApplicationBuilder builder,
         FirebirdEFCoreSettings settings) where TContext : DbContext
     {
+        if (!settings.DisableHealthChecks)
+        {
+            builder.TryAddHealthCheck(
+                name: typeof(TContext).Name,
+                static hcBuilder => hcBuilder.AddDbContextCheck<TContext>());
+        }
+
         if (!settings.DisableTracing)
         {
             builder.Services.AddOpenTelemetry()
                 .WithTracing(builder => builder
                     .AddEntityFrameworkCoreInstrumentation()
                     .AddConsoleExporter());
-        }
-
-        if (!settings.DisableHealthChecks)
-        {
-            var healthCheckKey = $"FirebirdResources.Aspire.EntityFrameworkCore.Client.{typeof(TContext).Name}";
-            if (!builder.Properties.ContainsKey(healthCheckKey))
-            {
-                builder.Properties[healthCheckKey] = true;
-                builder.Services.AddHealthChecks()
-                    .AddDbContextCheck<TContext>();
-            }
         }
     }
 }

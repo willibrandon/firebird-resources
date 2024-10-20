@@ -1,5 +1,7 @@
 ﻿using Aspire.Hosting;
 using Aspire.Hosting.ApplicationModel;
+using FirebirdResources.HealthChecks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FirebirdResources.Aspire.Hosting;
 
@@ -42,21 +44,6 @@ public static class FirebirdBuilderExtensions
 
         var firebirdServer = new FirebirdServerResource(name, userName?.Resource, passwordParameter);
 
-        //#pragma warning disable ASPIREEVENTING001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-        //        builder.Eventing.Subscribe<ConnectionStringAvailableEvent>(firebirdServer, async (@event, ct) =>
-        //        {
-        //            connectionString = await firebirdServer.GetConnectionStringAsync(ct).ConfigureAwait(false);
-
-        //            if (connectionString == null)
-        //            {
-        //                throw new DistributedApplicationException($"ConnectionStringAvailableEvent was published for the '{firebirdServer.Name}' resource but the connection string was null.");
-        //            }
-        //        });
-        //#pragma warning restore ASPIREEVENTING001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-
-        //var healthCheckKey = $"{name}_check";
-        //builder.Services.AddHealthChecks().AddFirebird(sp => connectionString ?? throw new InvalidOperationException("Connection string is unavailable"), name: healthCheckKey);
-
         return builder.AddResource(firebirdServer)
                       .WithEndpoint(port: port, targetPort: 3050, name: FirebirdServerResource.PrimaryEndpointName) // Internal port is always 3050.
                       .WithImage(FirebirdContainerImageTags.Image, FirebirdContainerImageTags.Tag)
@@ -68,7 +55,6 @@ public static class FirebirdBuilderExtensions
                           context.EnvironmentVariables["FIREBIRD_USER"] = firebirdServer.UserNameReference;
                           context.EnvironmentVariables["FIREBIRD_PASSWORD"] = firebirdServer.PasswordParameter;
                       });
-        //.WithHealthCheck(healthCheckKey);
     }
 
     /// <summary>
@@ -105,7 +91,23 @@ public static class FirebirdBuilderExtensions
         builder.Resource.AddDatabase(name, databaseName);
         builder.WithEnvironment("FIREBIRD_DATABASE", databaseName);
         var firebirdDatabase = new FirebirdDatabaseResource(name, databaseName, builder.Resource);
-        return builder.ApplicationBuilder.AddResource(firebirdDatabase);
+
+        string? connectionString = null;
+        builder.ApplicationBuilder.Eventing.Subscribe<ConnectionStringAvailableEvent>(firebirdDatabase, async (@event, ct) =>
+        {
+            connectionString = await firebirdDatabase.GetConnectionStringAsync(ct).ConfigureAwait(false);
+
+            if (connectionString == null)
+            {
+                throw new DistributedApplicationException($"ConnectionStringAvailableEvent was published for the '{firebirdDatabase.Name}' resource but the connection string was null.");
+            }
+        });
+
+        var healthCheckKey = $"{name}_check";
+        builder.ApplicationBuilder.Services.AddHealthChecks().AddFirebird(sp => connectionString ?? throw new InvalidOperationException("Connection string is unavailable"), name: healthCheckKey);
+
+        return builder.ApplicationBuilder.AddResource(firebirdDatabase)
+            .WithHealthCheck(healthCheckKey);
     }
 
     /// <summary>

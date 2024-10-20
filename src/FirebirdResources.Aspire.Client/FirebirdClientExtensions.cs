@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 
 namespace FirebirdResources.Aspire.Client;
@@ -91,31 +92,32 @@ public static class FirebirdClientExtensions
 
         if (settings.DisableHealthChecks is false)
         {
-            builder.Services.AddHealthChecks()
-                .AddCheck<FirebirdHealthCheck>(
-                    name: serviceKey is null ? "Firebird" : $"Firebird_{connectionName}",
-                    failureStatus: default,
-                    tags: []);
+            builder.TryAddHealthCheck(new HealthCheckRegistration(
+                serviceKey is null ? "Firebird" : $"Firebird_{connectionName}",
+                sp => new FirebirdHealthCheck(
+                    serviceKey is null
+                        ? sp.GetRequiredService<FirebirdConnectionFactory>()
+                        : sp.GetRequiredKeyedService<FirebirdConnectionFactory>(serviceKey)),
+                failureStatus: default,
+                tags: default,
+                timeout: default));
         }
 
         // TODO
-        //if (settings.DisableTracing is false)
-        //{
-        //    builder.Services.AddOpenTelemetry()
-        //        .WithTracing(
-        //            traceBuilder => traceBuilder.AddSource(
-        //                Telemetry.SmtpClient.ActivitySourceName));
-        //}
+        if (settings.DisableTracing is false)
+        {
+            //builder.Services.AddOpenTelemetry()
+            //    .WithTracing(tracerProviderBuilder =>
+            //    {
+            //        tracerProviderBuilder.AddNpgsql();
+            //    });
+        }
 
-        //if (settings.DisableMetrics is false)
-        //{
-        //    // Required by MailKit to enable metrics
-        //    Telemetry.SmtpClient.Configure();
-
-        //    builder.Services.AddOpenTelemetry()
-        //        .WithMetrics(
-        //            metricsBuilder => metricsBuilder.AddMeter(
-        //                Telemetry.SmtpClient.MeterName));
-        //}
+        // TODO
+        if (settings.DisableMetrics is false)
+        {
+            //builder.Services.AddOpenTelemetry()
+            //    .WithMetrics(NpgsqlCommon.AddNpgsqlMetrics);
+        }
     }
 }

@@ -22,7 +22,7 @@ public class RegistrationTests
         var registration = options.Value.Registrations.First();
         var check = registration.Factory(serviceProvider);
 
-        registration.Name.ShouldBe("firebird");
+        registration.Name.ShouldBe(nameof(FirebirdHealthCheck));
         check.ShouldBeOfType<FirebirdHealthCheck>();
     }
 
@@ -86,7 +86,7 @@ public class RegistrationTests
         var registration = options.Value.Registrations.First();
         var check = registration.Factory(serviceProvider);
 
-        registration.Name.ShouldBe("firebird");
+        registration.Name.ShouldBe(nameof(FirebirdHealthCheck));
         check.ShouldBeOfType<FirebirdHealthCheck>();
         factoryCalled.ShouldBeTrue();
     }

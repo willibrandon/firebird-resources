@@ -7,12 +7,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Aspire.Hosting" Version="8.2.1" />
-		<PackageReference Include="Firebird.HealthChecks" Version="1.0.1-alpha" />
+		<PackageReference Include="Aspire.Hosting" Version="9.0.0-rc.1.24511.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="FirebirdResources.Aspire.Hosting.Tests" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\FirebirdResources.HealthChecks\FirebirdResources.HealthChecks.csproj" />
 	</ItemGroup>
 
 </Project>

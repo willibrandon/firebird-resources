@@ -9,7 +9,7 @@ namespace FirebirdResources.HealthChecks;
 /// </summary>
 public static class FirebirdHealthCheckBuilderExtensions
 {
-    private const string NAME = "firebird";
+    private const string NAME = nameof(FirebirdHealthCheck);
     internal const string HEALTH_QUERY = "SELECT 1 FROM RDB$DATABASE;";
 
     /// <summary>

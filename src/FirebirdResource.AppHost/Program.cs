@@ -8,11 +8,11 @@ var firebird = builder.AddFirebird("firebird")
     .AddDatabase("firebirdDb");
 
 var apiService = builder.AddProject<Projects.FirebirdResource_ApiService>("apiservice")
-    .WithReference(firebird);
+    .WithReference(firebird).WaitFor(firebird);
 
 builder.AddProject<Projects.FirebirdResource_Web>("webfrontend")
-    .WithReference(cache)
-    .WithReference(apiService)
-    .WithExternalHttpEndpoints();
+    .WithExternalHttpEndpoints()
+    .WithReference(apiService).WaitFor(apiService)
+    .WithReference(cache).WaitFor(cache);
 
 builder.Build().Run();

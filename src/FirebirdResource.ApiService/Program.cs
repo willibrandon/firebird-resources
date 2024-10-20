@@ -10,8 +10,9 @@ builder.AddFirebirdClient("firebirdDb");
 builder.AddFirebirdDbContext<CatalogDbContext>("firebirdDb");
 
 // Add services to the container.
-builder.Services.AddProblemDetails();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddOutputCache();
+builder.Services.AddProblemDetails();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -26,6 +27,7 @@ if (app.Environment.IsDevelopment())
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
 app.UseHttpsRedirection();
+app.UseOutputCache();
 app.UseSwagger();
 
 if (app.Environment.IsDevelopment())

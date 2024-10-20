@@ -1,4 +1,5 @@
-﻿
+﻿using Aspire.Hosting;
+
 namespace FirebirdResource.Tests;
 
 public class DistributedApplicationFixture : IAsyncLifetime

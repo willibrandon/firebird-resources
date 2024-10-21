@@ -9,7 +9,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
-		<PackageId>Firebird.HealthChecks</PackageId>
+		<PackageId>FirebirdResources.HealthChecks</PackageId>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/willibrandon/firebird-resources</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>

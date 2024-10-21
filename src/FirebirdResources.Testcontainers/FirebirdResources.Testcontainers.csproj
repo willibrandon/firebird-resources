@@ -9,7 +9,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
-		<PackageId>Firebird.Testcontainers</PackageId>
+		<PackageId>FirebirdResources.Testcontainers</PackageId>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/willibrandon/firebird-resources</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>

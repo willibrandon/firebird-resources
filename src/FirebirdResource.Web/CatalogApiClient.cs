@@ -8,7 +8,7 @@ public class CatalogApiClient(HttpClient httpClient)
     {
         List<CatalogBrand>? brands = null;
 
-        await foreach (var brand in httpClient.GetFromJsonAsAsyncEnumerable<CatalogBrand>("/api/v1/catalog/brands", cancellationToken))
+        await foreach (var brand in httpClient.GetFromJsonAsAsyncEnumerable<CatalogBrand>("/catalog/brands", cancellationToken))
         {
             if (brands?.Count >= maxItems)
             {

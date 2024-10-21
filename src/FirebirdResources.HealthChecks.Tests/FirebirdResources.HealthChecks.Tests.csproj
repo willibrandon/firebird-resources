@@ -10,7 +10,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Firebird.Testcontainers" Version="1.0.1-alpha" />
 		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0.21" Condition="'$(TargetFramework)' == 'net6.0'" />
 		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="7.0.10" Condition="'$(TargetFramework)' == 'net7.0'" />
 		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.10" Condition="'$(TargetFramework)' == 'net8.0'" />
@@ -29,6 +28,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\FirebirdResources.HealthChecks\FirebirdResources.HealthChecks.csproj" />
+	  <ProjectReference Include="..\FirebirdResources.Testcontainers\FirebirdResources.Testcontainers.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

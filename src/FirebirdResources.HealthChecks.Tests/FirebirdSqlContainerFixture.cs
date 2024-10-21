@@ -1,4 +1,4 @@
-﻿using Firebird.Testcontainers;
+﻿using FirebirdResources.Testcontainers;
 
 namespace FirebirdResources.HealthChecks.Tests;
 

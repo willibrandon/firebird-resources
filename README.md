@@ -4,10 +4,10 @@
 
 A collection of libraries for working with Firebird SQL databases using Docker, ASP.NET Core, and .NET Aspire.
 
-## Firebird.HealthChecks
+## FirebirdResources.HealthChecks
 
-[Firebird.HealthChecks](https://www.nuget.org/packages/Firebird.HealthChecks) is an ASP.NET Core health check package for Firebird SQL databases.
+[FirebirdResources.HealthChecks](https://www.nuget.org/packages/FirebirdResources.HealthChecks) is an ASP.NET Core health check package for Firebird SQL databases.
 
-## Firebird.Testcontainers
+## FirebirdResources.Testcontainers
 
-[Firebird.Testcontainers](https://www.nuget.org/packages/Firebird.Testcontainers) is a fluent testcontainer builder for Firebird SQL Docker images.
+[FirebirdResources.Testcontainers](https://www.nuget.org/packages/FirebirdResources.Testcontainers) is a fluent testcontainer builder for Firebird SQL Docker images.

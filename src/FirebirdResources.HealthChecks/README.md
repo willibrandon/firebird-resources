@@ -1,11 +1,11 @@
-﻿# Firebird.HealthChecks
+﻿# FirebirdResources.HealthChecks
 
 [![.NET](https://github.com/willibrandon/firebird-resources/actions/workflows/ci.yml/badge.svg)](https://github.com/willibrandon/firebird-resources/actions/workflows/ci.yml)
 
-Firebird.HealthChecks is an ASP.NET Core health check package for Firebird SQL databases.
+FirebirdResources.HealthChecks is an ASP.NET Core health check package for Firebird SQL databases.
 
 ```PowerShell
-Install-Package Firebird.HealthChecks -IncludePrerelease
+Install-Package FirebirdResources.HealthChecks -IncludePrerelease
 ```
 
 Once the package is installed you can add the HealthCheck using the **AddFirebird** `IHealthChecksBuilder` extension methods.

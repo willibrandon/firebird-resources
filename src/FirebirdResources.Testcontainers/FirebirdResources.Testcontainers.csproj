@@ -28,8 +28,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="JetBrains.Annotations" VersionOverride="2023.3.0" PrivateAssets="All" Version="2024.2.0" />
-		<PackageReference Include="Testcontainers" Version="3.10.0" />
+		<PackageReference Include="JetBrains.Annotations" VersionOverride="2023.3.0" PrivateAssets="All" Version="2024.3.0" />
+		<PackageReference Include="Testcontainers" Version="4.0.0" />
 	</ItemGroup>
 	
 </Project>
